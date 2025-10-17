@@ -355,6 +355,12 @@
                   <article class="post-next col-6">
                     
                     
+                      <a href="/2025/10/16/Phy%20162a%201/" title="PHY 162a 1">
+                        <span class="hidden-mobile">PHY 162a 1</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
                   </article>
                 </div>
               
@@ -498,7 +504,7 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        var texts = ["Non-adiabatic Molecule Simulation","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
         var idx = Math.floor(Math.random() * texts.length);
         typing(texts[idx]);
       
@@ -612,10 +618,13 @@
       <script>
         if (!window.MathJax) {
           window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
+            tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']],
+              processEscapes: true,
+              tags: 'ams' // optional, enables \eqref{} numbering
             },
-            loader : {
+            loader: {
               load: ['ui/lazy']
             },
             options: {

@@ -354,9 +354,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/16/Preface/" title="Preface">
+                      <a href="/2025/10/16/hello-world/" title="Hello World">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Preface</span>
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -364,8 +364,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/16/Potential%20Energy%20Surface%20I.%20Concept/" title="Potential Energy Surface I. Concept">
-                        <span class="hidden-mobile">Potential Energy Surface I. Concept</span>
+                      <a href="/2025/10/16/Q-Chem%20Compile%20Issues/" title="Q-Chem Compile">
+                        <span class="hidden-mobile">Q-Chem Compile</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -513,7 +513,7 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        var texts = ["Non-adiabatic Molecule Simulation","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
         var idx = Math.floor(Math.random() * texts.length);
         typing(texts[idx]);
       
@@ -627,10 +627,13 @@
       <script>
         if (!window.MathJax) {
           window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
+            tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']],
+              processEscapes: true,
+              tags: 'ams' // optional, enables \eqref{} numbering
             },
-            loader : {
+            loader: {
               load: ['ui/lazy']
             },
             options: {

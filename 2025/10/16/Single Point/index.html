@@ -362,9 +362,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/16/Qchem_basic/" title="Q-Chem Basic">
+                      <a href="/2025/10/16/Quantum%20Chemistry%20Theory%20Basic/" title="Quantum Chemistry Theory Basic">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Q-Chem Basic</span>
+                        <span class="hidden-mobile">Quantum Chemistry Theory Basic</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -521,7 +521,7 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        var texts = ["Non-adiabatic Molecule Simulation","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
         var idx = Math.floor(Math.random() * texts.length);
         typing(texts[idx]);
       
@@ -635,10 +635,13 @@
       <script>
         if (!window.MathJax) {
           window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
+            tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']],
+              processEscapes: true,
+              tags: 'ams' // optional, enables \eqref{} numbering
             },
-            loader : {
+            loader: {
               load: ['ui/lazy']
             },
             options: {
