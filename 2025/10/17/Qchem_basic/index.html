@@ -1,0 +1,838 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="MoriyaSuwako2524">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Basic of Q-chem Q-Chem is a general-purpose electronic-structure package maintained and distributed by Q-Chem, Inc., headquartered in Pleasanton, California (USA). Founded in 1993, it is developed by">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Q-Chem Basic">
+<meta property="og:url" content="https://moriyasuwako2524.github.io/2025/10/17/Qchem_basic/index.html">
+<meta property="og:site_name" content="Moriya’s Lab">
+<meta property="og:description" content="Basic of Q-chem Q-Chem is a general-purpose electronic-structure package maintained and distributed by Q-Chem, Inc., headquartered in Pleasanton, California (USA). Founded in 1993, it is developed by">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="d:%5Ccalculate%5Cgithub%5CQchemTutorials%5Cnotebooks%5C03-qchem%5Cpngs%5Cparallel1.png">
+<meta property="article:published_time" content="2025-10-17T15:13:32.595Z">
+<meta property="article:modified_time" content="2025-10-17T15:13:32.595Z">
+<meta property="article:author" content="MoriyaSuwako2524">
+<meta property="article:tag" content="Quantum Chemistry Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="d:%5Ccalculate%5Cgithub%5CQchemTutorials%5Cnotebooks%5C03-qchem%5Cpngs%5Cparallel1.png">
+  
+  
+  
+  <title>Q-Chem Basic - Moriya’s Lab</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"moriyasuwako2524.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Q-Chem Basic"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-10-17 11:13" pubdate>
+          October 17, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          77 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Q-Chem Basic</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1>Basic of Q-chem</h1>
+<p><strong>Q-Chem</strong> is a general-purpose electronic-structure package maintained and distributed by Q-Chem, Inc., headquartered in Pleasanton, California (USA). Founded in 1993, it is developed by a broad community of contributors. Within the CCATS group, Q-Chem serves as the primary platform for method development and production calculations.</p>
+<h2 id="1-Q-Chem-overview">1.<strong>Q-Chem overview</strong></h2>
+<p>Q-Chem is a general-purpose electronic-structure package offering broad coverage from HF/DFT to advanced correlated and multireference methods. As of <strong>August 23, 2025</strong>, the latest release is <strong>Q-Chem 6.3</strong>.</p>
+<p><strong>Core capabilities (selected)</strong></p>
+<ol>
+<li><strong>Ground-state SCF (HF/ROHF/UHF):</strong> analytic gradients/Hessians, robust optimizers, and property analysis.</li>
+<li><strong>Density Functional Theory:</strong> semilocal → double-hybrid functionals; energies, geometry optimizations, and vibrational analyses; TDDFT including spin-flip variants for challenging excitations.</li>
+<li><strong>Post-HF correlation:</strong> MP2 family (incl. OO/RI/dual-basis, MP3), coupled-cluster (CCSD, CCSD(T)) and a wide EOM-CC suite (EE/SF/IP/EA), plus ADC methods.</li>
+<li><strong>Strong correlation &amp; active-space options:</strong> CASSCF/CAS-CI, RAS-CI/RAS-SF, CCVB/PP, and spin-flip DFT.</li>
+<li><strong>Excited states (broad toolbox):</strong> CIS, CIS(D), TDDFT/SF-TDDFT, ΔSCF via MOM/SGM, NOCI/NOCIS, EOM-CC, ADC; support for core-level excitations (CVS).</li>
+<li><strong>Embedding &amp; extended systems:</strong> stand-alone <strong>QM/MM</strong>, CHARMM interface, <strong>QM/EFP</strong>, and modern dielectric/embedding models.</li>
+<li><strong>PES exploration &amp; optimization:</strong> constrained and unconstrained optimizations (minima/TS), IRC paths, and relaxed scans.</li>
+</ol>
+<p><strong>Performance &amp; parallelism</strong><br>
+Q-Chem supports OpenMP threading, MPI for distributed-memory runs. Usually one should run with $2^n$ numbers of cores. I ran some benchmark of the parallel jobs:</p>
+<p><img src="D:%5Ccalculate%5Cgithub%5CQchemTutorials%5Cnotebooks%5C03-qchem%5Cpngs%5Cparallel1.png" srcset="/img/loading.gif" lazyload alt="parallel1"></p>
+<p>Figure 1. Parallel benchmarking of Q-Chem on the test molecule. Three tasks(single-point (SP), force, and vibrational frequency) were run with 2, 4, 8, 16, and 32 CPU cores on PETE. Speedup is computed from wall time relative to the 2-core run. According to the Figure, adding more cores won’t give proportional speeds.</p>
+<h2 id="2-Install-Compile-Q-chem">2. Install &amp; Compile Q-chem</h2>
+<p>Requirements:</p>
+<ul>
+<li>An access to a Linux Computer</li>
+<li>Q-chem package</li>
+<li>Basic knowledge of the Linux shell &amp; Slurm</li>
+</ul>
+<p>Optional:</p>
+<ul>
+<li>Pete supercomputer (used as an example in this tutorial)</li>
+<li>Q-chem developer access</li>
+</ul>
+<p>If you plan to develop new features in Q-Chem (e.g., new functions, special requirements), or if you simply want your own installation, you’ll need to download and compile Q-Chem in your home environment.</p>
+<h3 id="2-1-Download-Q-Chem">2.1: Download Q-Chem</h3>
+<p>Select a suitable directory for Q-Chem that has enough space (at least 10 GB) and will not be automatically cleaned up by system administrators.</p>
+<p>On the Pete supercomputer, a recommended location is<code>/scratch/$user/software/</code> .</p>
+<p>Replace <code>$user</code> with your own username. If the <code>software</code> directory does not exist, create it with:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /scratch/<span class="hljs-variable">$user</span><br><span class="hljs-built_in">mkdir</span> software<br><span class="hljs-built_in">cd</span> software<br></code></pre></td></tr></table></figure>
+<p>You can use <code>pwd</code> to verify that you are inside <code>/scratch/$user/software</code>.</p>
+<p>For Q-Chem developers, you can check out the latest source code via <strong>SVN</strong>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn --username=<span class="hljs-variable">$qchem</span>-developer-id checkout https://jubilee.q-chem.com/svnroot/qchem/trunk <span class="hljs-variable">$qchem</span>-directory-name<br></code></pre></td></tr></table></figure>
+<p>Replace <code>$qchem-developer-id</code> with your developer ID and <code>$qchem-directory-name</code> with a custom name for your Q-Chem installation.<br>
+If you just want a standard installation, you can simply use <code>qchem</code> as the folder name:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">svn --username=<span class="hljs-variable">$qchem</span>-developer-id checkout https://jubilee.q-chem.com/svnroot/qchem/trunk qchem<br></code></pre></td></tr></table></figure>
+<p>The download may take some time. After it finishes, you should see a new folder with the name you specified. Change into this directory, and prepare to configure the build.</p>
+<h3 id="2-2-Compile-Q-Chem">2.2 Compile Q-Chem</h3>
+<p>On the Pete supercomputer, you can write the following script (<code>compiler.sh</code>) to set up the environment and configure Q-Chem:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment">#SBATCH --partition=batch</span><br><span class="hljs-comment">#SBATCH --ntasks=16</span><br><span class="hljs-comment">#SBATCH --tasks-per-node=16</span><br><span class="hljs-comment">#SBATCH --output=./logs/%J_stdout.txt</span><br><span class="hljs-comment">#SBATCH --error=./logs/%J_stderr.txt</span><br><span class="hljs-comment">#SBATCH --time=1-00:00:00</span><br><span class="hljs-comment">#SBATCH --job-name=comp</span><br><br>module purge<br>module load cmake3/3.24.3<br>module load impi/2021.2.0<br>module load intel/2021.2.0<br><br><span class="hljs-built_in">export</span> QC=/scratch/<span class="hljs-variable">$USER</span>/software/qchem<br><span class="hljs-built_in">source</span> <span class="hljs-variable">$QC</span>/bin/qchem.setup.sh<br><span class="hljs-built_in">export</span> QCSCRATCH=/scratch/<span class="hljs-variable">$USER</span><br><br>./configure intel release<br><br></code></pre></td></tr></table></figure>
+<p>Source the script to start configuration:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ./compiler.sh<br></code></pre></td></tr></table></figure>
+<p>The terminal should display progress messages. If everything is set up correctly, you will see:</p>
+<blockquote>
+<p>Configureing done</p>
+<p>Generating done</p>
+<p>Build files have been written to: /scratch/$USER/software/qchem/build</p>
+</blockquote>
+<p>This indicates that the <strong>build directory</strong> has been created successfully.</p>
+<p>If you encounter errors, check the output and carefully read the error messages. In most cases, problems can be resolved by installing the required module, searching for the error message on Google or by asking ChatGPT for help.</p>
+<p>There’re some collection for [Known Issues](./Q-Chem Compile <a target="_blank" rel="noopener" href="http://Issues.md">Issues.md</a>).</p>
+<p>Copy the <a target="_blank" rel="noopener" href="http://compiler.sh">compiler.sh</a> file into build directory</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> ./compiler.sh ./build/compiler.sh<br><span class="hljs-built_in">cd</span> build<br><span class="hljs-built_in">mkdir</span> logs<br></code></pre></td></tr></table></figure>
+<p><strong>Edit the copied script</strong> by adding one more line at the end:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make -j 16 qcprog.exe &gt; mall.log<br></code></pre></td></tr></table></figure>
+<p>This will build Q-Chem with 16 parallel threads and save the compilation output into <code>mall.log</code>.</p>
+<p>Use the following command to submit the compile command.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sbatch compiler.sh<br></code></pre></td></tr></table></figure>
+<p>The first compilation can usually take more than <strong>4 hours</strong>.</p>
+<p>To check whether the job is still running or has finished (successfully or with errors), use:</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">squeue</span> -u <span class="hljs-variable">$USER</span><br></code></pre></td></tr></table></figure>
+<p>You can also check the build logs in:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/scratch/</span><span class="hljs-variable">$USER</span><span class="hljs-regexp">/software/</span>qchem<span class="hljs-regexp">/build/</span>logs<br></code></pre></td></tr></table></figure>
+<p>When compilation finishes successfully, a file named <code>qcprog.exe</code> will appear in either the <code>build</code> directory or the <code>exe</code> directory.</p>
+<p>If the executable is located in the <code>build</code> directory, copy it to your designated <code>exe</code> folder, for example:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">cp .<span class="hljs-regexp">/build/</span>qcprog.exe <span class="hljs-regexp">/scratch/</span><span class="hljs-variable">$USER</span><span class="hljs-regexp">/software/</span>qchem<span class="hljs-regexp">/exe/</span><br></code></pre></td></tr></table></figure>
+<p>At this point, you have successfully compiled Q-Chem.</p>
+<h2 id="3-File-structure-of-Q-chem-input-file">3. File structure of Q-chem input file</h2>
+<p>Q-Chem input files are divided into several <strong>modules</strong>, each enclosed by <code>$…</code> and <code>$end</code>.<br>
+Below is an example input file, followed by explanations of the most commonly used sections:</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs dns">$molecule<br><span class="hljs-number">0</span> <span class="hljs-number">1</span><br>O         -<span class="hljs-number">3.13270</span>       -<span class="hljs-number">0.56690</span>        <span class="hljs-number">1.47260</span><br>H         -<span class="hljs-number">3.45320</span>        <span class="hljs-number">0.33800</span>        <span class="hljs-number">1.47260</span><br>O         -<span class="hljs-number">1.81270</span>       -<span class="hljs-number">0.56690</span>        <span class="hljs-number">1.47260</span><br>H         -<span class="hljs-number">1.49230</span>       -<span class="hljs-number">1.21460</span>        <span class="hljs-number">2.10460</span><br>$end<br><br>$rem<br>BASIS  =  <span class="hljs-number">6</span>-<span class="hljs-number">31</span>+G*<br>JOB_TYPE  = opt<br>METHOD = HF<br>SOLVENT_METHOD = PCM<br>$end<br><br>$solvent<br>Dielectric <span class="hljs-number">78</span>.<span class="hljs-number">39</span><br>$end<br><br></code></pre></td></tr></table></figure>
+<h3 id="3-1-molecule">3.1 $molecule</h3>
+<p>The <strong>molecule block</strong> specifies the atomic structure, charge, and spin multiplicity of the system:</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs dns">$molecule<br><span class="hljs-number">0</span> <span class="hljs-number">1</span><br>O         -<span class="hljs-number">3.13270</span>       -<span class="hljs-number">0.56690</span>        <span class="hljs-number">1.47260</span><br>H         -<span class="hljs-number">3.45320</span>        <span class="hljs-number">0.33800</span>        <span class="hljs-number">1.47260</span><br>O         -<span class="hljs-number">1.81270</span>       -<span class="hljs-number">0.56690</span>        <span class="hljs-number">1.47260</span><br>H         -<span class="hljs-number">1.49230</span>       -<span class="hljs-number">1.21460</span>        <span class="hljs-number">2.10460</span><br>$end<br><br></code></pre></td></tr></table></figure>
+<p>The first line after <code>$molecule</code> contains:</p>
+<ul>
+<li><strong>Charge</strong> (here <code>0</code>, meaning neutral molecule)</li>
+<li><strong>Multiplicity</strong> (here <code>1</code>, meaning a singlet state, in which all electrons are paired)</li>
+</ul>
+<p>The following lines list each atom:</p>
+<ul>
+<li><strong>Element symbol</strong> (e.g., O, H)</li>
+<li><strong>Cartesian coordinates</strong> in Ångström (x, y, z).</li>
+</ul>
+<p>This block defines both the electronic state and the geometry of your system.</p>
+<h3 id="3-2-rem">3.2 <code>$rem</code></h3>
+<p>The <strong>$rem block</strong> (short for <em>run-time environment module</em>) controls most of the calculation settings in Q-Chem.</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-meta"><span class="hljs-keyword">$rem</span></span><br>BASIS          = <span class="hljs-number">6</span><span class="hljs-number">-31</span>+G*<br>JOB_TYPE       = opt<br>METHOD         = HF<br>SOLVENT_METHOD = PCM<br><span class="hljs-meta"><span class="hljs-keyword">$end</span></span><br></code></pre></td></tr></table></figure>
+<p>Here’s what each line means:</p>
+<ul>
+<li><strong><code>BASIS = 6-31+G\*</code></strong>
+<ul>
+<li>Specifies the basis set.</li>
+<li><code>6-31+G*</code> is a split-valence basis set with diffuse (<code>+</code>) and polarization (<code>*</code>) functions.</li>
+<li>You can change this to other basis sets (e.g., <code>cc-pVDZ</code>, <code>def2-TZVP</code>).</li>
+</ul>
+</li>
+<li><strong><code>JOB_TYPE = opt</code></strong>
+<ul>
+<li>Defines the type of calculation.</li>
+<li>Common options:
+<ul>
+<li><code>sp</code> → single-point energy</li>
+<li><code>opt</code> → geometry optimization</li>
+<li><code>freq</code> → vibrational frequency analysis</li>
+<li><code>force</code> → analytic gradient</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>METHOD = HF</code></strong>
+<ul>
+<li>Specifies the electronic structure method.</li>
+<li>Examples:
+<ul>
+<li><code>HF</code> (Hartree–Fock)</li>
+<li><code>DFT functionals</code> (e.g., <code>B3LYP</code>, <code>PBE0</code>)</li>
+<li><code>MP2</code>, <code>CCSD</code>, <code>ADC</code>, etc.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SOLVENT_METHOD = PCM</code></strong>
+<ul>
+<li>Tells Q-Chem to include solvent effects using the <strong>Polarizable Continuum Model (PCM)</strong>.</li>
+<li>Requires an additional <code>$solvent</code> block. It specific which solvent you are using by their dielectric value.</li>
+</ul>
+</li>
+</ul>
+<p>The <code>$rem</code> section is the heart of the input file, it controls what calculation is being done and how. A significant thing is that, whenever you copy an input file from others, and you don’t know exactly each line means.</p>
+<h2 id="4-Run-a-Q-Chem-job">4. Run a Q-Chem job</h2>
+<p>Once you have Q-Chem installed, run a few small jobs to test it. (You can also borrow a working Q-Chem install on a shared server to practice job submission.)</p>
+<p>We usually keep each project in its own folder—don’t mix everything together (unless you’re a T-800 ).</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /scratch/<span class="hljs-variable">$USER</span><br><span class="hljs-built_in">mkdir</span> -p qchem_calculation/tutorial_practices<br><span class="hljs-built_in">cd</span> qchem_calculation/tutorial_practices<br></code></pre></td></tr></table></figure>
+<p>Tip: press <code>Tab</code> for filename autocompletion.</p>
+<p>You can either copy the example input file in section 3, or create your own one. I give the example input name as <code>H2O2.inp</code>. Just use the following command</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi H2O2.inp<br></code></pre></td></tr></table></figure>
+<p>In <code>vi</code>: press <code>a</code> to enter insert mode, paste example input from Section 3, press <code>Esc</code>, then type <code>:wq</code> to save and quit.</p>
+<p>usually we use bash to submit jobs. Still create a file named <code>sub.sh</code>. You can just use the following bash first:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment">#SBATCH -J qchem_test                 # Job name</span><br><span class="hljs-comment">#SBATCH -p express                    # Partition/queue</span><br><span class="hljs-comment">#SBATCH --time=01:00:00               # Wall time limit</span><br><span class="hljs-comment">#SBATCH --nodes=1</span><br><span class="hljs-comment">#SBATCH --ntasks=1                    # 1 MPI task (Q-Chem will use threads)</span><br><span class="hljs-comment">#SBATCH --cpus-per-task=16            # Threads for OpenMP (-nt)</span><br><span class="hljs-comment">#SBATCH -o ./logs/OUTPUT_%J.log</span><br><span class="hljs-comment">#SBATCH -e ./logs/ERRORS_%J.log</span><br><br><br><span class="hljs-comment"># --- Q-Chem environment ---</span><br><span class="hljs-built_in">export</span> QC=/scratch/<span class="hljs-variable">$USER</span>/software/qchem          <span class="hljs-comment"># Q-Chem install root</span><br><span class="hljs-comment"># export QCAUX=/path/to/qcaux                    # Optional: EFP bases, etc.</span><br><span class="hljs-built_in">source</span> <span class="hljs-string">&quot;<span class="hljs-variable">$QC</span>/bin/qchem.setup.sh&quot;</span>                  <span class="hljs-comment"># Or qchem.setup / qchem_setup</span><br><span class="hljs-comment"># Use node-local scratch if available; else fall back to a per-user scratch</span><br><span class="hljs-built_in">export</span> QCSCRATCH=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;SLURM_TMPDIR:-/scratch/$USER/qcscratch/$SLURM_JOB_ID&#125;</span>&quot;</span><br><span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&quot;<span class="hljs-variable">$QCSCRATCH</span>&quot;</span><br><br><span class="hljs-comment"># Compiler/runtime modules (adjust to your cluster)</span><br>module purge<br>module load intel/2021.2.0<br><br><span class="hljs-comment"># Make OpenMP threads match Slurm allocation</span><br><span class="hljs-built_in">export</span> OMP_NUM_THREADS=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;SLURM_CPUS_PER_TASK&#125;</span>&quot;</span><br><br><br>infile=<span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span><br><span class="hljs-comment"># Output name: replace .inp with .out (or just append .out if no .inp)</span><br>outfile=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;infile%.inp&#125;</span>.out&quot;</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Running Q-Chem on <span class="hljs-variable">$infile</span> with <span class="hljs-variable">$&#123;OMP_NUM_THREADS&#125;</span> threads…&quot;</span><br>qchem -nt <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;OMP_NUM_THREADS&#125;</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$infile</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$outfile</span>&quot;</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Done. Output: <span class="hljs-variable">$outfile</span>&quot;</span><br><br></code></pre></td></tr></table></figure>
+<p>Why these settings?</p>
+<ul>
+<li><code>--ntasks=1</code> + <code>--cpus-per-task=16</code> is the correct layout for <strong>threaded</strong> (OpenMP) Q-Chem runs.</li>
+<li><code>qchem -nt N</code> tells Q-Chem to use <strong>N OpenMP threads</strong>.</li>
+</ul>
+<p>Submit the job (from the folder containing <code>H2O2.inp</code> and <code>sub.sh</code>):</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">sbatch </span><span class="hljs-keyword">sub.sh </span>H2O2.inp<br></code></pre></td></tr></table></figure>
+<p>Useful Slurm command:</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">squeue -u $<span class="hljs-keyword">USER</span>           <span class="hljs-title"># Check</span> job status<br></code></pre></td></tr></table></figure>
+<h2 id="5-View-Q-Chem-Results-with-IQmol">5. View Q-Chem Results with IQmol</h2>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Quantum-Chemistry-Tutorial/" class="print-no-link">#Quantum Chemistry Tutorial</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Q-Chem Basic</div>
+      <div>https://moriyasuwako2524.github.io/2025/10/17/Qchem_basic/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>MoriyaSuwako2524</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 17, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/10/17/Q-Chem%20Compile%20Issues/" title="Q-Chem Compile">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Q-Chem Compile</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/10/17/Quantum%20Chemistry%20Theory%20Basic/" title="Quantum Chemistry Theory Basic">
+                        <span class="hidden-mobile">Quantum Chemistry Theory Basic</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+        var idx = Math.floor(Math.random() * texts.length);
+        typing(texts[idx]);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']],
+              processEscapes: true,
+              tags: 'ams' // optional, enables \eqref{} numbering
+            },
+            loader: {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
