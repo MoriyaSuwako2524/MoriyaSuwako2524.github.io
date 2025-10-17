@@ -42,49 +42,11 @@
   
   
   <entry>
-    <title>PHY 162a 1</title>
-    <link href="/Phy%20162a%201/"/>
-    <url>/Phy%20162a%201/</url>
-    
-    <content type="html"><![CDATA[<p>1.1<br>$$<br>L=\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta<br>$$</p><p>$$<br>p &amp;= \sum_{\alpha} \frac{\partial L}{\partial \dot q^\alpha}<br>\<br>&amp;~~~~~~~~~~~~~~~=\frac{1}{2}g_{ij}(\delta_{\alpha}^{i}\dot q^{j}+\dot q^{i}\delta_{\alpha}^{j})<br>\<br>&amp;=g_{\alpha\beta}(q)\dot q^{\beta}<br>$$</p><p>$$<br>F &amp;= \frac{\partial L}{\partial q^{\alpha}}<br>\<br>&amp;=\frac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j<br>$$</p><p>1.2<br>$$<br>\frac{\partial L}{\partial q^{\alpha}} &amp;= \frac{d}{dt}\frac{\partial L}{\partial \dot q^\alpha }<br>\<br>\frac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j&amp;=\frac{d}{dt}(g_{\alpha\beta}(q)\dot q^{\beta})<br>\<br>\frac{1}{2}\frac{\partial g_{ij}}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j&amp;=\frac{d}{dt}(g_{\alpha\beta})\dot q^{\beta}+g_{\alpha\beta}\ddot q^{\beta}<br>\<br>\frac{1}{2}\frac{\partial g_{ij}}{\partial q^{\beta}}\dot {q}^i\dot {q}^j&amp;=\frac{\partial (g_{\beta\alpha})}{\partial q^k}\dot q^{k}\dot q^{\alpha} +g_{\beta\alpha}\ddot q^{\alpha}<br>\<br>\frac{1}{2}g^{\alpha\rho}(\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot {q}^{\beta}\dot {q}^\gamma - 2\frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma})&amp;=\delta_{i}^{\alpha}\ddot q^{i}<br>\<br>\ddot q^{\alpha}+\frac{1}{2}g^{\alpha\rho}(-\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot {q}^{\beta}\dot {q}^\gamma + \frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma}+\frac{\partial g_{\beta \rho}}{\partial q^\gamma}\dot q^{\beta}\dot q^{\gamma})&amp;=0<br>\<br>Q.E.D<br>$$</p><p>2.1</p><p>$$<br>F_1 &amp;= -k(x_1-x_2-l)<br>\<br>F_2 &amp;= k(x_1-x_2-l)<br>\<br>U(x_1,x_2) &amp;= \frac{1}{2}k(x_1-x_2-l)^2<br>$$</p><p>$$<br>L=\frac{1}{2}m(\dot x_1^2+\dot x_2^2)-\frac{1}{2}k(x_1-x_2-l)^2<br>$$</p><p>2.2<br>$$<br>L=\frac{1}{4}m(4\dot X^2+\dot x^2)-\frac{1}{2}k(x-l)^2<br>$$<br>2.3<br>$$<br>\frac{\partial L}{\partial x_i} = F_i<br>$$</p><p>$$<br>\frac{d}{dt}\frac{\partial L}{\partial \dot x_i} = m\ddot x_i<br>$$</p><p>Euler-Lagrange equations:<br>$$<br>F_i=m\ddot x_i<br>\<br>0 = m(\ddot x_1+\ddot x_2)<br>\<br>-2k(x_1-x_2-l) = m(\ddot x_1-\ddot x_2)<br>$$<br>For $X$ and $x$:<br>$$<br>\frac{\partial L}{\partial X} = 0<br>\<br>\frac{\partial L}{\partial x} = -k(x-l)<br>\<br>\frac{d}{dt}\frac{\partial L}{\partial \dot X} = 2m\ddot X<br>\<br>\frac{d}{dt}\frac{\partial L}{\partial \dot x} = \frac{1}{2}m\ddot x<br>$$<br>Euler-Lagrange equations:<br>$$<br>-2m\ddot X = 0 \rightarrow  \ddot X = 0<br>\<br>-k(x-l)-\frac{1}{2}m\ddot x =0<br>\<br>Q.E.D<br>$$</p>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>PHY 162a Problem Sets</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Multiwfn</title>
     <link href="/Multiwfn/"/>
     <url>/Multiwfn/</url>
     
     <content type="html"><![CDATA[<h1>Multiwfn</h1>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>Quantum Chemistry Tutorial</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Potential Energy Surface I. Concept</title>
-    <link href="/Potential%20Energy%20Surface%20I.%20Concept/"/>
-    <url>/Potential%20Energy%20Surface%20I.%20Concept/</url>
-    
-    <content type="html"><![CDATA[<h1>Potential Energy Surface I. Concept</h1>]]></content>
     
     
     
@@ -118,11 +80,49 @@
   
   
   <entry>
+    <title>PHY 162a 1</title>
+    <link href="/Phy%20162a%201/"/>
+    <url>/Phy%20162a%201/</url>
+    
+    <content type="html"><![CDATA[<p>1.1<br>$$<br>L=\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta<br>$$</p><p>$$<br>p &amp;= \sum_{\alpha} \frac{\partial L}{\partial \dot q^\alpha}<br>\<br>&amp;~~~~~~~~~~~~~~~=\frac{1}{2}g_{ij}(\delta_{\alpha}^{i}\dot q^{j}+\dot q^{i}\delta_{\alpha}^{j})<br>\<br>&amp;=g_{\alpha\beta}(q)\dot q^{\beta}<br>$$</p><p>$$<br>F &amp;= \frac{\partial L}{\partial q^{\alpha}}<br>\<br>&amp;=\frac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j<br>$$</p><p>1.2<br>$$<br>\frac{\partial L}{\partial q^{\alpha}} &amp;= \frac{d}{dt}\frac{\partial L}{\partial \dot q^\alpha }<br>\<br>\frac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j&amp;=\frac{d}{dt}(g_{\alpha\beta}(q)\dot q^{\beta})<br>\<br>\frac{1}{2}\frac{\partial g_{ij}}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j&amp;=\frac{d}{dt}(g_{\alpha\beta})\dot q^{\beta}+g_{\alpha\beta}\ddot q^{\beta}<br>\<br>\frac{1}{2}\frac{\partial g_{ij}}{\partial q^{\beta}}\dot {q}^i\dot {q}^j&amp;=\frac{\partial (g_{\beta\alpha})}{\partial q^k}\dot q^{k}\dot q^{\alpha} +g_{\beta\alpha}\ddot q^{\alpha}<br>\<br>\frac{1}{2}g^{\alpha\rho}(\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot {q}^{\beta}\dot {q}^\gamma - 2\frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma})&amp;=\delta_{i}^{\alpha}\ddot q^{i}<br>\<br>\ddot q^{\alpha}+\frac{1}{2}g^{\alpha\rho}(-\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot {q}^{\beta}\dot {q}^\gamma + \frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma}+\frac{\partial g_{\beta \rho}}{\partial q^\gamma}\dot q^{\beta}\dot q^{\gamma})&amp;=0<br>\<br>Q.E.D<br>$$</p><p>2.1</p><p>$$<br>F_1 &amp;= -k(x_1-x_2-l)<br>\<br>F_2 &amp;= k(x_1-x_2-l)<br>\<br>U(x_1,x_2) &amp;= \frac{1}{2}k(x_1-x_2-l)^2<br>$$</p><p>$$<br>L=\frac{1}{2}m(\dot x_1^2+\dot x_2^2)-\frac{1}{2}k(x_1-x_2-l)^2<br>$$</p><p>2.2<br>$$<br>L=\frac{1}{4}m(4\dot X^2+\dot x^2)-\frac{1}{2}k(x-l)^2<br>$$<br>2.3<br>$$<br>\frac{\partial L}{\partial x_i} = F_i<br>$$</p><p>$$<br>\frac{d}{dt}\frac{\partial L}{\partial \dot x_i} = m\ddot x_i<br>$$</p><p>Euler-Lagrange equations:<br>$$<br>F_i=m\ddot x_i<br>\<br>0 = m(\ddot x_1+\ddot x_2)<br>\<br>-2k(x_1-x_2-l) = m(\ddot x_1-\ddot x_2)<br>$$<br>For $X$ and $x$:<br>$$<br>\frac{\partial L}{\partial X} = 0<br>\<br>\frac{\partial L}{\partial x} = -k(x-l)<br>\<br>\frac{d}{dt}\frac{\partial L}{\partial \dot X} = 2m\ddot X<br>\<br>\frac{d}{dt}\frac{\partial L}{\partial \dot x} = \frac{1}{2}m\ddot x<br>$$<br>Euler-Lagrange equations:<br>$$<br>-2m\ddot X = 0 \rightarrow  \ddot X = 0<br>\<br>-k(x-l)-\frac{1}{2}m\ddot x =0<br>\<br>Q.E.D<br>$$</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>PHY 162a Problem Sets</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Potential Energy Surface I. Concept</title>
+    <link href="/Potential%20Energy%20Surface%20I.%20Concept/"/>
+    <url>/Potential%20Energy%20Surface%20I.%20Concept/</url>
+    
+    <content type="html"><![CDATA[<h1>Potential Energy Surface I. Concept</h1>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Quantum Chemistry Tutorial</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Preface</title>
     <link href="/Preface/"/>
     <url>/Preface/</url>
     
-    <content type="html"><![CDATA[<h1>Preface</h1><p>I would like  to write some tutorials but I’m too lazy so it’s delayed until now.</p><h1>TO DO LIST:</h1><ol start="0"><li><p>[Check List](/Check List/)</p></li><li><p>Computational Chemistry Softwares</p><ol><li><a href="/Qchem_basic/">Q-Chem Basic</a></li><li>IQmol</li><li>Multiwfn</li><li>VMD</li><li>Pymol</li><li>ORCA</li></ol></li><li><p>Computational Chemistry Jobs</p><ol><li>[Quantum Chemistry Theory Basic (quick review version)](/Quantum Chemistry Theory Basic/)</li><li>[Basis Set](/Basis Set/)</li><li>Single Point</li><li>Potential Energy Surface I. Concept</li><li>Geometry Optimization</li><li>Transition State</li><li>IRC and Chemical Reactions</li><li>Potential Energy Surface II. Scan</li><li>Vibration Analysis, Infrared Spectra, Raman Spectra, VCD and ROA spectra</li><li>Thermodynamics</li><li>Weak Interactions</li><li>Solvent Models</li><li>Excited States and Electronic spectra I. Theories</li><li>Excited States and Electronic spectra II. Calculations</li><li>Miscellaneous</li></ol></li><li><p>Quantum Chemistry Basic</p><ol><li>Quantum Mechanic</li><li>Hartree-Fock</li><li>CI methods</li><li>DFT</li></ol></li><li><p>Object-Oriented Programming(One should already have python code experience)</p><ol><li><p>Types of Coding</p></li><li><p>Concept of Objects</p></li><li><p>Objects and Classes in Python</p></li><li><p>Example: Jobs Management for Q-Chem by Python</p></li></ol></li><li><p>Quantum Chemistry Code Implement</p><ol><li>Hartree-Fock</li><li>DFT?</li><li>FCI?</li><li>First Order Gradient</li><li>Hessian</li></ol></li><li><p>Other things</p></li></ol>]]></content>
+    <content type="html"><![CDATA[<h1>Preface</h1><p>I would like  to write some tutorials but I’m too lazy so it’s delayed until now.</p><h1>TO DO LIST:</h1><ol start="0"><li><p><a href="/Check_List/">Check List</a></p></li><li><p>Computational Chemistry Softwares</p><ol><li><a href="/Qchem_basic/">Q-Chem Basic</a></li><li>IQmol</li><li>Multiwfn</li><li>VMD</li><li>Pymol</li><li>ORCA</li></ol></li><li><p>Computational Chemistry Jobs</p><ol><li>[Quantum Chemistry Theory Basic (quick review version)](/Quantum Chemistry Theory Basic/)</li><li>[Basis Set](/Basis Set/)</li><li>Single Point</li><li>Potential Energy Surface I. Concept</li><li>Geometry Optimization</li><li>Transition State</li><li>IRC and Chemical Reactions</li><li>Potential Energy Surface II. Scan</li><li>Vibration Analysis, Infrared Spectra, Raman Spectra, VCD and ROA spectra</li><li>Thermodynamics</li><li>Weak Interactions</li><li>Solvent Models</li><li>Excited States and Electronic spectra I. Theories</li><li>Excited States and Electronic spectra II. Calculations</li><li>Miscellaneous</li></ol></li><li><p>Quantum Chemistry Basic</p><ol><li>Quantum Mechanic</li><li>Hartree-Fock</li><li>CI methods</li><li>DFT</li></ol></li><li><p>Object-Oriented Programming(One should already have python code experience)</p><ol><li><p>Types of Coding</p></li><li><p>Concept of Objects</p></li><li><p>Objects and Classes in Python</p></li><li><p>Example: Jobs Management for Q-Chem by Python</p></li></ol></li><li><p>Quantum Chemistry Code Implement</p><ol><li>Hartree-Fock</li><li>DFT?</li><li>FCI?</li><li>First Order Gradient</li><li>Hessian</li></ol></li><li><p>Other things</p></li></ol>]]></content>
     
     
     
@@ -156,7 +156,7 @@
   
   
   <entry>
-    <title>Q-Chem Basic</title>
+    <title></title>
     <link href="/Qchem_basic/"/>
     <url>/Qchem_basic/</url>
     
@@ -194,11 +194,11 @@
   
   
   <entry>
-    <title>VMD</title>
-    <link href="/VMD/"/>
-    <url>/VMD/</url>
+    <title>Single Point Calculation</title>
+    <link href="/Single%20Point/"/>
+    <url>/Single%20Point/</url>
     
-    <content type="html"><![CDATA[<h1>VMD</h1>]]></content>
+    <content type="html"><![CDATA[<h1>Single-Point (SP) Calculation</h1><p>A <strong>single-point (SP)</strong> calculation evaluates properties (most commonly the <strong>electronic energy</strong>) of a system at a <strong>fixed geometry</strong>. It’s the simplest job type in computational chemistry and a building block for scans, optimizations, and higher-level methods.</p><h3 id="Where-the-geometry-comes-from">Where the geometry comes from</h3><ul><li>Manually built in a GUI (e.g., IQmol)</li><li>From a prior <strong>geometry optimization</strong></li><li>From <strong>experiment</strong> (X-ray, neutron, cryo-EM models)</li><li>From <strong>supplementary information</strong> (SI) in papers</li><li><strong>Automatically generated</strong> by other programs or scripts (ASE, RDKit, Amber, etc.)</li></ul><h3 id="What-Q-Chem-does-in-a-default-SP-run">What Q-Chem does in a default SP run</h3><ol><li>Print license banner and echo the input.</li><li>Initialize the molecular structure and basis set.</li><li>Build an <strong>initial guess</strong> for the wavefunction and evaluate its energy.</li><li>Run <strong>self-consistent field (SCF)</strong> iterations until converged.</li><li>If requested, perform <strong>additional models</strong> (DFT options, TDDFT roots, post-HF correlation, etc.).</li><li>Analyze the wavefunction: orbital energies (HOMO–LUMO), charges, multipole moments, and other requested properties.</li><li>Write a summary and timings, then exit.</li></ol>]]></content>
     
     
     
@@ -213,11 +213,11 @@
   
   
   <entry>
-    <title>Single Point Calculation</title>
-    <link href="/Single%20Point/"/>
-    <url>/Single%20Point/</url>
+    <title>VMD</title>
+    <link href="/VMD/"/>
+    <url>/VMD/</url>
     
-    <content type="html"><![CDATA[<h1>Single-Point (SP) Calculation</h1><p>A <strong>single-point (SP)</strong> calculation evaluates properties (most commonly the <strong>electronic energy</strong>) of a system at a <strong>fixed geometry</strong>. It’s the simplest job type in computational chemistry and a building block for scans, optimizations, and higher-level methods.</p><h3 id="Where-the-geometry-comes-from">Where the geometry comes from</h3><ul><li>Manually built in a GUI (e.g., IQmol)</li><li>From a prior <strong>geometry optimization</strong></li><li>From <strong>experiment</strong> (X-ray, neutron, cryo-EM models)</li><li>From <strong>supplementary information</strong> (SI) in papers</li><li><strong>Automatically generated</strong> by other programs or scripts (ASE, RDKit, Amber, etc.)</li></ul><h3 id="What-Q-Chem-does-in-a-default-SP-run">What Q-Chem does in a default SP run</h3><ol><li>Print license banner and echo the input.</li><li>Initialize the molecular structure and basis set.</li><li>Build an <strong>initial guess</strong> for the wavefunction and evaluate its energy.</li><li>Run <strong>self-consistent field (SCF)</strong> iterations until converged.</li><li>If requested, perform <strong>additional models</strong> (DFT options, TDDFT roots, post-HF correlation, etc.).</li><li>Analyze the wavefunction: orbital energies (HOMO–LUMO), charges, multipole moments, and other requested properties.</li><li>Write a summary and timings, then exit.</li></ol>]]></content>
+    <content type="html"><![CDATA[<h1>VMD</h1>]]></content>
     
     
     
