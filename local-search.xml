@@ -93,6 +93,25 @@
   
   
   <entry>
+    <title>Q-Chem Compile</title>
+    <link href="/2025/10/16/Q-Chem%20Compile%20Issues/"/>
+    <url>/2025/10/16/Q-Chem%20Compile%20Issues/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Quantum Chemistry Tutorial</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Preface</title>
     <link href="/2025/10/16/Preface/"/>
     <url>/2025/10/16/Preface/</url>
@@ -150,25 +169,6 @@
   
   
   <entry>
-    <title>Q-Chem Compile</title>
-    <link href="/2025/10/16/Q-Chem%20Compile%20Issues/"/>
-    <url>/2025/10/16/Q-Chem%20Compile%20Issues/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>Quantum Chemistry Tutorial</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Basis Sets</title>
     <link href="/2025/10/16/Basis%20Set/"/>
     <url>/2025/10/16/Basis%20Set/</url>
@@ -188,17 +188,17 @@
   
   
   <entry>
-    <title>Multiwfn</title>
-    <link href="/2025/10/16/Multiwfn/"/>
-    <url>/2025/10/16/Multiwfn/</url>
+    <title>PHY 162a 1</title>
+    <link href="/2025/10/16/Phy%20162a%201/"/>
+    <url>/2025/10/16/Phy%20162a%201/</url>
     
-    <content type="html"><![CDATA[<h1 id="Multiwfn"><a href="#Multiwfn" class="headerlink" title="Multiwfn"></a>Multiwfn</h1>]]></content>
+    <content type="html"><![CDATA[<p>1.1</p><script type="math/tex; mode=display">L=\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta</script><script type="math/tex; mode=display">p &= \sum_{\alpha} \frac{\partial L}{\partial \dot q^\alpha}\\&~~~~~~~~~~~~~~~=\frac{1}{2}g_{ij}(\delta_{\alpha}^{i}\dot q^{j}+\dot q^{i}\delta_{\alpha}^{j})\\&=g_{\alpha\beta}(q)\dot q^{\beta}</script><script type="math/tex; mode=display">F &= \frac{\partial L}{\partial q^{\alpha}}\\&=\frac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j</script><p>1.2 </p><script type="math/tex; mode=display">\frac{\partial L}{\partial q^{\alpha}} &= \frac{d}{dt}\frac{\partial L}{\partial \dot q^\alpha }\\\frac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j&=\frac{d}{dt}(g_{\alpha\beta}(q)\dot q^{\beta})\\\frac{1}{2}\frac{\partial g_{ij}}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j&=\frac{d}{dt}(g_{\alpha\beta})\dot q^{\beta}+g_{\alpha\beta}\ddot q^{\beta}\\\frac{1}{2}\frac{\partial g_{ij}}{\partial q^{\beta}}\dot {q}^i\dot {q}^j&=\frac{\partial (g_{\beta\alpha})}{\partial q^k}\dot q^{k}\dot q^{\alpha} +g_{\beta\alpha}\ddot q^{\alpha}\\\frac{1}{2}g^{\alpha\rho}(\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot {q}^{\beta}\dot {q}^\gamma - 2\frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma})&=\delta_{i}^{\alpha}\ddot q^{i}\\\ddot q^{\alpha}+\frac{1}{2}g^{\alpha\rho}(-\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot {q}^{\beta}\dot {q}^\gamma + \frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma}+\frac{\partial g_{\beta \rho}}{\partial q^\gamma}\dot q^{\beta}\dot q^{\gamma})&=0\\Q.E.D</script><p>2.1</p><script type="math/tex; mode=display">F_1 &= -k(x_1-x_2-l)\\F_2 &= k(x_1-x_2-l)\\U(x_1,x_2) &= \frac{1}{2}k(x_1-x_2-l)^2</script><script type="math/tex; mode=display">L=\frac{1}{2}m(\dot x_1^2+\dot x_2^2)-\frac{1}{2}k(x_1-x_2-l)^2</script><p>2.2</p><script type="math/tex; mode=display">L=\frac{1}{4}m(4\dot X^2+\dot x^2)-\frac{1}{2}k(x-l)^2</script><p>2.3</p><script type="math/tex; mode=display">\frac{\partial L}{\partial x_i} = F_i</script><script type="math/tex; mode=display">\frac{d}{dt}\frac{\partial L}{\partial \dot x_i} = m\ddot x_i</script><p>Euler-Lagrange equations:</p><script type="math/tex; mode=display">F_i=m\ddot x_i\\0 = m(\ddot x_1+\ddot x_2)\\-2k(x_1-x_2-l) = m(\ddot x_1-\ddot x_2)</script><p>For $X$ and $x$:</p><script type="math/tex; mode=display">\frac{\partial L}{\partial X} = 0\\\frac{\partial L}{\partial x} = -k(x-l)\\\frac{d}{dt}\frac{\partial L}{\partial \dot X} = 2m\ddot X\\\frac{d}{dt}\frac{\partial L}{\partial \dot x} = \frac{1}{2}m\ddot x</script><p>Euler-Lagrange equations:</p><script type="math/tex; mode=display">-2m\ddot X = 0 \rightarrow  \ddot X = 0\\-k(x-l)-\frac{1}{2}m\ddot x =0\\Q.E.D</script>]]></content>
     
     
     
     <tags>
       
-      <tag>Quantum Chemistry Tutorial</tag>
+      <tag>PHY 162a Problem Sets</tag>
       
     </tags>
     
@@ -226,17 +226,17 @@
   
   
   <entry>
-    <title>PHY 162a 1</title>
-    <link href="/2025/10/16/Phy%20162a%201/"/>
-    <url>/2025/10/16/Phy%20162a%201/</url>
+    <title>Multiwfn</title>
+    <link href="/2025/10/16/Multiwfn/"/>
+    <url>/2025/10/16/Multiwfn/</url>
     
-    <content type="html"><![CDATA[<p>1.1</p><script type="math/tex; mode=display">L=\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta</script><script type="math/tex; mode=display">p &= \sum_{\alpha} \frac{\partial L}{\partial \dot q^\alpha}\\&~~~~~~~~~~~~~~~=\frac{1}{2}g_{ij}(\delta_{\alpha}^{i}\dot q^{j}+\dot q^{i}\delta_{\alpha}^{j})\\&=g_{\alpha\beta}(q)\dot q^{\beta}</script><script type="math/tex; mode=display">F &= \frac{\partial L}{\partial q^{\alpha}}\\&=\frac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j</script><p>1.2 </p><script type="math/tex; mode=display">\frac{\partial L}{\partial q^{\alpha}} &= \frac{d}{dt}\frac{\partial L}{\partial \dot q^\alpha }\\\frac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j&=\frac{d}{dt}(g_{\alpha\beta}(q)\dot q^{\beta})\\\frac{1}{2}\frac{\partial g_{ij}}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j&=\frac{d}{dt}(g_{\alpha\beta})\dot q^{\beta}+g_{\alpha\beta}\ddot q^{\beta}\\\frac{1}{2}\frac{\partial g_{ij}}{\partial q^{\beta}}\dot {q}^i\dot {q}^j&=\frac{\partial (g_{\beta\alpha})}{\partial q^k}\dot q^{k}\dot q^{\alpha} +g_{\beta\alpha}\ddot q^{\alpha}\\\frac{1}{2}g^{\alpha\rho}(\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot {q}^{\beta}\dot {q}^\gamma - 2\frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma})&=\delta_{i}^{\alpha}\ddot q^{i}\\\ddot q^{\alpha}+\frac{1}{2}g^{\alpha\rho}(-\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot {q}^{\beta}\dot {q}^\gamma + \frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma}+\frac{\partial g_{\beta \rho}}{\partial q^\gamma}\dot q^{\beta}\dot q^{\gamma})&=0\\Q.E.D</script><p>2.1</p><script type="math/tex; mode=display">F_1 &= -k(x_1-x_2-l)\\F_2 &= k(x_1-x_2-l)\\U(x_1,x_2) &= \frac{1}{2}k(x_1-x_2-l)^2</script><script type="math/tex; mode=display">L=\frac{1}{2}m(\dot x_1^2+\dot x_2^2)-\frac{1}{2}k(x_1-x_2-l)^2</script><p>2.2</p><script type="math/tex; mode=display">L=\frac{1}{4}m(4\dot X^2+\dot x^2)-\frac{1}{2}k(x-l)^2</script><p>2.3</p><script type="math/tex; mode=display">\frac{\partial L}{\partial x_i} = F_i</script><script type="math/tex; mode=display">\frac{d}{dt}\frac{\partial L}{\partial \dot x_i} = m\ddot x_i</script><p>Euler-Lagrange equations:</p><script type="math/tex; mode=display">F_i=m\ddot x_i\\0 = m(\ddot x_1+\ddot x_2)\\-2k(x_1-x_2-l) = m(\ddot x_1-\ddot x_2)</script><p>For $X$ and $x$:</p><script type="math/tex; mode=display">\frac{\partial L}{\partial X} = 0\\\frac{\partial L}{\partial x} = -k(x-l)\\\frac{d}{dt}\frac{\partial L}{\partial \dot X} = 2m\ddot X\\\frac{d}{dt}\frac{\partial L}{\partial \dot x} = \frac{1}{2}m\ddot x</script><p>Euler-Lagrange equations:</p><script type="math/tex; mode=display">-2m\ddot X = 0 \rightarrow  \ddot X = 0\\-k(x-l)-\frac{1}{2}m\ddot x =0\\Q.E.D</script>]]></content>
+    <content type="html"><![CDATA[<h1 id="Multiwfn"><a href="#Multiwfn" class="headerlink" title="Multiwfn"></a>Multiwfn</h1>]]></content>
     
     
     
     <tags>
       
-      <tag>PHY 162a Problem Sets</tag>
+      <tag>Quantum Chemistry Tutorial</tag>
       
     </tags>
     

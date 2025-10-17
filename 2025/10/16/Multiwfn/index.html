@@ -345,21 +345,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/16/Basis%20Set/" title="Basis Sets">
+                      <a href="/2025/10/16/IQmol/" title="IQmol">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Basis Sets</span>
+                        <span class="hidden-mobile">IQmol</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2025/10/16/IQmol/" title="IQmol">
-                        <span class="hidden-mobile">IQmol</span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
@@ -504,7 +498,9 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        typing(text);
+        var texts = ["Non-adiabatic Molecule Simulation","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+        var idx = Math.floor(Math.random() * texts.length);
+        typing(texts[idx]);
       
     })(window, document);
   </script>
