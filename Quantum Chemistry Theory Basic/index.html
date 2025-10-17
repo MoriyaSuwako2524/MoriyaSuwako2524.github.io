@@ -19,22 +19,22 @@
   <meta name="author" content="MoriyaSuwako2524">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.Consider a Lagrangian system consisting of D coordinates $q^{I&#x3D;1,…,D}$ and $m$ constraints $f_{α&#x3D;1,…m}(q^I)$ &#x3D; 0. Let $s^{i&#x3D;1,…,D−m}$ be coordinates on the constrained submanifold define by $f_α(q)">
+    <meta name="description" content="Quantum Chemistry Theory Basic  Note: This part is for a quick introduction to Quantum Chemistry. For a more comprehensive study, I recommend Modern Quantum Chemistry by Szabo.  Quantum chemistry calc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHY 162a 2">
-<meta property="og:url" content="https://moriyasuwako2524.github.io/2025/10/17/Phy%20162a%202/index.html">
+<meta property="og:title" content="Quantum Chemistry Theory Basic">
+<meta property="og:url" content="https://moriyasuwako2524.github.io/Quantum%20Chemistry%20Theory%20Basic/index.html">
 <meta property="og:site_name" content="Moriya’s Lab">
-<meta property="og:description" content="1.Consider a Lagrangian system consisting of D coordinates $q^{I&#x3D;1,…,D}$ and $m$ constraints $f_{α&#x3D;1,…m}(q^I)$ &#x3D; 0. Let $s^{i&#x3D;1,…,D−m}$ be coordinates on the constrained submanifold define by $f_α(q)">
+<meta property="og:description" content="Quantum Chemistry Theory Basic  Note: This part is for a quick introduction to Quantum Chemistry. For a more comprehensive study, I recommend Modern Quantum Chemistry by Szabo.  Quantum chemistry calc">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-17T15:13:32.595Z">
 <meta property="article:modified_time" content="2025-10-17T15:13:32.595Z">
 <meta property="article:author" content="MoriyaSuwako2524">
-<meta property="article:tag" content="PHY 162a Problem Sets">
+<meta property="article:tag" content="Quantum Chemistry Tutorial">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>PHY 162a 2 - Moriya’s Lab</title>
+  <title>Quantum Chemistry Theory Basic - Moriya’s Lab</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="PHY 162a 2"></span>
+            <span id="subtitle" data-typed-text="Quantum Chemistry Theory Basic"></span>
           
         </div>
 
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          899 words
+          7.5k words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          8 mins
+          63 mins
         
       </span>
     
@@ -271,28 +271,146 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">PHY 162a 2</h1>
+            <h1 id="seo-header">Quantum Chemistry Theory Basic</h1>
             
             
               <div class="markdown-body">
                 
-                <p>1.Consider a Lagrangian system consisting of D coordinates $q^{I=1,…,D}$ and $m$ constraints $f_{α=1,…m}(q^I)$ = 0. Let $s^{i=1,…,D−m}$ be coordinates on the constrained submanifold define by $f_α(q) = 0$, so that $f_α(q^I(s^i, t))$ = 0 for all $s^i$. We showed in class that for any infinitesimal motion $δs^i$, then<br>
-$$<br>
-(\dot p_I-\mathcal F_I)\frac{\partial q^I}{\partial s^i}\delta s^i = 0<br>
-$$<br>
-Show that the equations of motion above follow from the Euler-Lagrange equations for<br>
-$$<br>
-\tilde L(s^i,\dot s^i) = L(q^I(s^i),\dot s^i \frac{\partial q^I}{\partial s^i}(s^i))<br>
-$$</p>
-<p>Prove:<br>
-$$<br>
-\dot q^I(s^i) =<br>
-$$</p>
+                <h1>Quantum Chemistry Theory Basic</h1>
+<blockquote>
+<p><strong>Note:</strong> This part is for a quick introduction to Quantum Chemistry. For a more comprehensive study, I recommend <em>Modern Quantum Chemistry</em> by Szabo.</p>
+</blockquote>
+<p>Quantum chemistry calculations face the central challenge of solving the Schrödinger equation for many-body systems. Because the Schrödinger equation is too complex to be solved exactly, in practical numerical calculations various approximations are always introduced to reduce computational complexity and cost. Common approximations include:</p>
+<ul>
+<li>Born–Oppenheimer approximation</li>
+<li>Finite basis set approximation</li>
+<li>Single-electron approximation, electron correlation approximations</li>
+<li>Relativistic approximations</li>
+<li>Approximations in numerical accuracy of computation</li>
+</ul>
+<p>In most cases, the accuracy of quantum chemistry calculations depends critically on two aspects: the theoretical method and the basis set.</p>
+<h2 id="I-Born–Oppenheimer-BO-Approximation">I. Born–Oppenheimer (BO) Approximation</h2>
+<p>To rigorously solve the Schrödinger equation of a molecular system, both electrons and nuclei must be treated quantum mechanically, which makes the problem very complex:</p>
 <p>$$<br>
-\frac{d}{dt}\frac{\partial \tilde L(s^i,\dot s^i)}{\partial \dot s^i}-\frac{\partial \tilde L(s^i,\dot s^i)}{\partial \dot s^i} &amp;= \frac{d}{dt}\frac{ L(q^I(s^i),\dot s^i \frac{\partial q^I}{\partial s^i}(s^i)}{\partial \dot q^I}\frac{\partial \dot q^I}{\partial \dot s^i}-\frac{\partial \tilde  L(q^I(s^i),\dot s^i \frac{\partial q^I}{\partial s^i}(s^i)}{\partial \dot q^I}\frac{\partial q^I}{\partial s^i}<br>
-\<br>
-&amp;=<br>
+\hat{H}<em>{\text{tot}} , \Psi</em>{\text{tot}}(\mathbf{R}; \mathbf{r})<br>
+= E_{\text{tot}} , \Psi_{\text{tot}}(\mathbf{R}; \mathbf{r})<br>
 $$</p>
+<p>Since nuclear masses are much larger than electron masses, quantum effects of nuclei are much smaller than those of electrons. The BO approximation is one of the most important approximations in quantum chemistry. It separates nuclear and electronic motions, thereby reducing the complexity of solving the molecular Schrödinger equation:</p>
+<p>$$<br>
+\Psi_{\text{tot}}(\mathbf{R}; \mathbf{r})<br>
+= \Psi_{\text{nuc}}(\mathbf{R}) , \Psi_{\text{ele}}^{(\mathbf{R})}(\mathbf{r})<br>
+$$</p>
+<hr>
+<h3 id="1-1-Electronic-Schrodinger-Equation">1.1 Electronic Schrödinger Equation</h3>
+<p>Under the BO approximation, when solving the electronic wavefunction, the nuclear positions are regarded as fixed parameters. Thus, the BO approximation is also referred to as the fixed-nuclei approximation.</p>
+<p>For each set of nuclear coordinates $\mathbf{R}$, the corresponding electronic energy $E_{\text{ele}}(\mathbf{R})$ can be obtained by solving the electronic Schrödinger equation. This energy is called the potential energy or potential energy surface (PES) under the BO approximation:</p>
+<p>$$<br>
+\hat{H}<em>{\text{ele}}^{(\mathbf{R})} \Psi</em>{\text{ele}}^{(\mathbf{R})}(\mathbf{r})<br>
+= E_{\text{ele}}^{(\mathbf{R})} \Psi_{\text{ele}}^{(\mathbf{R})}(\mathbf{r})<br>
+$$</p>
+<p>To describe nuclear motion, one must further solve the nuclear Schrödinger equation, which includes the nuclear kinetic energy operator and the interaction potential:</p>
+<p>$$<br>
+\left[ \hat{T}<em>{\text{nuc}} + E</em>{\text{pot}}(\mathbf{R}) \right]<br>
+\Psi_{\text{nuc}}(\mathbf{R})<br>
+= E_{\text{tot}} \Psi_{\text{nuc}}(\mathbf{R})<br>
+$$</p>
+<hr>
+<h3 id="1-2-Beyond-the-BO-Approximation">1.2 Beyond the BO Approximation</h3>
+<p>For directly solving the nuclear + electronic system, using the BO approximation to obtain the nuclear wavefunction and $E_{\text{tot}}$, the following corrections may be introduced:</p>
+<ol>
+<li><strong>Non-adiabatic correction</strong>: This introduces the non-adiabatic coupling matrix elements (NACME), which describe the coupling between different electronic states and nuclear motion.</li>
+<li><strong>Diagonal correction</strong>: The diagonal part corresponding to NACME, used to correct the coupling between a single electronic state and nuclear motion; this contribution is usually small.</li>
+<li><strong>Mass polarization correction</strong>: Arising from the coupling between the internal motion of the electrons and the center-of-mass motion of the nuclei.</li>
+</ol>
+<p><em>For details, see</em> <em>Introduction to Computational Chemistry</em> (3rd edition), Section 3.1.</p>
+<hr>
+<h3 id="1-3-Diagonal-Born–Oppenheimer-Correction-DBOC">1.3 Diagonal Born–Oppenheimer Correction (DBOC)</h3>
+<p>When no strong intersection of two potential energy surfaces occurs, the BO approximation is often very reasonable. Errors in the electronic part of the calculation are mainly due to the neglect of nuclear motion. If further corrections are required, one can add the <strong>Diagonal Born–Oppenheimer Correction (DBOC)</strong> to the electronic energy:</p>
+<p>$$<br>
+\Delta E_{\text{DBOC}} =<br>
+\sum_A^{\text{atoms}}</p>
+<ul>
+<li>\frac{1}{2M_A}<br>
+\left\langle \Psi_{\text{ele}} \middle| \nabla_A^2 \middle| \Psi_{\text{ele}} \right\rangle<br>
+$$</li>
+</ul>
+<p>In molecular dynamics simulations involving nuclear motion, potential energy surfaces alone are not sufficient; one must also consider the coupling between electronic and nuclear motion. The <strong>non-adiabatic coupling matrix elements (NACME)</strong> then become particularly important. In such cases, although the BO approximation provides a useful starting point, the electronic Schrödinger equation must often be solved repeatedly with explicit inclusion of NACME terms.</p>
+<h2 id="II-Electron-Correlation">II. Electron Correlation</h2>
+<p>In practical quantum chemical calculations, the molecular Hamiltonian is written as:</p>
+<p>$$<br>
+\hat{H}_{\text{ele}}^{(\mathbf{R})}<br>
+= \sum_i \left[ -\frac{1}{2} \nabla_i^2 - \sum_A \frac{Z_A}{|\mathbf{r}_i - \mathbf{R}_A|} \right]</p>
+<ul>
+<li>\sum_{i&gt;j} \frac{1}{r_{ij}}</li>
+<li>\sum_{A&gt;B} \frac{Z_A Z_B}{|\mathbf{R}_A - \mathbf{R}_B|}<br>
+$$</li>
+</ul>
+<p>where the terms correspond to <strong>electron kinetic energy</strong>, <strong>electron–nucleus attraction</strong>, <strong>electron–electron repulsion</strong>, and <strong>nucleus–nucleus repulsion</strong>. The first bracketed part is the <strong>one-electron part</strong>.</p>
+<hr>
+<h3 id="2-1-Electron–Electron-Interaction-in-Terms-of-Density">2.1 Electron–Electron Interaction in Terms of Density</h3>
+<p>The electron–electron interaction can also be expressed in terms of the electron density, which provides a more intuitive physical picture:</p>
+<p>$$<br>
+E_{ee} = \left\langle \Psi \middle| \sum_{i&gt;j} \frac{1}{r_{ij}} \middle| \Psi \right\rangle<br>
+= \iint \frac{\rho(\mathbf{r}_1, \mathbf{r}<em>2)}{r</em>{12}} , d\mathbf{r}_1 d\mathbf{r}_2<br>
+$$</p>
+<p>The two-particle density can be decomposed as:</p>
+<p>$$<br>
+\rho(\mathbf{r}_1, \mathbf{r}_2) =<br>
+[\rho^{\alpha\alpha}(\mathbf{r}_1, \mathbf{r}_2) + \rho^{\beta\beta}(\mathbf{r}_1, \mathbf{r}_2)]</p>
+<ul>
+<li>[\rho^{\alpha\beta}(\mathbf{r}_1, \mathbf{r}_2) + \rho^{\beta\alpha}(\mathbf{r}_1, \mathbf{r}_2)]<br>
+= \rho^{\uparrow\uparrow}(\mathbf{r}_1, \mathbf{r}_2) + \rho^{\uparrow\downarrow}(\mathbf{r}_1, \mathbf{r}_2)<br>
+$$</li>
+</ul>
+<ul>
+<li><strong>Same-spin pair density</strong><br>
+$$<br>
+\rho^{\uparrow\uparrow}(\mathbf{r}_1, \mathbf{r}_2)<br>
+= \Gamma^{\uparrow\uparrow}(\mathbf{r}_1, \mathbf{r}_2)<br>
+= \rho^{\uparrow}(\mathbf{r}_1) \rho^{\uparrow}(\mathbf{r}_2) + \Gamma_X^{\uparrow\uparrow}(\mathbf{r}_1, \mathbf{r}_2)<br>
+$$</li>
+<li><strong>Opposite-spin pair density</strong><br>
+$$<br>
+\rho^{\uparrow\downarrow}(\mathbf{r}_1, \mathbf{r}_2)<br>
+= \Gamma^{\uparrow\downarrow}(\mathbf{r}_1, \mathbf{r}_2)<br>
+= \rho^{\uparrow}(\mathbf{r}_1) \rho^{\downarrow}(\mathbf{r}_2)<br>
+$$</li>
+</ul>
+<hr>
+<h3 id="2-2-Exchange-and-Coulomb-Correlation">2.2 Exchange and Coulomb Correlation</h3>
+<ul>
+<li>
+<p><strong>Exchange correlation ($X$)</strong>: Arises from the Pauli exclusion principle (antisymmetry of the electronic wavefunction). This reduces the probability of finding two same-spin electrons close to each other. The corresponding energy lowering is the <strong>exchange energy $E_X$</strong>.</p>
+</li>
+<li>
+<p><strong>Coulomb correlation ($C$)</strong>: Due to Coulomb repulsion, electrons tend to avoid each other even beyond exchange effects, lowering the probability of electron–electron co-location. This further reduces the system energy, corresponding to the <strong>correlation energy $E_C$</strong>.</p>
+</li>
+</ul>
+<p>Thus, electron correlation effects beyond exchange are essential to capture long-range Coulomb avoidance. Approximations neglecting this (e.g., Hartree–Fock) miss correlation energy, which must be included for quantitative accuracy.</p>
+<hr>
+<h3 id="Example-H-2">Example: $H_2$</h3>
+<p>Consider the hydrogen molecule:</p>
+<ul>
+<li><strong>Correlation hole</strong>: If one electron is known to be at a certain position, the probability of finding another electron nearby is reduced due to exchange and correlation effects.</li>
+<li><strong>Fermi hole</strong>: Reflects the Pauli principle; the minimum value is 0, showing that the probability of finding two same-spin electrons at the same position is zero.</li>
+<li><strong>Coulomb hole</strong>: Arises from Coulomb repulsion; the distribution shifts slightly to avoid close encounters even for opposite-spin electrons.</li>
+</ul>
+<p>Graphically, the <strong>total hole</strong> can be seen as a combination of the <strong>Fermi hole</strong> and <strong>Coulomb hole</strong>, shifting electron density to reduce repulsion.</p>
+<h2 id="III-Classification-of-Common-Theoretical-Methods">III. Classification of Common Theoretical Methods</h2>
+<ul>
+<li><strong>Semi-empirical methods</strong> (e.g., Semi-empirical, DFTB, GFN-xTB)</li>
+<li><strong>Density functional theory (DFT)</strong></li>
+<li><strong>Hartree–Fock (HF)</strong></li>
+<li><strong>Perturbation theory</strong></li>
+<li><strong>Coupled cluster (CC)</strong></li>
+<li><strong>Configuration interaction (CI)</strong></li>
+<li><strong>Multiconfigurational self-consistent field (MCSCF)</strong></li>
+<li><strong>Multireference methods</strong> (e.g., MRCI, CASPT2)</li>
+<li><strong>Molecular mechanics (MM, non-quantum chemistry)</strong></li>
+</ul>
+<p>Among them, <strong>ab initio</strong> methods are those derived directly from first principles without empirical parameters. In practice, computational chemistry often balances accuracy and computational cost.</p>
+<p>DFT is currently the most widely used method because it achieves a balance between efficiency and accuracy. Although not as rigorous as wavefunction-based <em>post-HF</em> methods, DFT is still a mainstream tool.</p>
+<h3 id=""></h3>
 
                 
               </div>
@@ -305,7 +423,7 @@ $$</p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/PHY-162a-Problem-Sets/" class="print-no-link">#PHY 162a Problem Sets</a>
+        <a href="/tags/Quantum-Chemistry-Tutorial/" class="print-no-link">#Quantum Chemistry Tutorial</a>
       
     </div>
   
@@ -317,8 +435,8 @@ $$</p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>PHY 162a 2</div>
-      <div>https://moriyasuwako2524.github.io/2025/10/17/Phy 162a 2/</div>
+      <div>Quantum Chemistry Theory Basic</div>
+      <div>https://moriyasuwako2524.github.io/Quantum Chemistry Theory Basic/</div>
     </div>
     <div class="license-meta">
       
@@ -362,9 +480,9 @@ $$</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/17/Multiwfn/" title="Multiwfn">
+                      <a href="/Qchem_basic/" title="Q-Chem Basic">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Multiwfn</span>
+                        <span class="hidden-mobile">Q-Chem Basic</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -372,8 +490,8 @@ $$</p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/17/Potential%20Energy%20Surface%20I.%20Concept/" title="Potential Energy Surface I. Concept">
-                        <span class="hidden-mobile">Potential Energy Surface I. Concept</span>
+                      <a href="/VMD/" title="VMD">
+                        <span class="hidden-mobile">VMD</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
