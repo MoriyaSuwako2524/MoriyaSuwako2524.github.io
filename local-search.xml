@@ -119,49 +119,11 @@
   
   
   <entry>
-    <title>PHY 162a 2</title>
-    <link href="/Phy%20162a%202/"/>
-    <url>/Phy%20162a%202/</url>
-    
-    <content type="html"><![CDATA[<p>1.Consider a Lagrangian system consisting of D coordinates $q^{I=1,…,D}$ and $m$ constraints $f_{α=1,…m}(q^I)$ = 0. Let $s^{i=1,…,D−m}$ be coordinates on the constrained submanifold define by $f_α(q) = 0$, so that $f_α(q^I(s^i, t))$ = 0 for all $s^i$. We showed in class that for any infinitesimal motion $δs^i$, then<br>$$<br>(\dot p_I-\mathcal F_I)\frac{\partial q^I}{\partial s^i}\delta s^i = 0<br>$$<br>Show that the equations of motion above follow from the Euler-Lagrange equations for<br>$$<br>\tilde L(s^i,\dot s^i) = L(q^I(s^i),\dot s^i \frac{\partial q^I}{\partial s^i}(s^i))<br>$$</p><p>Prove:<br>$$<br>\dot q^I(s^i) =<br>$$</p><p>$$<br>\frac{d}{dt}\frac{\partial \tilde L(s^i,\dot s^i)}{\partial \dot s^i}-\frac{\partial \tilde L(s^i,\dot s^i)}{\partial \dot s^i} &amp;= \frac{d}{dt}\frac{ L(q^I(s^i),\dot s^i \frac{\partial q^I}{\partial s^i}(s^i)}{\partial \dot q^I}\frac{\partial \dot q^I}{\partial \dot s^i}-\frac{\partial \tilde  L(q^I(s^i),\dot s^i \frac{\partial q^I}{\partial s^i}(s^i)}{\partial \dot q^I}\frac{\partial q^I}{\partial s^i}<br>\<br>&amp;=<br>$$</p>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>PHY 162a Problem Sets</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Potential Energy Surface I. Concept</title>
     <link href="/Potential%20Energy%20Surface%20I.%20Concept/"/>
     <url>/Potential%20Energy%20Surface%20I.%20Concept/</url>
     
     <content type="html"><![CDATA[<h1>Potential Energy Surface I. Concept</h1>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>Quantum Chemistry Tutorial</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Q-Chem Compile</title>
-    <link href="/Q-Chem%20Compile%20Issues/"/>
-    <url>/Q-Chem%20Compile%20Issues/</url>
-    
-    <content type="html"><![CDATA[]]></content>
     
     
     
@@ -205,17 +167,36 @@
   
   
   <entry>
-    <title>IQmol</title>
-    <link href="/IQmol/"/>
-    <url>/IQmol/</url>
+    <title>Q-Chem Compile</title>
+    <link href="/Q-Chem%20Compile%20Issues/"/>
+    <url>/Q-Chem%20Compile%20Issues/</url>
     
-    <content type="html"><![CDATA[<h1>IQmol</h1><p>IQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem</p><p>you can download it here <a href="https://www.iqmol.org/">IQmol Molecular Viewer</a></p><h2 id="XYZ-Files">XYZ Files</h2><p>.xyz file is a widely used</p>]]></content>
+    <content type="html"><![CDATA[]]></content>
     
     
     
     <tags>
       
       <tag>Quantum Chemistry Tutorial</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>PHY 162a 2</title>
+    <link href="/Phy%20162a%202/"/>
+    <url>/Phy%20162a%202/</url>
+    
+    <content type="html"><![CDATA[<p>1.Consider a Lagrangian system consisting of D coordinates $q^{I=1,…,D}$ and $m$ constraints $f_{α=1,…m}(q^I)$ = 0. Let $s^{i=1,…,D−m}$ be coordinates on the constrained submanifold define by $f_α(q) = 0$, so that $f_α(q^I(s^i, t))$ = 0 for all $s^i$. We showed in class that for any infinitesimal motion $δs^i$, then<br>$$<br>(\dot p_I-\mathcal F_I)\frac{\partial q^I}{\partial s^i}\delta s^i = 0<br>$$<br>Show that the equations of motion above follow from the Euler-Lagrange equations for<br>$$<br>\tilde L(s^i,\dot s^i) = L(q^I(s^i),\dot s^i \frac{\partial q^I}{\partial s^i}(s^i))<br>$$</p><p>Prove:<br>$$<br>\dot q^I(s^i) =<br>$$</p><p>$$<br>\frac{d}{dt}\frac{\partial \tilde L(s^i,\dot s^i)}{\partial \dot s^i}-\frac{\partial \tilde L(s^i,\dot s^i)}{\partial \dot s^i} &amp;= \frac{d}{dt}\frac{ L(q^I(s^i),\dot s^i \frac{\partial q^I}{\partial s^i}(s^i)}{\partial \dot q^I}\frac{\partial \dot q^I}{\partial \dot s^i}-\frac{\partial \tilde  L(q^I(s^i),\dot s^i \frac{\partial q^I}{\partial s^i}(s^i)}{\partial \dot q^I}\frac{\partial q^I}{\partial s^i}<br>\<br>&amp;=<br>$$</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>PHY 162a Problem Sets</tag>
       
     </tags>
     
@@ -243,11 +224,11 @@
   
   
   <entry>
-    <title>Multiwfn</title>
-    <link href="/Multiwfn/"/>
-    <url>/Multiwfn/</url>
+    <title>IQmol</title>
+    <link href="/IQmol/"/>
+    <url>/IQmol/</url>
     
-    <content type="html"><![CDATA[<h1>Multiwfn</h1>]]></content>
+    <content type="html"><![CDATA[<h1>IQmol</h1><p>IQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem</p><p>you can download it here <a href="https://www.iqmol.org/">IQmol Molecular Viewer</a></p><h2 id="XYZ-Files">XYZ Files</h2><p>.xyz file is a widely used</p>]]></content>
     
     
     
@@ -273,6 +254,25 @@
     <tags>
       
       <tag>PHY 162a Problem Sets</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Multiwfn</title>
+    <link href="/Multiwfn/"/>
+    <url>/Multiwfn/</url>
+    
+    <content type="html"><![CDATA[<h1>Multiwfn</h1>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Quantum Chemistry Tutorial</tag>
       
     </tags>
     
