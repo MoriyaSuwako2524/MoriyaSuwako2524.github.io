@@ -189,14 +189,11 @@
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
-      <div class="h2">
-        
-          <!-- 其他页面：正常 subtitle -->
+        <div class="h2">
           
             <span id="subtitle" data-typed-text="Tags - Quantum Chemistry Tutorial"></span>
           
-        
-      </div>
+        </div>
 
         
       </div>
@@ -234,15 +231,15 @@
       
       <p class="h5">2025</p>
     
-    <a href="/Quantum%20Chemistry%20Theory%20Basic/" class="list-group-item list-group-item-action">
-      <time>10-16</time>
-      <div class="list-group-item-title">Quantum Chemistry Theory Basic</div>
-    </a>
-  
-    
     <a href="/Single%20Point/" class="list-group-item list-group-item-action">
       <time>10-16</time>
       <div class="list-group-item-title">Single Point Calculation</div>
+    </a>
+  
+    
+    <a href="/Quantum%20Chemistry%20Theory%20Basic/" class="list-group-item list-group-item-action">
+      <time>10-16</time>
+      <div class="list-group-item-title">Quantum Chemistry Theory Basic</div>
     </a>
   
     
@@ -264,15 +261,15 @@
     </a>
   
     
-    <a href="/Basis%20Set/" class="list-group-item list-group-item-action">
-      <time>10-16</time>
-      <div class="list-group-item-title">Basis Sets</div>
-    </a>
-  
-    
     <a href="/IQmol/" class="list-group-item list-group-item-action">
       <time>10-16</time>
       <div class="list-group-item-title">IQmol</div>
+    </a>
+  
+    
+    <a href="/Basis%20Set/" class="list-group-item list-group-item-action">
+      <time>10-16</time>
+      <div class="list-group-item-title">Basis Sets</div>
     </a>
   
     
@@ -370,9 +367,7 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
-        var idx = Math.floor(Math.random() * texts.length);
-        typing(texts[idx]);
+        typing(text);
       
     })(window, document);
   </script>
