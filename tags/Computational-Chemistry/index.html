@@ -183,9 +183,6 @@
 </nav>
 
   
-<div style="position:fixed;top:10px;left:10px;z-index:9999;color:#fff;background:#000;padding:5px;">
-  layout = tag
-</div>
 
 <div id="banner" class="banner" parallax=true
      style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
@@ -328,7 +325,9 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        typing(text);
+        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+        var idx = Math.floor(Math.random() * texts.length);
+        typing(texts[idx]);
       
     })(window, document);
   </script>

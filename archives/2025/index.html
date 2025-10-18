@@ -183,9 +183,6 @@
 </nav>
 
   
-<div style="position:fixed;top:10px;left:10px;z-index:9999;color:#fff;background:#000;padding:5px;">
-  layout = archive
-</div>
 
 <div id="banner" class="banner" parallax=true
      style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
@@ -236,6 +233,12 @@
     </a>
   
     
+    <a href="/QChem_Basic/" class="list-group-item list-group-item-action">
+      <time>10-16</time>
+      <div class="list-group-item-title">Q-Chem Basic</div>
+    </a>
+  
+    
     <a href="/Quantum%20Chemistry%20Theory%20Basic/" class="list-group-item list-group-item-action">
       <time>10-16</time>
       <div class="list-group-item-title">Quantum Chemistry Theory Basic</div>
@@ -254,9 +257,9 @@
     </a>
   
     
-    <a href="/QChem_Basic/" class="list-group-item list-group-item-action">
+    <a href="/Q-Chem%20Compile%20Issues/" class="list-group-item list-group-item-action">
       <time>10-16</time>
-      <div class="list-group-item-title">Q-Chem Basic</div>
+      <div class="list-group-item-title">Q-Chem Compile</div>
     </a>
   
     
@@ -266,21 +269,15 @@
     </a>
   
     
-    <a href="/Potential%20Energy%20Surface%20I.%20Concept/" class="list-group-item list-group-item-action">
-      <time>10-16</time>
-      <div class="list-group-item-title">Potential Energy Surface I. Concept</div>
-    </a>
-  
-    
-    <a href="/Q-Chem%20Compile%20Issues/" class="list-group-item list-group-item-action">
-      <time>10-16</time>
-      <div class="list-group-item-title">Q-Chem Compile</div>
-    </a>
-  
-    
     <a href="/Preface/" class="list-group-item list-group-item-action">
       <time>10-16</time>
       <div class="list-group-item-title">Preface</div>
+    </a>
+  
+    
+    <a href="/Potential%20Energy%20Surface%20I.%20Concept/" class="list-group-item list-group-item-action">
+      <time>10-16</time>
+      <div class="list-group-item-title">Potential Energy Surface I. Concept</div>
     </a>
   
     
@@ -384,7 +381,9 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        typing(text);
+        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+        var idx = Math.floor(Math.random() * texts.length);
+        typing(texts[idx]);
       
     })(window, document);
   </script>

@@ -192,9 +192,6 @@
 </nav>
 
   
-<div style="position:fixed;top:10px;left:10px;z-index:9999;color:#fff;background:#000;padding:5px;">
-  layout = post
-</div>
 
 <div id="banner" class="banner" parallax=true
      style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
@@ -280,7 +277,8 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Potential-Energy-Surface-I-Concept"><a href="#Potential-Energy-Surface-I-Concept" class="headerlink" title="Potential Energy Surface I. Concept"></a>Potential Energy Surface I. Concept</h1>
+                <h1>Potential Energy Surface I. Concept</h1>
+
                 
               </div>
             
@@ -349,9 +347,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Phy%20162a%202/" title="PHY 162a 2">
+                      <a href="/Preface/" title="Preface">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PHY 162a 2</span>
+                        <span class="hidden-mobile">Preface</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -359,8 +357,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Q-Chem%20Compile%20Issues/" title="Q-Chem Compile">
-                        <span class="hidden-mobile">Q-Chem Compile</span>
+                      <a href="/Basis%20Set/" title="Basis Sets">
+                        <span class="hidden-mobile">Basis Sets</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -508,7 +506,9 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        typing(text);
+        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+        var idx = Math.floor(Math.random() * texts.length);
+        typing(texts[idx]);
       
     })(window, document);
   </script>

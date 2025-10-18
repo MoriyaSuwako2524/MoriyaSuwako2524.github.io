@@ -183,9 +183,6 @@
 </nav>
 
   
-<div style="position:fixed;top:10px;left:10px;z-index:9999;color:#fff;background:#000;padding:5px;">
-  layout = 
-</div>
 
 <div id="banner" class="banner" parallax=true
      style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
@@ -224,9 +221,7 @@
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
-<div style="position:fixed;top:10px;left:10px;z-index:9999;color:#fff;background:#000;padding:5px;">
-  layout = 
-</div>
+
 
 <h1 style="display: none">Moriya’s Lab</h1>
 
@@ -244,7 +239,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/IQmol/" target="_self">
         <div>
-          IQmolIQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem you can download it here IQmol Molecular Viewer XYZ Files.xyz file is a widely used
+          IQmol IQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem you can download it here IQmol Molecular Viewer XYZ Files .xyz file is a widely used
         </div>
       </a>
 
@@ -324,7 +319,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/Phy%20162a%201/" target="_self">
         <div>
-          1.1  L=\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta p &= \sum_{\alpha} \frac{\partial L}{\partial \dot q^\alpha} \\ &~~~~~~~~~~~~~~~=\frac{1}{2}g_{ij}(\delta_{\alpha}^{i}\dot q^{j}+\dot
+          1.1 $$ L=\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta $$ $$ p &amp;= \sum_{\alpha} \frac{\partial L}{\partial \dot q^\alpha} \ &amp;~~~~~~~~~~~~~~~=\frac{1}{2}g_{ij}(\delta_{\alpha}^{i}\
         </div>
       </a>
 
@@ -443,7 +438,9 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        typing(text);
+        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+        var idx = Math.floor(Math.random() * texts.length);
+        typing(texts[idx]);
       
     })(window, document);
   </script>

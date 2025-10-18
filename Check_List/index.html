@@ -194,9 +194,6 @@
 </nav>
 
   
-<div style="position:fixed;top:10px;left:10px;z-index:9999;color:#fff;background:#000;padding:5px;">
-  layout = post
-</div>
 
 <div id="banner" class="banner" parallax=true
      style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
@@ -282,8 +279,12 @@
             
               <div class="markdown-body">
                 
-                <p>I’ve been planning to write a series of tutorials for a long time, but procrastination got the better of me—until now.<br>This series aims to serve as both a <strong>personal notebook</strong> and a <strong>beginner’s guide</strong> to computational chemistry, covering theory, software usage, and practical coding.<br><span id="more"></span></p>
-<h1 id="Check-List"><a href="#Check-List" class="headerlink" title="Check List"></a>Check List</h1><h2 id="TO-DO-LIST"><a href="#TO-DO-LIST" class="headerlink" title="TO DO LIST:"></a>TO DO LIST:</h2>
+                <p>I’ve been planning to write a series of tutorials for a long time, but procrastination got the better of me—until now.<br>
+This series aims to serve as both a <strong>personal notebook</strong> and a <strong>beginner’s guide</strong> to computational chemistry, covering theory, software usage, and practical coding.</p>
+<span id="more"></span>
+<h1>Check List</h1>
+<h2 id="TO-DO-LIST">TO DO LIST:</h2>
+
                 
               </div>
             
@@ -381,8 +382,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Quantum%20Chemistry%20Theory%20Basic/" title="Quantum Chemistry Theory Basic">
-                        <span class="hidden-mobile">Quantum Chemistry Theory Basic</span>
+                      <a href="/QChem_Basic/" title="Q-Chem Basic">
+                        <span class="hidden-mobile">Q-Chem Basic</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -530,7 +531,9 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        typing(text);
+        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+        var idx = Math.floor(Math.random() * texts.length);
+        typing(texts[idx]);
       
     })(window, document);
   </script>
