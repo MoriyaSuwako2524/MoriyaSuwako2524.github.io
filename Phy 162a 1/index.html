@@ -98,7 +98,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Moriya&#39;s Lab</strong>
+      <strong>Fluid</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k words
+          397 words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          18 mins
+          4 mins
         
       </span>
     
@@ -259,7 +259,6 @@
   <main>
     
       
-、
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
@@ -426,15 +425,21 @@ $$</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Multiwfn/" title="Multiwfn">
+                      <a href="/Basis%20Set/" title="Basis Sets">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Multiwfn</span>
+                        <span class="hidden-mobile">Basis Sets</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/IQmol/" title="IQmol">
+                        <span class="hidden-mobile">IQmol</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
@@ -691,13 +696,10 @@ $$</p>
       <script>
         if (!window.MathJax) {
           window.MathJax = {
-            tex: {
-              inlineMath: [['$', '$'], ['\\(', '\\)']],
-              displayMath: [['$$', '$$'], ['\\[', '\\]']],
-              processEscapes: true,
-              tags: 'ams' // optional, enables \eqref{} numbering
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
             },
-            loader: {
+            loader : {
               load: ['ui/lazy']
             },
             options: {
