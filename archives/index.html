@@ -189,12 +189,29 @@
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="Archives"></span>
-          
-        </div>
+<div class="banner-text text-center">
+  <h1 style="font-size: 3rem; font-weight: 700; color: #fff; margin-bottom: 1rem;">
+    Moriya's Lab
+  </h1>
 
+  
+    <p id="typed-subtitle" style="font-size: 1.5rem; color: #fff;"></p>
+    <script>
+      var subtitles = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+      var randomText = subtitles[Math.floor(Math.random() * subtitles.length)];
+      if (typeof Typed !== 'undefined') {
+        new Typed("#typed-subtitle", {
+          strings: [randomText],
+          typeSpeed: 70,
+          showCursor: true,
+          cursorChar: "_"
+        });
+      } else {
+        document.getElementById("typed-subtitle").innerText = randomText;
+      }
+    </script>
+  
+</div>
         
       </div>
 
@@ -239,9 +256,9 @@
     </a>
   
     
-    <a href="/VMD/" class="list-group-item list-group-item-action">
+    <a href="/Quantum%20Chemistry%20Theory%20Basic/" class="list-group-item list-group-item-action">
       <time>10-16</time>
-      <div class="list-group-item-title">VMD</div>
+      <div class="list-group-item-title">Quantum Chemistry Theory Basic</div>
     </a>
   
     
@@ -251,21 +268,15 @@
     </a>
   
     
-    <a href="/Quantum%20Chemistry%20Theory%20Basic/" class="list-group-item list-group-item-action">
+    <a href="/VMD/" class="list-group-item list-group-item-action">
       <time>10-16</time>
-      <div class="list-group-item-title">Quantum Chemistry Theory Basic</div>
+      <div class="list-group-item-title">VMD</div>
     </a>
   
     
     <a href="/Phy%20162a%202/" class="list-group-item list-group-item-action">
       <time>10-16</time>
       <div class="list-group-item-title">PHY 162a 2</div>
-    </a>
-  
-    
-    <a href="/Potential%20Energy%20Surface%20I.%20Concept/" class="list-group-item list-group-item-action">
-      <time>10-16</time>
-      <div class="list-group-item-title">Potential Energy Surface I. Concept</div>
     </a>
   
     
@@ -281,9 +292,15 @@
     </a>
   
     
-    <a href="/Basis%20Set/" class="list-group-item list-group-item-action">
+    <a href="/Potential%20Energy%20Surface%20I.%20Concept/" class="list-group-item list-group-item-action">
       <time>10-16</time>
-      <div class="list-group-item-title">Basis Sets</div>
+      <div class="list-group-item-title">Potential Energy Surface I. Concept</div>
+    </a>
+  
+    
+    <a href="/Multiwfn/" class="list-group-item list-group-item-action">
+      <time>10-16</time>
+      <div class="list-group-item-title">Multiwfn</div>
     </a>
   
 </div>

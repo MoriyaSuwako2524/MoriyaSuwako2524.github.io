@@ -189,12 +189,29 @@
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text=""></span>
-          
-        </div>
+<div class="banner-text text-center">
+  <h1 style="font-size: 3rem; font-weight: 700; color: #fff; margin-bottom: 1rem;">
+    Moriya's Lab
+  </h1>
 
+  
+    <p id="typed-subtitle" style="font-size: 1.5rem; color: #fff;"></p>
+    <script>
+      var subtitles = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
+      var randomText = subtitles[Math.floor(Math.random() * subtitles.length)];
+      if (typeof Typed !== 'undefined') {
+        new Typed("#typed-subtitle", {
+          strings: [randomText],
+          typeSpeed: 70,
+          showCursor: true,
+          cursorChar: "_"
+        });
+      } else {
+        document.getElementById("typed-subtitle").innerText = randomText;
+      }
+    </script>
+  
+</div>
         
       </div>
 
@@ -221,18 +238,7 @@
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
-<!-- 首页标题与副标题区域 -->
-<section class="index-banner text-center" style="margin: 3rem 0;">
-  <h1 class="index-title" style="font-size: 3rem; font-weight: 700;">
-    Moriya&#39;s Lab
-  </h1>
 
-  
-    <p class="index-subtitle" style="font-size: 1.5rem; color: var(--text-muted); margin-top: 1rem;">
-      Artificial Intelligence
-    </p>
-  
-</section>
 
 <h1 style="display: none">Moriya’s Lab</h1>
 
@@ -242,15 +248,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/IQmol/" target="_self">
-          IQmol
+        <a href="/Basis%20Set/" target="_self">
+          Basis Sets
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/IQmol/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/Basis%20Set/" target="_self">
         <div>
-          IQmol IQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem you can download it here IQmol Molecular Viewer XYZ Files .xyz file is a widely used
+          Basis Sets I. Basis Function To solve the HF and KS-DFT equations, molecular orbitals are expanded as linear combinations of basis functions: $$ \varphi_i(\mathbf{r}) = C_{1,i}\chi_1(\mathbf{r}) + C_{
         </div>
       </a>
 
@@ -282,15 +288,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/Multiwfn/" target="_self">
-          Multiwfn
+        <a href="/IQmol/" target="_self">
+          IQmol
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/Multiwfn/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/IQmol/" target="_self">
         <div>
-          Multiwfn
+          IQmol IQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem you can download it here IQmol Molecular Viewer XYZ Files .xyz file is a widely used
         </div>
       </a>
 
