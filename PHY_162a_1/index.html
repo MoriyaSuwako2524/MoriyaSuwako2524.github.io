@@ -19,15 +19,15 @@
   <meta name="author" content="MoriyaSuwako2524">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.1 $$ L&#x3D;\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta $$ $$ p &amp;&#x3D; \sum_{\alpha} \frac{\partial L}{\partial \dot q^\alpha} \ &amp;~~~~~~~~~~~~~~~&#x3D;\frac{1}{2}g_{ij}(\delta_{\alpha}^{i}\">
+    <meta name="description" content="1.1 $$ L&#x3D;\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta $$ $$ \begin{aligned} p_\alpha &amp;&#x3D; \sum_{\beta} \frac{\partial L}{\partial \dot q^{\beta}} \ &amp;&#x3D; \tfrac12, g_{ij}!\left(\delta">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHY 162a 1">
 <meta property="og:url" content="https://moriyasuwako2524.github.io/PHY_162a_1/index.html">
 <meta property="og:site_name" content="Moriya’s Lab">
-<meta property="og:description" content="1.1 $$ L&#x3D;\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta $$ $$ p &amp;&#x3D; \sum_{\alpha} \frac{\partial L}{\partial \dot q^\alpha} \ &amp;~~~~~~~~~~~~~~~&#x3D;\frac{1}{2}g_{ij}(\delta_{\alpha}^{i}\">
+<meta property="og:description" content="1.1 $$ L&#x3D;\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta $$ $$ \begin{aligned} p_\alpha &amp;&#x3D; \sum_{\beta} \frac{\partial L}{\partial \dot q^{\beta}} \ &amp;&#x3D; \tfrac12, g_{ij}!\left(\delta">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-17T00:37:08.758Z">
-<meta property="article:modified_time" content="2025-10-19T16:20:34.496Z">
+<meta property="article:modified_time" content="2025-10-19T18:15:07.041Z">
 <meta property="article:author" content="MoriyaSuwako2524">
 <meta property="article:tag" content="Physics">
 <meta property="article:tag" content="Problem Sets">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          397 words
+          422 words
         
       </span>
     
@@ -344,40 +344,48 @@ $$<br>
 L=\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta<br>
 $$</p>
 <p>$$<br>
-p &amp;= \sum_{\alpha} \frac{\partial L}{\partial \dot q^\alpha}<br>
-\<br>
-&amp;~~~~~~~~~~~~~~~=\frac{1}{2}g_{ij}(\delta_{\alpha}^{i}\dot q^{j}+\dot q^{i}\delta_{\alpha}^{j})<br>
-\<br>
-&amp;=g_{\alpha\beta}(q)\dot q^{\beta}<br>
+\begin{aligned}<br>
+p_\alpha &amp;= \sum_{\beta} \frac{\partial L}{\partial \dot q^{\beta}} \<br>
+&amp;= \tfrac12, g_{ij}!\left(\delta_{\alpha}^{i}\dot q^{j} + \dot q^{i}\delta_{\alpha}^{j}\right) \<br>
+&amp;= g_{\alpha\beta}(q),\dot q^{\beta}.<br>
+\end{aligned}<br>
 $$</p>
 <p>$$<br>
-F &amp;= \frac{\partial L}{\partial q^{\alpha}}<br>
-\<br>
-&amp;=\frac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j<br>
+\begin{aligned}<br>
+F &amp;= \frac{\partial L}{\partial q^{\alpha}} \<br>
+&amp;= \tfrac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot{q}^i \dot{q}^j<br>
+\end{aligned}<br>
 $$</p>
-<p>1.2<br>
-$$<br>
+<p>1.2</p>
+<p>$$<br>
+\begin{aligned}<br>
 \frac{\partial L}{\partial q^{\alpha}} &amp;= \frac{d}{dt}\frac{\partial L}{\partial \dot q^\alpha }<br>
 \<br>
-\frac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j&amp;=\frac{d}{dt}(g_{\alpha\beta}(q)\dot q^{\beta})<br>
-\<br>
-\frac{1}{2}\frac{\partial g_{ij}}{\partial q^{\alpha}}\dot {q}^i\dot {q}^j&amp;=\frac{d}{dt}(g_{\alpha\beta})\dot q^{\beta}+g_{\alpha\beta}\ddot q^{\beta}<br>
-\<br>
-\frac{1}{2}\frac{\partial g_{ij}}{\partial q^{\beta}}\dot {q}^i\dot {q}^j&amp;=\frac{\partial (g_{\beta\alpha})}{\partial q^k}\dot q^{k}\dot q^{\alpha} +g_{\beta\alpha}\ddot q^{\alpha}<br>
-\<br>
-\frac{1}{2}g^{\alpha\rho}(\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot {q}^{\beta}\dot {q}^\gamma - 2\frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma})&amp;=\delta_{i}^{\alpha}\ddot q^{i}<br>
-\<br>
-\ddot q^{\alpha}+\frac{1}{2}g^{\alpha\rho}(-\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot {q}^{\beta}\dot {q}^\gamma + \frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma}+\frac{\partial g_{\beta \rho}}{\partial q^\gamma}\dot q^{\beta}\dot q^{\gamma})&amp;=0<br>
-\<br>
+\tfrac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot{q}^i\dot{q}^j<br>
+&amp;= \frac{d}{dt}(g_{\alpha\beta}(q)\dot q^{\beta}) \<br>
+\tfrac{1}{2}\frac{\partial g_{ij}}{\partial q^{\alpha}}\dot{q}^i\dot{q}^j<br>
+&amp;= \frac{d}{dt}(g_{\alpha\beta})\dot q^{\beta}+g_{\alpha\beta}\ddot q^{\beta} \<br>
+\tfrac{1}{2}\frac{\partial g_{ij}}{\partial q^{\beta}}\dot{q}^i\dot{q}^j<br>
+&amp;= \frac{\partial (g_{\beta\alpha})}{\partial q^k}\dot q^{k}\dot q^{\alpha} + g_{\beta\alpha}\ddot q^{\alpha} \\tfrac{1}{2}g^{\alpha\rho}!\left(<br>
+\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot{q}^{\beta}\dot{q}^\gamma<br>
+- 2\frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma}<br>
+\right)<br>
+&amp;= \delta_{i}^{\alpha}\ddot q^{i} \\ddot q^{\alpha}+ \tfrac{1}{2}g^{\alpha\rho}!\left(<br>
+-\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot{q}^{\beta}\dot{q}^\gamma<br>
++ \frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma}<br>
++ \frac{\partial g_{\beta \rho}}{\partial q^\gamma}\dot q^{\beta}\dot q^{\gamma}<br>
+\right)<br>
+&amp;= 0 \<br>
 Q.E.D<br>
+\end{aligned}<br>
 $$</p>
 <p>2.1</p>
 <p>$$<br>
-F_1 &amp;= -k(x_1-x_2-l)<br>
-\<br>
-F_2 &amp;= k(x_1-x_2-l)<br>
-\<br>
-U(x_1,x_2) &amp;= \frac{1}{2}k(x_1-x_2-l)^2<br>
+\begin{aligned}<br>
+F_1 &amp;= -k(x_1 - x_2 - l) \<br>
+F_2 &amp;= k(x_1 - x_2 - l) \<br>
+U(x_1, x_2) &amp;= \tfrac{1}{2}k(x_1 - x_2 - l)^2<br>
+\end{aligned}<br>
 $$</p>
 <p>$$<br>
 L=\frac{1}{2}m(\dot x_1^2+\dot x_2^2)-\frac{1}{2}k(x_1-x_2-l)^2<br>
@@ -413,11 +421,13 @@ $$<br>
 $$<br>
 Euler-Lagrange equations:<br>
 $$<br>
+\begin{aligned}<br>
 -2m\ddot X = 0 \rightarrow  \ddot X = 0<br>
 \<br>
 -k(x-l)-\frac{1}{2}m\ddot x =0<br>
 \<br>
 Q.E.D<br>
+\end{aligned}<br>
 $$</p>
 
                 
@@ -513,15 +523,21 @@ $$</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Multiwfn/" title="Multiwfn">
+                      <a href="/IQmol/" title="IQmol">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Multiwfn</span>
+                        <span class="hidden-mobile">IQmol</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/Multiwfn/" title="Multiwfn">
+                        <span class="hidden-mobile">Multiwfn</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
