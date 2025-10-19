@@ -19,15 +19,15 @@
   <meta name="author" content="MoriyaSuwako2524">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This post gives an instruction to quick view my posts of Tutorials.">
+    <meta name="description" content="A quick-start checklist for newcomers joining the CCATS group, ensuring all essential servers and software are properly set up.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0. Check List">
 <meta property="og:url" content="https://moriyasuwako2524.github.io/Check_List/index.html">
 <meta property="og:site_name" content="Moriya’s Lab">
-<meta property="og:description" content="This post gives an instruction to quick view my posts of Tutorials.">
+<meta property="og:description" content="A quick-start checklist for newcomers joining the CCATS group, ensuring all essential servers and software are properly set up.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-18T00:27:21.959Z">
-<meta property="article:modified_time" content="2025-10-18T00:27:43.322Z">
+<meta property="article:modified_time" content="2025-10-19T01:42:44.298Z">
 <meta property="article:author" content="MoriyaSuwako2524">
 <meta property="article:tag" content="Computational Chemistry">
 <meta property="article:tag" content="Quantum Chemistry">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          10 words
+          119 words
         
       </span>
     
@@ -278,8 +278,58 @@
             
               <div class="markdown-body">
                 
-                <p>I’ve been planning to write a series of tutorials for a long time, but procrastination got the better of me—until now.<br>This series aims to serve as both a <strong>personal notebook</strong> and a <strong>beginner’s guide</strong> to computational chemistry, covering theory, software usage, and practical coding.<br><span id="more"></span></p>
-<h1 id="Check-List"><a href="#Check-List" class="headerlink" title="Check List"></a>Check List</h1><h2 id="TO-DO-LIST"><a href="#TO-DO-LIST" class="headerlink" title="TO DO LIST:"></a>TO DO LIST:</h2>
+                <h1>Check List</h1>
+<p>This checklist is designed for new members joining the CCATS Group. It helps you verify that all required servers and software are properly configured before starting any computational work.</p>
+<h2 id="1-Supercomputers">1. Supercomputers</h2>
+<p>In the CCATS group, we primarily use two clusters: PETE and OSCER, hosted respectively by Oklahoma State University (OSU) and the University of Oklahoma (OU). These two clusters are largely interchangeable. For example, if PETE is under maintenance, you can usually submit your jobs to OSCER instead.</p>
+<p>However, due to differences in system architecture and software environments, the recommended usage is as follows:</p>
+<ul>
+<li>PETE: for CPU-based tasks<br>
+(e.g., Q-Chem quantum chemistry calculations, classical molecular dynamics simulations)</li>
+<li>OSCER: for GPU-based tasks<br>
+(e.g., machine learning, QM/MM simulations)</li>
+</ul>
+<h3 id="Account-Request">Account Request</h3>
+<p>You need to apply for access to both systems:</p>
+<p>PETE: <a target="_blank" rel="noopener" href="https://hpcc.okstate.edu/account-request.html">https://hpcc.okstate.edu/account-request.html</a><br>
+OSCER: <a target="_blank" rel="noopener" href="https://www.ou.edu/oscer/support/accounts/new_account">https://www.ou.edu/oscer/support/accounts/new_account</a></p>
+<p>Before applying, inform Dr. Shao that you plan to request an account.<br>
+Typically, your account will be approved within one week.<br>
+Do not apply from outside the United States.</p>
+<p>If you encounter any issues during registration or setup, please ask other group members for assistance.</p>
+<h2 id="2-IQmol">2. IQmol</h2>
+<p>Our group primarily performs quantum chemical calculations using Q-Chem. You do not need to install Q-Chem locally, since we maintain multiple customized versions on the supercomputers for method development.<br>
+If you need access to a specific version, please ask one of the group members.</p>
+<p>If you are a graduate student who plans to compile or modify Q-Chem yourself, refer to the section<br>
+<a href="/QChem_Basic/">Q-Chem Basic</a><br>
+for detailed instructions on downloading, compiling, and configuring Q-Chem.</p>
+<h3 id="2-1-Installing-IQmol">2.1 Installing IQmol</h3>
+<p>To visualize Q-Chem results, you should install IQmol on your personal computer (Windows or macOS recommended).<br>
+If you plan to run molecular dynamics simulations, you may also need VMD for trajectory visualization.</p>
+<p>Unless you are very familiar with Linux, it is better to use Windows or macOS for your local setup.</p>
+<p>You can download IQmol from its official website:<br>
+<a target="_blank" rel="noopener" href="https://www.iqmol.org/">https://www.iqmol.org/</a></p>
+<p>Download the latest version, extract the archive, and install it following the on-screen instructions.</p>
+<h3 id="2-2-Verification-Checklist">2.2 Verification Checklist</h3>
+<p>After installation, please verify that:</p>
+<ol>
+<li>IQmol launches normally.</li>
+<li>You can build a molecule using the graphical interface.</li>
+<li>You can save the molecule file correctly.</li>
+<li>You can open and visualize Q-Chem output files.</li>
+</ol>
+<p>For more detailed guidance, see the dedicated section:<br>
+<a href="/IQmol/">IQmol</a></p>
+<h3 id="2-3-Known-Issues">2.3 Known Issues</h3>
+<p>macOS security warning:<br>
+On macOS, IQmol may show a warning that the developer’s certificate cannot be verified.<br>
+To fix this, go to System Preferences → Security &amp; Privacy, and allow IQmol to run.</p>
+<p>macOS File saving issue:<br>
+Some macOS users have reported that IQmol cannot save files properly.<br>
+Installing an older version of IQmol may resolve this issue.</p>
+<p>If you encounter other installation or runtime problems, searching through Google or ChatGPT can help you find effective solutions.</p>
+<p>Once you have completed the steps above, your computing environment should be ready for running and visualizing Q-Chem calculations on the CCATS group clusters.</p>
+
                 
               </div>
             
@@ -377,8 +427,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Quantum%20Chemistry%20Theory%20Basic/" title="Quantum Chemistry Theory Basic">
-                        <span class="hidden-mobile">Quantum Chemistry Theory Basic</span>
+                      <a href="/QChem_Basic/" title="Q-Chem Basic">
+                        <span class="hidden-mobile">Q-Chem Basic</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
