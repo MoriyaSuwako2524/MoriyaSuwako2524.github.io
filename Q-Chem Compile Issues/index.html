@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pngs/suwako.png">
+  <link rel="icon" href="/pngs/suwako.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -19,15 +19,15 @@
   <meta name="author" content="MoriyaSuwako2524">
   <meta name="keywords" content="">
   
-    <meta name="description" content="MoriyaSuwako2524’s personal  blog">
+    <meta name="description" content="HDF5 Issue  The error is: 12345678In file included from &#x2F;scratch&#x2F;moriya&#x2F;software&#x2F;qchem_default&#x2F;libqch5&#x2F;libqch5&#x2F;project_file.cpp(1):&#x2F;scratch&#x2F;moriya&#x2F;software&#x2F;qchem_default&#x2F;libqch5&#x2F;libqch5&#x2F;project_file.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Q-Chem Compile">
 <meta property="og:url" content="https://moriyasuwako2524.github.io/Q-Chem%20Compile%20Issues/index.html">
 <meta property="og:site_name" content="Moriya’s Lab">
-<meta property="og:description" content="MoriyaSuwako2524’s personal  blog">
+<meta property="og:description" content="HDF5 Issue  The error is: 12345678In file included from &#x2F;scratch&#x2F;moriya&#x2F;software&#x2F;qchem_default&#x2F;libqch5&#x2F;libqch5&#x2F;project_file.cpp(1):&#x2F;scratch&#x2F;moriya&#x2F;software&#x2F;qchem_default&#x2F;libqch5&#x2F;libqch5&#x2F;project_file.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-17T15:13:32.595Z">
-<meta property="article:modified_time" content="2025-10-17T15:13:32.595Z">
+<meta property="article:published_time" content="2025-10-20T13:56:04.619Z">
+<meta property="article:modified_time" content="2025-10-20T13:56:04.619Z">
 <meta property="article:author" content="MoriyaSuwako2524">
 <meta property="article:tag" content="Quantum Chemistry Tutorial">
 <meta name="twitter:card" content="summary_large_image">
@@ -98,7 +98,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>Moriya&#39;s Lab</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-17 11:13" pubdate>
-          October 17, 2025 am
+        <time datetime="2025-10-20 09:56" pubdate>
+          October 20, 2025 am
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          77 words
         
       </span>
     
@@ -259,12 +259,26 @@
   <main>
     
       
-、
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
     <div class="side-col d-none d-lg-block col-lg-2">
       
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+</div>
+
+
+  </aside>
+
 
     </div>
 
@@ -277,7 +291,14 @@
             
               <div class="markdown-body">
                 
-                
+                <ol>
+<li>HDF5 Issue</li>
+</ol>
+<p>The error is:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs commandline">In file included from /scratch/moriya/software/qchem_default/libqch5/libqch5/project_file.cpp(1):<br>/scratch/moriya/software/qchem_default/libqch5/libqch5/project_file.hpp(193): error: identifier &quot;H5L_info2_t&quot; is undefined<br>      static herr_t load_schema(hid_t loc_id, char const *name, H5L_info2_t const *info, void *data)<br>                                                                ^<br><br>In file included from /scratch/moriya/software/qchem_default/libqch5/libqch5/project_file.cpp(1):<br>/scratch/moriya/software/qchem_default/libqch5/libqch5/project_file.hpp(219): error: identifier &quot;H5Literate2&quot; is undefined<br>          herr_t herr = H5Literate2(gid, H5_INDEX_NAME, H5_ITER_NATIVE, NULL, load_schema, child);<br></code></pre></td></tr></table></figure>
+<p>Use the folloing solution on PETE:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">module load gcc/7.3.0<br>module load hdf5/1.12.2-gcc-7.3.0<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -314,7 +335,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 17, 2025</div>
+          <div>October 20, 2025</div>
         </div>
       
       
@@ -346,9 +367,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/QChem_Basic/" title="Q-Chem Basic">
+                      <a href="/Check_List/" title="0.5. Check List">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Q-Chem Basic</span>
+                        <span class="hidden-mobile">0.5. Check List</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -356,8 +377,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Quantum%20Chemistry%20Theory%20Basic/" title="Quantum Chemistry Theory Basic">
-                        <span class="hidden-mobile">Quantum Chemistry Theory Basic</span>
+                      <a href="/PHY_162a_2/" title="PHY 162a 2">
+                        <span class="hidden-mobile">PHY 162a 2</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -505,9 +526,7 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
-        var idx = Math.floor(Math.random() * texts.length);
-        typing(texts[idx]);
+        typing(text);
       
     })(window, document);
   </script>
@@ -619,13 +638,10 @@
       <script>
         if (!window.MathJax) {
           window.MathJax = {
-            tex: {
-              inlineMath: [['$', '$'], ['\\(', '\\)']],
-              displayMath: [['$$', '$$'], ['\\[', '\\]']],
-              processEscapes: true,
-              tags: 'ams' // optional, enables \eqref{} numbering
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
             },
-            loader: {
+            loader : {
               load: ['ui/lazy']
             },
             options: {

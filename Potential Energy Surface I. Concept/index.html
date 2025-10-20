@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pngs/suwako.png">
+  <link rel="icon" href="/pngs/suwako.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -98,7 +98,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>Moriya&#39;s Lab</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          31 words
+          2 words
         
       </span>
     
@@ -259,12 +259,26 @@
   <main>
     
       
-、
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
     <div class="side-col d-none d-lg-block col-lg-2">
       
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+</div>
+
+
+  </aside>
+
 
     </div>
 
@@ -277,8 +291,7 @@
             
               <div class="markdown-body">
                 
-                <h1>Potential Energy Surface I. Concept</h1>
-
+                <h1 id="Potential-Energy-Surface-I-Concept"><a href="#Potential-Energy-Surface-I-Concept" class="headerlink" title="Potential Energy Surface I. Concept"></a>Potential Energy Surface I. Concept</h1>
                 
               </div>
             
@@ -357,8 +370,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Preface/" title="Preface">
-                        <span class="hidden-mobile">Preface</span>
+                      <a href="/QChem_Basic/" title="Q-Chem Basic">
+                        <span class="hidden-mobile">Q-Chem Basic</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -506,9 +519,7 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        var texts = ["Non-adiabatic Molecule Dynamics","Machine Learning","Quantum Chemistry","Music Production","Artificial Intelligence"];
-        var idx = Math.floor(Math.random() * texts.length);
-        typing(texts[idx]);
+        typing(text);
       
     })(window, document);
   </script>
@@ -620,13 +631,10 @@
       <script>
         if (!window.MathJax) {
           window.MathJax = {
-            tex: {
-              inlineMath: [['$', '$'], ['\\(', '\\)']],
-              displayMath: [['$$', '$$'], ['\\[', '\\]']],
-              processEscapes: true,
-              tags: 'ams' // optional, enables \eqref{} numbering
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
             },
-            loader: {
+            loader : {
               load: ['ui/lazy']
             },
             options: {
