@@ -27,7 +27,7 @@
 <meta property="og:description" content="Physics 162a (QM I): Problem Set 2  1. Constrained Lagrangian systems Consider a Lagrangian system consisting of $D$ coordinates $q^I$ ($I&#x3D;1,\dots,D$) and $m$ constraints $f_a&#x3D;f_{a&#x3D;1,\dots,m}(q^I)&#x3D;0$.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-17T00:37:08.759Z">
-<meta property="article:modified_time" content="2025-10-20T02:48:56.538Z">
+<meta property="article:modified_time" content="2025-10-20T02:54:24.204Z">
 <meta property="article:author" content="MoriyaSuwako2524">
 <meta property="article:tag" content="Physics">
 <meta property="article:tag" content="Problem Sets">
@@ -355,13 +355,13 @@
 <p>Consider a Lagrangian system consisting of $D$ coordinates $q^I$ ($I=1,\dots,D$) and $m$ constraints $f_a=f_{a=1,\dots,m}(q^I)=0$.<br>
 Let $s^i$ ($i=1,\dots,D-m$) be coordinates on the constrained submanifold defined by $f_a(q)=0$, so that $f_a!\left(q^I(s^i,t)\right)=0$ for all $s^i$. We showed in class that for any infinitesimal motion $\delta s^i$, then<br>
 $$<br>
-\bigl(p_I-\mathcal F_I\bigr),\frac{\partial q^I}{\partial s^i},\delta s^i=0<br>
+\bigl(p_I-\mathcal F_I\bigr)\frac{\partial q^I}{\partial s^i}\delta s^i=0<br>
 \tag{1}<br>
 $$</p>
 <p>Show that the equations of motion above follow from the Euler–Lagrange equations for<br>
 $$<br>
 \tilde L(s^i,\dot s^i)<br>
-= L!\left(q^I(s^i),,\dot s^i,\frac{\partial q^I}{\partial s^i}(s^i)\right).<br>
+= L!\left(q^I(s^i),\dot s^i\frac{\partial q^I}{\partial s^i}(s^i)\right).<br>
 \tag{2}<br>
 $$</p>
 <hr>
@@ -382,7 +382,7 @@ $$</p>
 <hr>
 <p><strong>(b)</strong> A bead with mass $m$ is constrained to move on a massless hoop of radius $a$ with a diameter fixed to lie along the $z$-axis.<br>
 The hoop is rotating about the $z$ axis with constant angular speed $\omega$.</p>
-<p>i. <strong>Lagrangian and equations of motion.</strong> Obtain the Lagrangian and the Euler–Lagrange equations of motion assuming that the only external force arises from a constant gravitational force $-mg,\hat z$.</p>
+<p>i. <strong>Lagrangian and equations of motion.</strong> Obtain the Lagrangian and the Euler–Lagrange equations of motion assuming that the only external force arises from a constant gravitational force $-mg\hat z$.</p>
 <p>ii. <strong>Critical angular speed.</strong> Show that if $\omega&gt;\omega_0$ for some particular critical frequency $\omega_0$, there exists a solution in which the particle remains stationary on the hoop at a point other than the bottom (or top), but for $\omega&lt;\omega_0$, the only stationary points are the bottom and top. Find this value of $\omega_0$.</p>
 <p><strong>Important hints</strong></p>
 <ul>
@@ -391,15 +391,15 @@ The hoop is rotating about the $z$ axis with constant angular speed $\omega$.</p
 </ul>
 <hr>
 <p><strong>©</strong> Consider a particle moving under the influence of some central force (about the origin).<br>
-Write the Lagrangian in a frame that rotates with constant angular velocity $\mathbf{\Omega}=\omega,\hat z$ about the $z$ axis.<br>
+Write the Lagrangian in a frame that rotates with constant angular velocity $\mathbf{\Omega}=\omega\hat z$ about the $z$ axis.<br>
 Using the Euler–Lagrange equations, write the equations of motion in this rotating frame, and show that one gets the additional Coriolis and centrifugal force terms:<br>
 $$<br>
-m\ddot{\mathbf x};=;\mathbf F_{\mathrm{cor}}+\mathbf F_{\mathrm{centrifugal}}+\mathbf F!\bigl(|\mathbf x|\bigr),<br>
+m\ddot{\mathbf x}=\mathbf F_{\mathrm{cor}}+\mathbf F_{\mathrm{centrifugal}}+\mathbf F!\bigl(|\mathbf x|\bigr),<br>
 $$<br>
 $$<br>
 \mathbf F_{\mathrm{cor}}=-2m\mathbf{\Omega}\times\dot{\mathbf x},<br>
 \qquad<br>
-\mathbf F_{\mathrm{centrifugal}}=-m,\mathbf{\Omega}\times(\mathbf{\Omega}times\mathbf x),<br>
+\mathbf F_{\mathrm{centrifugal}}=-m\mathbf{\Omega}\times(\mathbf{\Omega}\times\mathbf x),<br>
 \tag{5}<br>
 $$<br>
 and $\mathbf F!\bigl(|\mathbf x|\bigr)$ takes the same form as in the non-rotating frame.</p>
@@ -507,8 +507,8 @@ and $\mathbf F!\bigl(|\mathbf x|\bigr)$ takes the same form as in the non-rotati
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Potential%20Energy%20Surface%20I.%20Concept/" title="Potential Energy Surface I. Concept">
-                        <span class="hidden-mobile">Potential Energy Surface I. Concept</span>
+                      <a href="/Preface/" title="0. Preface &amp; Contents">
+                        <span class="hidden-mobile">0. Preface &amp; Contents</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
