@@ -19,15 +19,15 @@
   <meta name="author" content="MoriyaSuwako2524">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.1 $$ L&#x3D;\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta $$ $$ \begin{aligned} p_\alpha &amp;&#x3D; \sum_{\beta} \frac{\partial L}{\partial \dot q^{\beta}} \ &amp;&#x3D; \tfrac12, g_{ij}!\left(\delta">
+    <meta name="description" content="Physics 162a (QM I) Problem Set 1  1. Consider the following Lagrangian $$ L &#x3D; \frac{1}{2} g_{\alpha \beta}(q) \dot{q}^\alpha \dot{q}^\beta $$ with $\alpha, \beta &#x3D; 1, \ldots, d$, where $g_{\alpha \be">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHY 162a 1">
 <meta property="og:url" content="https://moriyasuwako2524.github.io/PHY_162a_1/index.html">
 <meta property="og:site_name" content="Moriya’s Lab">
-<meta property="og:description" content="1.1 $$ L&#x3D;\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta $$ $$ \begin{aligned} p_\alpha &amp;&#x3D; \sum_{\beta} \frac{\partial L}{\partial \dot q^{\beta}} \ &amp;&#x3D; \tfrac12, g_{ij}!\left(\delta">
+<meta property="og:description" content="Physics 162a (QM I) Problem Set 1  1. Consider the following Lagrangian $$ L &#x3D; \frac{1}{2} g_{\alpha \beta}(q) \dot{q}^\alpha \dot{q}^\beta $$ with $\alpha, \beta &#x3D; 1, \ldots, d$, where $g_{\alpha \be">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-17T00:37:08.758Z">
-<meta property="article:modified_time" content="2025-10-19T18:15:07.041Z">
+<meta property="article:modified_time" content="2025-10-20T02:43:37.580Z">
 <meta property="article:author" content="MoriyaSuwako2524">
 <meta property="article:tag" content="Physics">
 <meta property="article:tag" content="Problem Sets">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          422 words
+          819 words
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          2 mins
+          3 mins
         
       </span>
     
@@ -286,7 +286,7 @@
         aria-expanded="true"
       >
         PHY 162a Problem Sets
-        <span class="list-group-count">(2)</span>
+        <span class="list-group-count">(3)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -297,6 +297,15 @@
           
   <div class="category-post-list">
     
+    
+      
+      
+        <a href="/PHY_162a_0/" title="PHY 162a 0"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PHY 162a 0</span>
+        </a>
+      
     
       
       
@@ -339,96 +348,223 @@
             
               <div class="markdown-body">
                 
-                <p>1.1<br>
+                <h1>Physics 162a (QM I)</h1>
+<h2 id="Problem-Set-1">Problem Set 1</h2>
+<hr>
+<h3 id="1-Consider-the-following-Lagrangian">1. Consider the following Lagrangian</h3>
+<p>$$<br>
+L = \frac{1}{2} g_{\alpha \beta}(q) \dot{q}^\alpha \dot{q}^\beta<br>
+$$</p>
+<p>with $\alpha, \beta = 1, \ldots, d$, where $g_{\alpha \beta}$ is called a <em>metric</em>, and has an inverse $g^{\alpha \beta}$ such that</p>
+<p>$$<br>
+g^{\alpha \beta} g_{\beta \rho} = \delta^\alpha_\rho .<br>
+$$</p>
+<p>Here $\delta$ is the Kronecker delta function, and the Einstein summation convention is used.</p>
+<p>You may apply the Euler–Lagrange equations as before:</p>
+<p>$$<br>
+\frac{\partial L}{\partial q^\alpha} - \frac{d}{dt}\frac{\partial L}{\partial \dot{q}^\alpha} = 0<br>
+$$</p>
+<hr>
+<h4 id="a">(a)</h4>
+<p>Write the generalized momenta and the generalized forces.</p>
+<h4 id="b">(b)</h4>
+<p>Show that the Euler–Lagrange equations are equivalent to the <em>geodesic equation</em>:</p>
+<p>$$<br>
+\ddot{q}^\alpha + \Gamma^\alpha_{\beta \gamma} \dot{q}^\beta \dot{q}^\gamma = 0<br>
+$$</p>
+<p>where</p>
+<p>$$<br>
+\Gamma^\alpha_{\beta \gamma} = \frac{1}{2} g^{\alpha \rho}<br>
+\left(<br>
+g_{\beta \rho, \gamma} + g_{\gamma \rho, \beta} - g_{\beta \gamma, \rho}<br>
+\right),<br>
+$$</p>
+<p>with</p>
+<p>$$<br>
+g_{\alpha \beta, \gamma} = \frac{\partial g_{\alpha \beta}}{\partial q^\gamma},<br>
+$$</p>
+<p>which is known as the <strong>Levi–Civita connection</strong> for the metric $g$.<br>
+Particle dynamics on such “curved” spaces appear both in general relativistic situations and also in cases such as vibrations on a bent sheet or other non-flat geometries.</p>
+<hr>
+<h3 id="2-Two-coupled-particles">2. Two coupled particles</h3>
+<p><strong>(a)</strong><br>
+Write the Lagrangian for two nonrelativistic particles with positions $x_1, x_2$ and equal mass $m$, moving in one dimension, connected by a spring whose force on $x_1$ is<br>
 $$<br>
-L=\frac{1}{2}g_{\alpha\beta}(q)\dot {q}^\alpha\dot {q}^\beta<br>
+F_1 = -k(x_1 - x_2 - \ell),<br>
+$$<br>
+and whose force on $x_2$ is<br>
+$$<br>
+F_2 = -k(x_2 - x_1 + \ell),<br>
+$$<br>
+where $\ell$ is the unstretched length of the spring.<br>
+The momentum for particle $i$ is the standard $p_i = m \dot{x}_i$.<br>
+You may assume particle 1 is always to the right of particle 2.</p>
+<p><strong>(b)</strong><br>
+Rewrite $L$ in terms of the center of mass<br>
+$$<br>
+X = \tfrac{1}{2}(x_1 + x_2)<br>
+$$<br>
+and the separation<br>
+$$<br>
+x = x_1 - x_2 .<br>
 $$</p>
-<p>$$<br>
+<p><strong>©</strong><br>
+Solve the Euler–Lagrange equations in terms of $X, x$ and show that they are equivalent to those in terms of $x_1, x_2$.</p>
+<h1>Answers to Problem Set 1</h1>
+<hr>
+<p>I should note that the original answer doesn’t have description. The description here is generated by AI.</p>
+<h2 id="1-The-Lagrangian-and-Geodesic-Equation">1. The Lagrangian and Geodesic Equation</h2>
+<h3 id="1-1-Generalized-Momentum-and-Force">(1.1) Generalized Momentum and Force</h3>
+<p>The Lagrangian is given by:<br>
+$$<br>
+L = \frac{1}{2} g_{\alpha \beta}(q), \dot{q}^\alpha \dot{q}^\beta<br>
+$$</p>
+<p>The generalized momentum $p_\alpha$ is defined as:<br>
+$$<br>
 \begin{aligned}<br>
-p_\alpha &amp;= \sum_{\beta} \frac{\partial L}{\partial \dot q^{\beta}} \<br>
-&amp;= \tfrac12, g_{ij}!\left(\delta_{\alpha}^{i}\dot q^{j} + \dot q^{i}\delta_{\alpha}^{j}\right) \<br>
-&amp;= g_{\alpha\beta}(q),\dot q^{\beta}.<br>
+p_\alpha &amp;= \frac{\partial L}{\partial \dot q^{\alpha}} \<br>
+&amp;= \frac{1}{2} \frac{\partial}{\partial \dot q^{\alpha}}<br>
+\left(g_{ij}, \dot q^i \dot q^j\right) \<br>
+&amp;= \tfrac{1}{2}, g_{ij}!\left(\delta_{\alpha}^{i}\dot q^{j} + \dot q^{i}\delta_{\alpha}^{j}\right) \<br>
+&amp;= g_{\alpha\beta}(q), \dot q^{\beta}.<br>
 \end{aligned}<br>
 $$</p>
-<p>$$<br>
+<p>The generalized force $F_\alpha$ is:<br>
+$$<br>
 \begin{aligned}<br>
-F &amp;= \frac{\partial L}{\partial q^{\alpha}} \<br>
-&amp;= \tfrac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot{q}^i \dot{q}^j<br>
+F_\alpha &amp;= \frac{\partial L}{\partial q^{\alpha}} \<br>
+&amp;= \tfrac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}} \dot{q}^i \dot{q}^j<br>
 \end{aligned}<br>
 $$</p>
-<p>1.2</p>
-<p>$$<br>
+<p>Hence, $p_\alpha$ corresponds to the momentum conjugate to $q^\alpha$, while $F_\alpha$ represents the generalized force arising from the variation of the metric tensor $g_{\alpha\beta}(q)$.</p>
+<hr>
+<h3 id="1-2-Derivation-of-the-Geodesic-Equation">(1.2) Derivation of the Geodesic Equation</h3>
+<p>We start from the Euler–Lagrange equation:<br>
+$$<br>
+\frac{\partial L}{\partial q^{\alpha}} = \frac{d}{dt}\frac{\partial L}{\partial \dot q^\alpha}.<br>
+$$</p>
+<p>Substituting the expressions derived above:<br>
+$$<br>
 \begin{aligned}<br>
-\frac{\partial L}{\partial q^{\alpha}} &amp;= \frac{d}{dt}\frac{\partial L}{\partial \dot q^\alpha }<br>
-\<br>
 \tfrac{1}{2}\frac{\partial g_{ij}(q)}{\partial q^{\alpha}}\dot{q}^i\dot{q}^j<br>
-&amp;= \frac{d}{dt}(g_{\alpha\beta}(q)\dot q^{\beta}) \<br>
+&amp;= \frac{d}{dt}\left(g_{\alpha\beta}(q)\dot q^{\beta}\right) \<br>
 \tfrac{1}{2}\frac{\partial g_{ij}}{\partial q^{\alpha}}\dot{q}^i\dot{q}^j<br>
-&amp;= \frac{d}{dt}(g_{\alpha\beta})\dot q^{\beta}+g_{\alpha\beta}\ddot q^{\beta} \<br>
+&amp;= \frac{d g_{\alpha\beta}}{d t}\dot q^{\beta} + g_{\alpha\beta}\ddot q^{\beta} \<br>
 \tfrac{1}{2}\frac{\partial g_{ij}}{\partial q^{\beta}}\dot{q}^i\dot{q}^j<br>
-&amp;= \frac{\partial (g_{\beta\alpha})}{\partial q^k}\dot q^{k}\dot q^{\alpha} + g_{\beta\alpha}\ddot q^{\alpha} \\tfrac{1}{2}g^{\alpha\rho}!\left(<br>
+&amp;= \frac{\partial g_{\beta\alpha}}{\partial q^k}\dot q^{k}\dot q^{\alpha} + g_{\beta\alpha}\ddot q^{\alpha}.<br>
+\end{aligned}<br>
+$$</p>
+<p>Rearranging and multiplying by $g^{\alpha\rho}$, we obtain:<br>
+$$<br>
+\tfrac{1}{2} g^{\alpha\rho}!\left(<br>
 \frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot{q}^{\beta}\dot{q}^\gamma<br>
 - 2\frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma}<br>
 \right)<br>
-&amp;= \delta_{i}^{\alpha}\ddot q^{i} \\ddot q^{\alpha}+ \tfrac{1}{2}g^{\alpha\rho}!\left(<br>
+= \ddot q^{\alpha}.<br>
+$$</p>
+<p>Simplifying gives the standard geodesic form:<br>
+$$<br>
+\ddot q^{\alpha} + \tfrac{1}{2} g^{\alpha\rho}!\left(<br>
 -\frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}\dot{q}^{\beta}\dot{q}^\gamma<br>
 + \frac{\partial g_{\gamma \rho}}{\partial q^\beta}\dot q^{\beta}\dot q^{\gamma}<br>
 + \frac{\partial g_{\beta \rho}}{\partial q^\gamma}\dot q^{\beta}\dot q^{\gamma}<br>
 \right)<br>
-&amp;= 0 \<br>
-Q.E.D<br>
-\end{aligned}<br>
+= 0,<br>
 $$</p>
-<p>2.1</p>
+<p>or equivalently,<br>
+$$<br>
+\ddot q^{\alpha} + \Gamma^{\alpha}<em>{\beta\gamma} \dot q^{\beta}\dot q^{\gamma} = 0,<br>
+$$<br>
+where<br>
+$$<br>
+\Gamma^{\alpha}</em>{\beta\gamma} = \tfrac{1}{2} g^{\alpha\rho}<br>
+\left(<br>
+\frac{\partial g_{\rho\beta}}{\partial q^{\gamma}} + \frac{\partial g_{\rho\gamma}}{\partial q^{\beta}}- \frac{\partial g_{\beta\gamma}}{\partial q^{\rho}}<br>
+\right)<br>
+$$</p>
+<p>is the <strong>Levi–Civita connection</strong>.<br>
+Thus, the Euler–Lagrange equation for this Lagrangian indeed yields the geodesic equation.<br>
+<em>Q.E.D.</em></p>
+<hr>
+<h2 id="2-Two-Coupled-Particles">2. Two Coupled Particles</h2>
+<h3 id="2-1-The-Lagrangian-in-x-1-x-2">(2.1) The Lagrangian in $x_1, x_2$</h3>
+<p>For two equal-mass particles connected by a spring:</p>
 <p>$$<br>
 \begin{aligned}<br>
-F_1 &amp;= -k(x_1 - x_2 - l) \<br>
-F_2 &amp;= k(x_1 - x_2 - l) \<br>
-U(x_1, x_2) &amp;= \tfrac{1}{2}k(x_1 - x_2 - l)^2<br>
+F_1 &amp;= -k(x_1 - x_2 - \ell), \<br>
+F_2 &amp;= -k(x_2 - x_1 + \ell),<br>
 \end{aligned}<br>
 $$</p>
-<p>$$<br>
-L=\frac{1}{2}m(\dot x_1^2+\dot x_2^2)-\frac{1}{2}k(x_1-x_2-l)^2<br>
+<p>and the potential energy is:<br>
+$$<br>
+U(x_1, x_2) = \tfrac{1}{2}k(x_1 - x_2 - \ell)^2.<br>
 $$</p>
-<p>2.2<br>
+<p>Hence, the Lagrangian is:<br>
 $$<br>
-L=\frac{1}{4}m(4\dot X^2+\dot x^2)-\frac{1}{2}k(x-l)^2<br>
-$$<br>
-2.3<br>
-$$<br>
-\frac{\partial L}{\partial x_i} = F_i<br>
+L = \frac{1}{2}m(\dot x_1^2 + \dot x_2^2) - \frac{1}{2}k(x_1 - x_2 - \ell)^2.<br>
 $$</p>
-<p>$$<br>
-\frac{d}{dt}\frac{\partial L}{\partial \dot x_i} = m\ddot x_i<br>
+<hr>
+<h3 id="2-2-Transformation-to-Center-of-Mass-and-Relative-Coordinates">(2.2) Transformation to Center-of-Mass and Relative Coordinates</h3>
+<p>Define the <strong>center of mass</strong> and <strong>relative coordinate</strong> as:<br>
+$$<br>
+X = \frac{1}{2}(x_1 + x_2), \qquad x = x_1 - x_2.<br>
 $$</p>
-<p>Euler-Lagrange equations:<br>
+<p>Then,<br>
 $$<br>
-F_i=m\ddot x_i<br>
-\<br>
-0 = m(\ddot x_1+\ddot x_2)<br>
-\<br>
--2k(x_1-x_2-l) = m(\ddot x_1-\ddot x_2)<br>
-$$<br>
-For $X$ and $x$:<br>
-$$<br>
-\frac{\partial L}{\partial X} = 0<br>
-\<br>
-\frac{\partial L}{\partial x} = -k(x-l)<br>
-\<br>
-\frac{d}{dt}\frac{\partial L}{\partial \dot X} = 2m\ddot X<br>
-\<br>
-\frac{d}{dt}\frac{\partial L}{\partial \dot x} = \frac{1}{2}m\ddot x<br>
-$$<br>
-Euler-Lagrange equations:<br>
+\dot x_1 = \dot X + \frac{1}{2}\dot x, \qquad<br>
+\dot x_2 = \dot X - \frac{1}{2}\dot x.<br>
+$$</p>
+<p>Substituting these into $L$, we obtain:<br>
 $$<br>
 \begin{aligned}<br>
--2m\ddot X = 0 \rightarrow  \ddot X = 0<br>
-\<br>
--k(x-l)-\frac{1}{2}m\ddot x =0<br>
-\<br>
-Q.E.D<br>
+L &amp;= \frac{1}{2}m!\left[(\dot X + \tfrac{1}{2}\dot x)^2 + (\dot X - \tfrac{1}{2}\dot x)^2\right]<br>
+- \frac{1}{2}k(x - \ell)^2 \[4pt]<br>
+&amp;= \frac{1}{4}m(4\dot X^2 + \dot x^2) - \frac{1}{2}k(x - \ell)^2.<br>
 \end{aligned}<br>
 $$</p>
+<p>Thus, the Lagrangian separates into <strong>center-of-mass motion</strong> and <strong>relative motion</strong> parts.</p>
+<hr>
+<h3 id="2-3-Euler–Lagrange-Equations-and-Equivalence">(2.3) Euler–Lagrange Equations and Equivalence</h3>
+<p>For each particle coordinate $x_i$, the Euler–Lagrange equation is:<br>
+$$<br>
+\frac{\partial L}{\partial x_i} = \frac{d}{dt}\frac{\partial L}{\partial \dot x_i}.<br>
+$$</p>
+<p>This gives:<br>
+$$<br>
+\frac{\partial L}{\partial x_i} = F_i, \qquad<br>
+\frac{d}{dt}\frac{\partial L}{\partial \dot x_i} = m\ddot x_i.<br>
+$$</p>
+<p>Hence:<br>
+$$<br>
+F_i = m\ddot x_i.<br>
+$$</p>
+<p>Combining the two-particle equations yields:<br>
+$$<br>
+\begin{aligned}<br>
+0 &amp;= m(\ddot x_1 + \ddot x_2), \<br>
+-2k(x_1 - x_2 - \ell) &amp;= m(\ddot x_1 - \ddot x_2).<br>
+\end{aligned}<br>
+$$</p>
+<p>Now, in terms of $X$ and $x$:</p>
+<p>$$<br>
+\frac{\partial L}{\partial X} = 0, \quad<br>
+\frac{\partial L}{\partial x} = -k(x - \ell),<br>
+$$</p>
+<p>and</p>
+<p>$$<br>
+\frac{d}{dt}\frac{\partial L}{\partial \dot X} = 2m\ddot X, \quad<br>
+\frac{d}{dt}\frac{\partial L}{\partial \dot x} = \tfrac{1}{2}m\ddot x.<br>
+$$</p>
+<p>Thus, the corresponding Euler–Lagrange equations are:<br>
+$$<br>
+\begin{aligned}<br>
+-2m\ddot X &amp;= 0 \quad \Rightarrow \quad \ddot X = 0, \[4pt]<br>
+-k(x - \ell) - \tfrac{1}{2}m\ddot x &amp;= 0 \quad \Rightarrow \quad m\ddot x = -2k(x - \ell).<br>
+\end{aligned}<br>
+$$</p>
+<p>The first describes <strong>free motion of the center of mass</strong>,<br>
+and the second describes <strong>harmonic motion</strong> of the relative coordinate.</p>
+<p><em>Q.E.D.</em></p>
 
                 
               </div>
