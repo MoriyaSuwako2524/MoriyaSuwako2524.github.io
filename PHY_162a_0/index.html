@@ -19,12 +19,12 @@
   <meta name="author" content="MoriyaSuwako2524">
   <meta name="keywords" content="">
   
-    <meta name="description" content="IntroductionThis category, PHY 162a Problem Sets, contains my personal notes and solutions for the Quantum Mechanics course at Brandeis University.You may use these notes as a reference. If you notice">
+    <meta name="description" content="Introduction This category, PHY 162a Problem Sets, contains my personal notes and solutions for the Quantum Mechanics course at Brandeis University. You may use these notes as a reference. If you noti">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHY 162a 0">
 <meta property="og:url" content="https://moriyasuwako2524.github.io/PHY_162a_0/index.html">
 <meta property="og:site_name" content="Moriya’s Lab">
-<meta property="og:description" content="IntroductionThis category, PHY 162a Problem Sets, contains my personal notes and solutions for the Quantum Mechanics course at Brandeis University.You may use these notes as a reference. If you notice">
+<meta property="og:description" content="Introduction This category, PHY 162a Problem Sets, contains my personal notes and solutions for the Quantum Mechanics course at Brandeis University. You may use these notes as a reference. If you noti">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-20T13:56:04.616Z">
 <meta property="article:modified_time" content="2025-10-20T13:56:04.617Z">
@@ -47,6 +47,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -348,11 +350,15 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This category, <strong>PHY 162a Problem Sets</strong>, contains my personal notes and solutions for the <em>Quantum Mechanics</em> course at Brandeis University.<br>You may use these notes as a reference. If you notice any mistakes, please feel free to contact me at <strong>suwako2524@gmail.com</strong>.</p>
-<p>I recommend <em>Курс теоретической физики</em> (<em>Course of Theoretical Physics</em>) by <strong>Landau and Lifshitz</strong> for reviewing Quantum Mechanics.<br>However, this collection is <strong>not</strong> suitable for beginners who are learning Quantum Mechanics for the first time.</p>
+                <h1>Introduction</h1>
+<p>This category, <strong>PHY 162a Problem Sets</strong>, contains my personal notes and solutions for the <em>Quantum Mechanics</em> course at Brandeis University.<br>
+You may use these notes as a reference. If you notice any mistakes, please feel free to contact me at <strong><a href="mailto:suwako2524@gmail.com">suwako2524@gmail.com</a></strong>.</p>
+<p>I recommend <em>Курс теоретической физики</em> (<em>Course of Theoretical Physics</em>) by <strong>Landau and Lifshitz</strong> for reviewing Quantum Mechanics.<br>
+However, this collection is <strong>not</strong> suitable for beginners who are learning Quantum Mechanics for the first time.</p>
 <hr>
-<h1 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h1><ol>
-<li><a href="/PHY_162a_1/">Problem Set 1: Classical Mechanics</a>  </li>
+<h1>Contents</h1>
+<ol>
+<li><a href="/PHY_162a_1/">Problem Set 1: Classical Mechanics</a></li>
 <li><a href="/PHY_162a_2/">Problem Set 2</a></li>
 </ol>
 
@@ -521,7 +527,6 @@
 
   
   
-
 
 
 
@@ -715,49 +720,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

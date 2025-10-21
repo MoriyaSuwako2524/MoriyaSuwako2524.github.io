@@ -19,12 +19,12 @@
   <meta name="author" content="MoriyaSuwako2524">
   <meta name="keywords" content="">
   
-    <meta name="description" content="IQmolIQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem you can download it here IQmol Molecular Viewer XYZ Files.xyz file is a widely used">
+    <meta name="description" content="IQmol IQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem you can download it here IQmol Molecular Viewer XYZ Files .xyz file is a widely used">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IQmol">
 <meta property="og:url" content="https://moriyasuwako2524.github.io/IQmol/index.html">
 <meta property="og:site_name" content="Moriya’s Lab">
-<meta property="og:description" content="IQmolIQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem you can download it here IQmol Molecular Viewer XYZ Files.xyz file is a widely used">
+<meta property="og:description" content="IQmol IQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem you can download it here IQmol Molecular Viewer XYZ Files .xyz file is a widely used">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-17T15:13:32.595Z">
 <meta property="article:modified_time" content="2025-10-17T15:13:32.595Z">
@@ -45,6 +45,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -291,9 +293,11 @@
             
               <div class="markdown-body">
                 
-                <h1 id="IQmol"><a href="#IQmol" class="headerlink" title="IQmol"></a>IQmol</h1><p>IQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem</p>
+                <h1>IQmol</h1>
+<p>IQmol is a GUI software for visualizing molecule, and manage calculation results from Q-Chem</p>
 <p>you can download it here <a target="_blank" rel="noopener" href="https://www.iqmol.org/">IQmol Molecular Viewer</a></p>
-<h2 id="XYZ-Files"><a href="#XYZ-Files" class="headerlink" title="XYZ Files"></a>XYZ Files</h2><p>.xyz file is a widely used</p>
+<h2 id="XYZ-Files">XYZ Files</h2>
+<p>.xyz file is a widely used</p>
 
                 
               </div>
@@ -435,7 +439,6 @@
 
   
   
-
 
 
 
@@ -629,49 +632,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
