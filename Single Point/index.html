@@ -19,12 +19,12 @@
   <meta name="author" content="MoriyaSuwako2524">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Single-Point (SP) CalculationA single-point (SP) calculation evaluates properties (most commonly the electronic energy) of a system at a fixed geometry. It’s the simplest job type in computational che">
+    <meta name="description" content="Single-Point (SP) Calculation A single-point (SP) calculation evaluates properties (most commonly the electronic energy) of a system at a fixed geometry. It’s the simplest job type in computational ch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Single Point Calculation">
 <meta property="og:url" content="https://moriyasuwako2524.github.io/Single%20Point/index.html">
 <meta property="og:site_name" content="Moriya’s Lab">
-<meta property="og:description" content="Single-Point (SP) CalculationA single-point (SP) calculation evaluates properties (most commonly the electronic energy) of a system at a fixed geometry. It’s the simplest job type in computational che">
+<meta property="og:description" content="Single-Point (SP) Calculation A single-point (SP) calculation evaluates properties (most commonly the electronic energy) of a system at a fixed geometry. It’s the simplest job type in computational ch">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-17T15:13:32.595Z">
 <meta property="article:modified_time" content="2025-10-17T15:13:32.595Z">
@@ -293,15 +293,18 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Single-Point-SP-Calculation"><a href="#Single-Point-SP-Calculation" class="headerlink" title="Single-Point (SP) Calculation"></a>Single-Point (SP) Calculation</h1><p>A <strong>single-point (SP)</strong> calculation evaluates properties (most commonly the <strong>electronic energy</strong>) of a system at a <strong>fixed geometry</strong>. It’s the simplest job type in computational chemistry and a building block for scans, optimizations, and higher-level methods.</p>
-<h3 id="Where-the-geometry-comes-from"><a href="#Where-the-geometry-comes-from" class="headerlink" title="Where the geometry comes from"></a>Where the geometry comes from</h3><ul>
+                <h1>Single-Point (SP) Calculation</h1>
+<p>A <strong>single-point (SP)</strong> calculation evaluates properties (most commonly the <strong>electronic energy</strong>) of a system at a <strong>fixed geometry</strong>. It’s the simplest job type in computational chemistry and a building block for scans, optimizations, and higher-level methods.</p>
+<h3 id="Where-the-geometry-comes-from">Where the geometry comes from</h3>
+<ul>
 <li>Manually built in a GUI (e.g., IQmol)</li>
 <li>From a prior <strong>geometry optimization</strong></li>
 <li>From <strong>experiment</strong> (X-ray, neutron, cryo-EM models)</li>
 <li>From <strong>supplementary information</strong> (SI) in papers</li>
 <li><strong>Automatically generated</strong> by other programs or scripts (ASE, RDKit, Amber, etc.)</li>
 </ul>
-<h3 id="What-Q-Chem-does-in-a-default-SP-run"><a href="#What-Q-Chem-does-in-a-default-SP-run" class="headerlink" title="What Q-Chem does in a default SP run"></a>What Q-Chem does in a default SP run</h3><ol>
+<h3 id="What-Q-Chem-does-in-a-default-SP-run">What Q-Chem does in a default SP run</h3>
+<ol>
 <li>Print license banner and echo the input.</li>
 <li>Initialize the molecular structure and basis set.</li>
 <li>Build an <strong>initial guess</strong> for the wavefunction and evaluate its energy.</li>
