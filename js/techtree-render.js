@@ -383,9 +383,9 @@ class TechtreeRenderer {
   // 绑定节点交互事件
   bindNodeEvents(ng, node, isDone, isLocked) {
     const typeLabels = {
-      required: '必修路径',
-      optional: '支线（可选）',
-      goal: '🏆 最终目标'
+      required: 'Main Quest',
+      optional: 'Side Quest',
+      goal: 'Goal of Chapter'
     };
     
     ng.on('mouseenter', (event) => {
@@ -406,14 +406,14 @@ class TechtreeRenderer {
       if (els.prereq) {
         const prereqs = (node.prereqs || []).map(p => this.nodeMap[p].label);
         document.querySelector(els.prereq).innerHTML = prereqs.length
-          ? `前置：${prereqs.map(n => `<em>${n}</em>`).join(' + ')}`
-          : '无前置 — 可直接开始！';
+          ? `Requirements：${prereqs.map(n => `<em>${n}</em>`).join(' + ')}`
+          : 'No Requirements！';
       }
       
       if (els.hint) {
         document.querySelector(els.hint).textContent = isLocked
-          ? '🔒 请先完成所有前置课程'
-          : isDone ? '点击可取消完成状态' : '👆 点击标记为已完成';
+          ? '🔒 Please complete all requirements'
+          : isDone ? 'Click to complete' : '👆 Click to complete';
       }
       
       this.tooltip.style.opacity = '1';
