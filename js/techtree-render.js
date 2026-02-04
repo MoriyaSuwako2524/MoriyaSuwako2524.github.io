@@ -97,7 +97,7 @@ class TechtreeRenderer {
     const required = this.nodes.filter(n => n.type === 'required');
     const completedRequired = required.filter(n => this.completed.has(n.id)).length;
     
-    this.progressText.textContent = `${completedRequired} / ${required.length} 必修`;
+    this.progressText.textContent = `${completedRequired} / ${required.length} Main`;
     this.progressFill.style.width = (completedRequired / required.length * 100) + '%';
   }
   
@@ -352,7 +352,7 @@ class TechtreeRenderer {
           .attr('fill', '#9b59b6')
           .attr('font-size', '7px')
           .attr('font-weight', '600')
-          .text('支线');
+          .text('Side');
       }
       
       // 状态图标
@@ -383,9 +383,9 @@ class TechtreeRenderer {
   // 绑定节点交互事件
   bindNodeEvents(ng, node, isDone, isLocked) {
     const typeLabels = {
-      required: 'Main Quest',
+      required: 'Main Path',
       optional: 'Side Quest',
-      goal: 'Goal of Chapter'
+      goal: '🏆 Final Goal'
     };
     
     ng.on('mouseenter', (event) => {
@@ -406,14 +406,14 @@ class TechtreeRenderer {
       if (els.prereq) {
         const prereqs = (node.prereqs || []).map(p => this.nodeMap[p].label);
         document.querySelector(els.prereq).innerHTML = prereqs.length
-          ? `Requirements：${prereqs.map(n => `<em>${n}</em>`).join(' + ')}`
-          : 'No Requirements！';
+          ? `Prerequisites: ${prereqs.map(n => `<em>${n}</em>`).join(' + ')}`
+          : 'No prerequisites — Start anytime!';
       }
       
       if (els.hint) {
         document.querySelector(els.hint).textContent = isLocked
-          ? '🔒 Please complete all requirements'
-          : isDone ? 'Click to complete' : '👆 Click to complete';
+          ? '🔒 Complete all prerequisites first'
+          : isDone ? 'Click to unmark as completed' : '👆 Click to mark as completed';
       }
       
       this.tooltip.style.opacity = '1';
