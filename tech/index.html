@@ -299,12 +299,12 @@
   
   <div class="techtree-header">
     <div class="techtree-progress">
-      <span class="progress-text" id="techtree-webdev-1770238428415-progress">0 / 0 必修</span>
+      <span class="progress-text" id="techtree-webdev-1770238566117-progress">0 / 0 必修</span>
       <div class="progress-bar">
-        <div class="progress-fill" id="techtree-webdev-1770238428415-fill" style="width:0%"></div>
+        <div class="progress-fill" id="techtree-webdev-1770238566117-fill" style="width:0%"></div>
       </div>
     </div>
-    <button class="techtree-reset" onclick="window.techtree_techtree-webdev-1770238428415.reset()">重置</button>
+    <button class="techtree-reset" onclick="window.techtree_techtree-webdev-1770238566117.reset()">重置</button>
   </div>
   
   
@@ -317,14 +317,14 @@
   </div>
   
   
-  <div class="techtree-graph" id="techtree-webdev-1770238428415" style="height:500px"></div>
+  <div class="techtree-graph" id="techtree-webdev-1770238566117" style="height:500px"></div>
   
-  <div class="techtree-tooltip" id="techtree-webdev-1770238428415-tooltip">
-    <div class="tooltip-title" id="techtree-webdev-1770238428415-tt"></div>
-    <div class="tooltip-badge" id="techtree-webdev-1770238428415-tb"></div>
-    <div class="tooltip-desc" id="techtree-webdev-1770238428415-td"></div>
-    <div class="tooltip-prereq" id="techtree-webdev-1770238428415-tp"></div>
-    <div class="tooltip-hint" id="techtree-webdev-1770238428415-th"></div>
+  <div class="techtree-tooltip" id="techtree-webdev-1770238566117-tooltip">
+    <div class="tooltip-title" id="techtree-webdev-1770238566117-tt"></div>
+    <div class="tooltip-badge" id="techtree-webdev-1770238566117-tb"></div>
+    <div class="tooltip-desc" id="techtree-webdev-1770238566117-td"></div>
+    <div class="tooltip-prereq" id="techtree-webdev-1770238566117-tp"></div>
+    <div class="tooltip-hint" id="techtree-webdev-1770238566117-th"></div>
   </div>
 </div>
 
@@ -343,23 +343,23 @@
         return;
       }
       
-      window.techtree_techtree-webdev-1770238428415 = new TechtreeRenderer({
-        container: '#techtree-webdev-1770238428415',
+      window.techtree_techtree-webdev-1770238566117 = new TechtreeRenderer({
+        container: '#techtree-webdev-1770238566117',
         data: data,
-        progressText: '#techtree-webdev-1770238428415-progress',
-        progressFill: '#techtree-webdev-1770238428415-fill',
-        tooltip: '#techtree-webdev-1770238428415-tooltip',
+        progressText: '#techtree-webdev-1770238566117-progress',
+        progressFill: '#techtree-webdev-1770238566117-fill',
+        tooltip: '#techtree-webdev-1770238566117-tooltip',
         tooltipElements: {
-          title: '#techtree-webdev-1770238428415-tt',
-          badge: '#techtree-webdev-1770238428415-tb',
-          desc: '#techtree-webdev-1770238428415-td',
-          prereq: '#techtree-webdev-1770238428415-tp',
-          hint: '#techtree-webdev-1770238428415-th'
+          title: '#techtree-webdev-1770238566117-tt',
+          badge: '#techtree-webdev-1770238566117-tb',
+          desc: '#techtree-webdev-1770238566117-td',
+          prereq: '#techtree-webdev-1770238566117-tp',
+          hint: '#techtree-webdev-1770238566117-th'
         }
       });
     })
     .catch(err => {
-      document.getElementById('techtree-webdev-1770238428415').innerHTML = 
+      document.getElementById('techtree-webdev-1770238566117').innerHTML = 
         '<div style="padding:2em;text-align:center;color:#999">⚠️ ' + err.message + '</div>';
     });
 })();
