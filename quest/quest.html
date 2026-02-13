@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>📜 Quest Book</title>
+<style>*{box-sizing:border-box;margin:0;padding:0}body{overflow:hidden;height:100vh;background:#1a1a2e}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}</style>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script type="text/babel">
+const { useState, useRef, useCallback, useEffect, useMemo } = React;
+
+
+
+/* ═══════════════════════════════════════════
+   HELPERS
+   ═══════════════════════════════════════════ */
+const EMOJIS = ["📖","📊","🤖","🔥","⚡","🎯","🧠","🔬","🌍","📦","🔀","🔄","✂️","📚","🔢","🐼","📈","🧹","🔍","🎨","📐","🌲","🌳","⚙️","↩️","🔦","🖼️","💡","🛠️","🚀","💎","🏆","🎓","🎪","🧪","🔮","🌟","🎵","🎲","🧩","🐍","☕","🦀","💻","🌐","📡","🔧","🎮","📝","🗂️"];
+const isImg = (ic) => ic && (ic.startsWith("http") || ic.startsWith("data:") || ic.startsWith("blob:"));
+const SK = "questbook_v4";
+const load = () => { try { const r = localStorage.getItem(SK); return r ? JSON.parse(r) : null; } catch { return null; } };
+const save = (d) => { try { localStorage.setItem(SK, JSON.stringify(d)); } catch {} };
+const uid = () => "q" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+
+/*
+  preReqs format (v4):
+    [ ["qA","qB"], ["qC"] ]
+    means: (qA OR qB) AND (qC)
+  Each inner array is an OR-group. All groups must be satisfied.
+  Migrate old flat format ["q1","q2"] → [["q1"],["q2"]]
+*/
+function migratePreReqs(pr) {
+  if (!pr || !Array.isArray(pr) || pr.length === 0) return [];
+  if (typeof pr[0] === "string") return pr.map(id => [id]); // old flat → each is AND
+  return pr;
+}
+
+function migrateData(data) {
+  return data.map(line => ({
+    ...line, bg: line.bg || "",
+    quests: line.quests.map(q => ({ ...q, preReqs: migratePreReqs(q.preReqs) }))
+  }));
+}
+
+/* allQMap: { questId → quest } across ALL lines */
+function buildGlobalMap(data) {
+  const m = {};
+  data.forEach(line => line.quests.forEach(q => m[q.id] = { ...q, _lineId: line.id, _lineName: line.name, _lineIcon: line.icon }));
+  return m;
+}
+
+/* Check if a quest's prerequisites are met (cross-chapter, OR logic) */
+function isAvailable(quest, globalMap) {
+  const groups = quest.preReqs;
+  if (!groups || groups.length === 0) return true;
+  return groups.every(orGroup =>
+    orGroup.some(qid => globalMap[qid]?.state === "completed")
+  );
+}
+
+/* Recompute states for ALL lines at once */
+function recomputeAll(data) {
+  // Build map of current states
+  const gm = buildGlobalMap(data);
+  // Iterate until stable (cascading unlocks)
+  let changed = true;
+  let iterations = 0;
+  while (changed && iterations < 50) {
+    changed = false;
+    iterations++;
+    data.forEach(line => {
+      line.quests.forEach(q => {
+        if (q.state === "completed") return;
+        const shouldBe = isAvailable(q, gm) ? "available" : "locked";
+        if (q.state !== shouldBe) { q.state = shouldBe; gm[q.id] = { ...gm[q.id], state: shouldBe }; changed = true; }
+      });
+    });
+  }
+  return data.map(l => ({ ...l, quests: l.quests.map(q => ({ ...q })) }));
+}
+
+/* Get all quest IDs referenced in preReqs (flat) */
+function allPreReqIds(preReqs) {
+  return (preReqs || []).flat();
+}
+
+const SC = {
+  completed: { fill: "#10b981", glow: "rgba(16,185,129,.22)", bdr: "#059669" },
+  available: { fill: "#f59e0b", glow: "rgba(245,158,11,.22)", bdr: "#d97706" },
+  locked:    { fill: "#475569", glow: "rgba(71,85,105,.12)", bdr: "#334155" },
+};
+
+/* ═══════════════════════════════════════════
+   DEFAULT DATA
+   ═══════════════════════════════════════════ */
+const DEFAULT_DATA = migrateData([
+  {
+    id:"tutorial", name:"入门教程", icon:"📖", desc:"从零开始的基础教程", bg:"",
+    quests:[
+      {id:"q1",x:140,y:200,name:"Hello World",icon:"🌍",isMain:true,state:"completed",desc:"编写你的第一个 Python 程序。",tasks:["安装 Python 3.10+","创建 hello.py","运行并查看输出"],preReqs:[]},
+      {id:"q2",x:340,y:200,name:"变量与类型",icon:"📦",isMain:true,state:"completed",desc:"了解 Python 中的基本数据类型。",tasks:["学习 int, float, str, bool","完成类型转换练习"],preReqs:["q1"]},
+      {id:"q3",x:540,y:120,name:"条件判断",icon:"🔀",isMain:true,state:"available",desc:"掌握 if-elif-else 结构。",tasks:["编写 if-else","完成猜数字游戏"],preReqs:["q2"]},
+      {id:"q4",x:540,y:280,name:"循环结构",icon:"🔄",isMain:true,state:"available",desc:"学习 for 和 while 循环。",tasks:["for 循环","while 循环","break/continue"],preReqs:["q2"]},
+      {id:"q5",x:740,y:200,name:"函数定义",icon:"⚡",isMain:true,state:"locked",desc:"学习如何定义和调用函数。",tasks:["定义函数","参数与返回值","作用域"],preReqs:["q3","q4"]},
+      {id:"q6",x:340,y:60,name:"字符串操作",icon:"✂️",isMain:false,state:"completed",desc:"深入学习字符串操作。",tasks:["切片","f-string","常用方法"],preReqs:["q2"]},
+      {id:"q7",x:740,y:60,name:"列表推导式",icon:"🎯",isMain:false,state:"locked",desc:"学习列表推导式。",tasks:["基础推导","条件过滤"],preReqs:["q3","q6"]},
+      {id:"q8",x:940,y:200,name:"模块与包",icon:"📚",isMain:true,state:"locked",desc:"组织代码为模块和包。",tasks:["自定义模块","import","标准库"],preReqs:["q5"]},
+    ],
+  },
+  {
+    id:"data_science", name:"数据科学", icon:"📊", desc:"数据分析与可视化", bg:"",
+    quests:[
+      // ds1 depends on tutorial q5 (cross-chapter!) OR q8
+      {id:"ds1",x:140,y:200,name:"NumPy 基础",icon:"🔢",isMain:true,state:"locked",desc:"学习 NumPy 数组操作。",tasks:["ndarray","数组运算","广播"],preReqs:[["q5","q8"]]},
+      {id:"ds2",x:380,y:120,name:"Pandas 入门",icon:"🐼",isMain:true,state:"locked",desc:"DataFrame 基本操作。",tasks:["创建 DataFrame","筛选与聚合"],preReqs:["ds1"]},
+      {id:"ds3",x:380,y:280,name:"Matplotlib",icon:"📈",isMain:true,state:"locked",desc:"数据可视化图表。",tasks:["折线图","散点图"],preReqs:["ds1"]},
+      {id:"ds4",x:620,y:200,name:"数据清洗",icon:"🧹",isMain:true,state:"locked",desc:"处理缺失值和异常值。",tasks:["处理 NaN","类型转换"],preReqs:["ds2","ds3"]},
+      {id:"ds5",x:620,y:60,name:"Seaborn",icon:"🎨",isMain:false,state:"locked",desc:"统计图表。",tasks:["热力图","分布图"],preReqs:["ds3"]},
+      {id:"ds6",x:860,y:200,name:"探索性分析",icon:"🔍",isMain:true,state:"locked",desc:"综合 EDA。",tasks:["数据概览","相关性分析"],preReqs:["ds4"]},
+    ],
+  },
+  {
+    id:"ml", name:"机器学习", icon:"🤖", desc:"ML入门与实践", bg:"",
+    quests:[
+      // ml1 depends on ds4 (cross-chapter)
+      {id:"ml1",x:140,y:200,name:"ML 概述",icon:"🧠",isMain:true,state:"locked",desc:"机器学习基本概念。",tasks:["监督/无监督","训练/测试"],preReqs:["ds4"]},
+      {id:"ml2",x:380,y:120,name:"线性回归",icon:"📐",isMain:true,state:"locked",desc:"线性回归原理。",tasks:["最小二乘","sklearn"],preReqs:["ml1"]},
+      {id:"ml3",x:380,y:280,name:"逻辑回归",icon:"📊",isMain:true,state:"locked",desc:"分类入门。",tasks:["Sigmoid","二分类"],preReqs:["ml1"]},
+      // ml4: needs (ml2 OR ml3) — only one is required
+      {id:"ml4",x:620,y:200,name:"决策树",icon:"🌲",isMain:true,state:"locked",desc:"决策树算法。",tasks:["信息增益","CART"],preReqs:[["ml2","ml3"]]},
+      {id:"ml5",x:860,y:200,name:"随机森林",icon:"🌳",isMain:true,state:"locked",desc:"集成学习。",tasks:["Bagging","调优"],preReqs:["ml4"]},
+    ],
+  },
+]);
+
+/* ═══════════════════════════════════════════
+   SMALL COMPONENTS
+   ═══════════════════════════════════════════ */
+function IconHTML({ icon, size = 24, style = {} }) {
+  if (isImg(icon)) return <img src={icon} alt="" style={{ width: size, height: size, objectFit: "cover", borderRadius: 4, display: "block", ...style }} />;
+  return <span style={{ fontSize: size * 0.85, lineHeight: 1, ...style }}>{icon}</span>;
+}
+
+function Toast({ msg }) { if (!msg) return null; return <div style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: "#1e293b", border: "1px solid #475569", borderRadius: 10, padding: "10px 22px", fontSize: 14, color: "#e2e8f0", zIndex: 999, boxShadow: "0 8px 32px rgba(0,0,0,.5)", animation: "toastPop .25s ease" }}>{msg}</div>; }
+
+function Overlay({ children, onClose, wide }) {
+  return <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.55)", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center", animation: "fadeUp .15s ease" }}>
+    <div onClick={e => e.stopPropagation()} style={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 14, width: wide ? 560 : 480, maxWidth: "94vw", maxHeight: "88vh", overflowY: "auto", boxShadow: "0 24px 64px rgba(0,0,0,.6)" }}>{children}</div>
+  </div>;
+}
+
+function Confirm({ msg, onYes, onNo }) {
+  return <Overlay onClose={onNo}><div style={{ padding: "22px 24px" }}>
+    <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 14 }}>⚠️ 确认操作</div>
+    <p style={{ fontSize: 14, color: "#94a3b8", lineHeight: 1.6, marginBottom: 20 }}>{msg}</p>
+    <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
+      <button onClick={onNo} style={btnBase}>取消</button>
+      <button onClick={() => { onYes(); onNo(); }} style={{ ...btnBase, background: "#e94560", color: "#fff" }}>确认</button>
+    </div>
+  </div></Overlay>;
+}
+
+const btnBase = { background: "rgba(255,255,255,.06)", border: "none", color: "#94a3b8", borderRadius: 7, padding: "8px 18px", fontSize: 13, cursor: "pointer", fontFamily: "inherit" };
+const iS = { width: "100%", padding: "9px 12px", background: "#0f0f1e", border: "1px solid #334155", borderRadius: 7, color: "#e2e8f0", fontSize: 13, outline: "none", fontFamily: "inherit", boxSizing: "border-box" };
+
+/* ═══════════════════════════════════════════
+   ICON PICKER
+   ═══════════════════════════════════════════ */
+function IconPicker({ value, onChange, label = "图标" }) {
+  const [tab, setTab] = useState(isImg(value) ? "custom" : "emoji");
+  const [url, setUrl] = useState(isImg(value) ? value : "");
+  const fileRef = useRef(null);
+  const handleFile = (e) => { const f = e.target.files?.[0]; if (!f || !f.type.startsWith("image/")) return; const rd = new FileReader(); rd.onload = ev => { setUrl(ev.target.result); onChange(ev.target.result); }; rd.readAsDataURL(f); };
+  const tabBtn = (id, lbl) => <button key={id} onClick={() => setTab(id)} style={{ padding: "4px 12px", borderRadius: 6, fontSize: 11, fontWeight: 600, cursor: "pointer", border: "none", fontFamily: "inherit", background: tab === id ? "rgba(233,69,96,.2)" : "rgba(255,255,255,.04)", color: tab === id ? "#e94560" : "#64748b" }}>{lbl}</button>;
+  return <div>
+    <div style={{ fontSize: 12, fontWeight: 600, color: "#94a3b8", marginBottom: 5 }}>{label}</div>
+    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+      <div style={{ width: 40, height: 40, borderRadius: 8, background: "#0f0f1e", border: "1px solid #334155", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", flexShrink: 0 }}><IconHTML icon={value || "❓"} size={26} /></div>
+      <div style={{ fontSize: 12, color: "#64748b" }}>{isImg(value) ? "自定义图片" : `Emoji: ${value}`}</div>
+    </div>
+    <div style={{ display: "flex", gap: 4, marginBottom: 8 }}>{tabBtn("emoji", "🎭 Emoji")}{tabBtn("custom", "🖼️ 图片")}</div>
+    {tab === "emoji" && <div style={{ display: "grid", gridTemplateColumns: "repeat(10, 1fr)", gap: 2, maxHeight: 120, overflowY: "auto", padding: 4, background: "rgba(0,0,0,.2)", borderRadius: 8 }}>
+      {EMOJIS.map(e => <button key={e} onClick={() => onChange(e)} style={{ width: 30, height: 30, display: "flex", alignItems: "center", justifyContent: "center", background: value === e ? "rgba(233,69,96,.25)" : "transparent", border: "none", borderRadius: 6, fontSize: 17, cursor: "pointer" }}>{e}</button>)}
+    </div>}
+    {tab === "custom" && <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <div style={{ display: "flex", gap: 6 }}>
+        <input placeholder="图片 URL..." value={url} onChange={e => setUrl(e.target.value)} style={{ ...iS, flex: 1 }} />
+        <button onClick={() => { if (url.trim()) onChange(url.trim()); }} style={{ padding: "0 12px", background: "#10b981", border: "none", color: "#fff", borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>应用</button>
+        <button onClick={() => fileRef.current?.click()} style={{ padding: "0 10px", background: "rgba(255,255,255,.06)", border: "1px solid #334155", borderRadius: 6, color: "#94a3b8", fontSize: 12, cursor: "pointer", fontFamily: "inherit" }}>📁</button>
+        <input ref={fileRef} type="file" accept="image/*" onChange={handleFile} style={{ display: "none" }} />
+      </div>
+    </div>}
+  </div>;
+}
+
+function BgPicker({ value, onChange }) {
+  const [url, setUrl] = useState(value || "");
+  const fileRef = useRef(null);
+  const handleFile = (e) => { const f = e.target.files?.[0]; if (!f) return; const rd = new FileReader(); rd.onload = ev => { setUrl(ev.target.result); onChange(ev.target.result); }; rd.readAsDataURL(f); };
+  return <div>
+    <div style={{ fontSize: 12, fontWeight: 600, color: "#94a3b8", marginBottom: 5 }}>背景图片（可选）</div>
+    {value && <div style={{ width: "100%", height: 50, borderRadius: 8, marginBottom: 8, overflow: "hidden", background: `url(${value}) center/cover`, border: "1px solid #334155", position: "relative" }}>
+      <button onClick={() => { setUrl(""); onChange(""); }} style={{ position: "absolute", top: 3, right: 3, width: 20, height: 20, borderRadius: "50%", background: "rgba(0,0,0,.6)", border: "none", color: "#fff", fontSize: 11, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>✕</button>
+    </div>}
+    <div style={{ display: "flex", gap: 6 }}>
+      <input placeholder="背景图 URL..." value={url} onChange={e => setUrl(e.target.value)} style={{ ...iS, flex: 1 }} />
+      <button onClick={() => { if (url.trim()) onChange(url.trim()); }} style={{ padding: "0 12px", background: "#10b981", border: "none", color: "#fff", borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>应用</button>
+      <button onClick={() => fileRef.current?.click()} style={{ padding: "0 10px", background: "rgba(255,255,255,.06)", border: "1px solid #334155", borderRadius: 6, color: "#94a3b8", fontSize: 12, cursor: "pointer", fontFamily: "inherit" }}>📁</button>
+      <input ref={fileRef} type="file" accept="image/*" onChange={handleFile} style={{ display: "none" }} />
+    </div>
+    <div style={{ fontSize: 11, color: "#475569", marginTop: 3 }}>留空 = 默认网格</div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════════
+   PREREQ EDITOR (AND/OR groups, cross-chapter)
+   ═══════════════════════════════════════════ */
+function PreReqEditor({ groups, onChange, allData, currentLineId, currentQuestId }) {
+  // groups: [["qA","qB"], ["qC"]] = (qA OR qB) AND qC
+  // allData: entire questbook data array for cross-chapter picking
+
+  // Collect all quests across all lines, grouped by line
+  const lineQuests = allData.map(line => ({
+    id: line.id, name: line.name, icon: line.icon, isCurrent: line.id === currentLineId,
+    quests: line.quests.filter(q => q.id !== currentQuestId),
+  })).filter(l => l.quests.length > 0);
+
+  const addGroup = () => onChange([...groups, []]);
+  const removeGroup = (gi) => onChange(groups.filter((_, i) => i !== gi));
+  const addToGroup = (gi, qid) => {
+    const ng = groups.map((g, i) => i === gi ? (g.includes(qid) ? g.filter(x => x !== qid) : [...g, qid]) : g);
+    onChange(ng);
+  };
+  const removeFromGroup = (gi, qid) => {
+    onChange(groups.map((g, i) => i === gi ? g.filter(x => x !== qid) : g));
+  };
+
+  // Build global quest map for display
+  const gm = {};
+  allData.forEach(l => l.quests.forEach(q => gm[q.id] = { ...q, _lineName: l.name, _lineIcon: l.icon, _lineId: l.id }));
+
+  const [openPicker, setOpenPicker] = useState(null); // group index
+  const [search, setSearch] = useState("");
+
+  return <div>
+    <div style={{ fontSize: 12, fontWeight: 600, color: "#94a3b8", marginBottom: 8 }}>
+      前置条件
+      <span style={{ fontSize: 11, color: "#475569", fontWeight: 400, marginLeft: 6 }}>组间 AND · 组内 OR</span>
+    </div>
+
+    {groups.length === 0 && <div style={{ fontSize: 12, color: "#475569", marginBottom: 8 }}>无前置条件（任务直接可用）</div>}
+
+    {groups.map((group, gi) => (
+      <div key={gi} style={{ marginBottom: 8 }}>
+        {gi > 0 && <div style={{ fontSize: 11, color: "#e94560", fontWeight: 700, textAlign: "center", margin: "4px 0", letterSpacing: 2 }}>AND</div>}
+        <div style={{ background: "rgba(255,255,255,.03)", border: "1px solid #334155", borderRadius: 8, padding: 10 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
+            <span style={{ fontSize: 11, color: "#64748b", fontWeight: 600 }}>
+              条件组 {gi + 1}
+              {group.length > 1 && <span style={{ color: "#f59e0b", marginLeft: 4 }}>（满足其一即可）</span>}
+            </span>
+            <button onClick={() => removeGroup(gi)} style={{ background: "none", border: "none", color: "#64748b", fontSize: 14, cursor: "pointer", padding: "0 4px" }}>✕</button>
+          </div>
+
+          {/* chips for quests in this group */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 6 }}>
+            {group.map(qid => {
+              const info = gm[qid];
+              const cross = info && info._lineId !== currentLineId;
+              return <span key={qid} style={{
+                padding: "3px 10px", display: "inline-flex", alignItems: "center", gap: 4,
+                background: cross ? "rgba(99,102,241,.12)" : "rgba(233,69,96,.12)",
+                border: `1px solid ${cross ? "rgba(99,102,241,.35)" : "rgba(233,69,96,.3)"}`,
+                borderRadius: 12, fontSize: 12, color: cross ? "#818cf8" : "#e94560",
+              }}>
+                {info && <IconHTML icon={info.icon} size={13} />}
+                {cross && <span style={{ fontSize: 10, opacity: .7 }}>[{info?._lineName}]</span>}
+                {info?.name || qid}
+                <button onClick={() => removeFromGroup(gi, qid)} style={{ background: "none", border: "none", color: "inherit", fontSize: 12, cursor: "pointer", padding: 0, marginLeft: 2 }}>×</button>
+                {group.length > 1 && qid !== group[group.length - 1] && <span style={{ color: "#f59e0b", fontSize: 10, marginLeft: 2, fontWeight: 700 }}>OR</span>}
+              </span>;
+            })}
+            {group.length === 0 && <span style={{ fontSize: 12, color: "#475569" }}>（点击下方添加任务）</span>}
+          </div>
+
+          {/* picker toggle */}
+          <button onClick={() => { setOpenPicker(openPicker === gi ? null : gi); setSearch(""); }} style={{
+            padding: "4px 10px", background: "rgba(255,255,255,.04)", border: "1px dashed #334155",
+            borderRadius: 6, fontSize: 11, color: "#94a3b8", cursor: "pointer", fontFamily: "inherit",
+          }}>＋ 添加任务{group.length > 0 ? "（OR）" : ""}</button>
+
+          {/* quest picker dropdown */}
+          {openPicker === gi && <div style={{ marginTop: 8, background: "#0f0f1e", border: "1px solid #334155", borderRadius: 8, maxHeight: 200, overflowY: "auto" }}>
+            <div style={{ padding: "6px 8px", borderBottom: "1px solid #1e293b" }}>
+              <input placeholder="搜索任务..." value={search} onChange={e => setSearch(e.target.value)}
+                style={{ ...iS, padding: "6px 10px", fontSize: 12 }} autoFocus />
+            </div>
+            {lineQuests.map(line => {
+              const filtered = line.quests.filter(q => !search || q.name.toLowerCase().includes(search.toLowerCase()));
+              if (filtered.length === 0) return null;
+              return <div key={line.id}>
+                <div style={{ padding: "5px 10px", fontSize: 11, fontWeight: 700, color: line.isCurrent ? "#e94560" : "#818cf8", background: "rgba(255,255,255,.02)", display: "flex", alignItems: "center", gap: 4 }}>
+                  <IconHTML icon={line.icon} size={13} />{line.name}
+                  {!line.isCurrent && <span style={{ fontSize: 10, color: "#475569" }}>（跨章节）</span>}
+                </div>
+                {filtered.map(q => {
+                  const inGroup = group.includes(q.id);
+                  return <div key={q.id} onClick={() => addToGroup(gi, q.id)}
+                    style={{ padding: "5px 10px 5px 20px", cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: inGroup ? "#e94560" : "#94a3b8", background: inGroup ? "rgba(233,69,96,.08)" : "transparent", transition: "background .1s" }}>
+                    <IconHTML icon={q.icon} size={14} />
+                    <span>{q.name}</span>
+                    {inGroup && <span style={{ marginLeft: "auto", fontSize: 11 }}>✓</span>}
+                  </div>;
+                })}
+              </div>;
+            })}
+          </div>}
+        </div>
+      </div>
+    ))}
+
+    <button onClick={addGroup} style={{
+      width: "100%", padding: "7px 0", borderRadius: 7, border: "1px dashed #334155",
+      background: "none", color: "#64748b", fontSize: 12, cursor: "pointer", fontFamily: "inherit",
+      marginTop: 4,
+    }}>＋ 添加条件组（AND）</button>
+  </div>;
+}
+
+/* ═══════════════════════════════════════════
+   QUEST EDITOR MODAL
+   ═══════════════════════════════════════════ */
+function QuestEditor({ quest, lineId, allData, onSave, onDelete, onClose }) {
+  const isNew = !quest._exists;
+  const [f, setF] = useState({
+    name: quest.name || "", icon: quest.icon || "💡", isMain: quest.isMain ?? true,
+    desc: quest.desc || "", tasks: (quest.tasks || []).join("\n"), preReqs: quest.preReqs || [],
+  });
+  const doSave = () => {
+    if (!f.name.trim()) return;
+    onSave({ ...quest, _exists: undefined, id: quest.id || uid(), name: f.name.trim(), icon: f.icon, isMain: f.isMain, desc: f.desc, tasks: f.tasks.split("\n").map(s => s.trim()).filter(Boolean), preReqs: f.preReqs.filter(g => g.length > 0), state: quest.state || "available" });
+  };
+
+  return <Overlay onClose={onClose} wide>
+    <div style={{ padding: "18px 22px 14px", borderBottom: "1px solid #334155", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ fontSize: 17, fontWeight: 700 }}>{isNew ? "✨ 新建任务" : "✏️ 编辑任务"}</div>
+      <button onClick={onClose} style={{ background: "none", border: "none", color: "#64748b", fontSize: 20, cursor: "pointer" }}>✕</button>
+    </div>
+    <div style={{ padding: "18px 22px" }}>
+      <div style={{ marginBottom: 14 }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: "#94a3b8", marginBottom: 5 }}>任务名称</div>
+        <input style={iS} value={f.name} onChange={e => setF(p => ({ ...p, name: e.target.value }))} placeholder="输入名称..." />
+      </div>
+      <div style={{ marginBottom: 14 }}><IconPicker value={f.icon} onChange={ic => setF(p => ({ ...p, icon: ic }))} label="任务图标" /></div>
+      <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, cursor: "pointer", marginBottom: 14, color: "#94a3b8" }}>
+        <input type="checkbox" checked={f.isMain} onChange={e => setF(p => ({ ...p, isMain: e.target.checked }))} style={{ accentColor: "#e94560", width: 16, height: 16 }} />
+        主线任务（菱形 + 粗连线）
+      </label>
+      <div style={{ marginBottom: 14 }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: "#94a3b8", marginBottom: 5 }}>描述</div>
+        <textarea style={{ ...iS, resize: "vertical", minHeight: 60 }} value={f.desc} onChange={e => setF(p => ({ ...p, desc: e.target.value }))} />
+      </div>
+      <div style={{ marginBottom: 14 }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: "#94a3b8", marginBottom: 5 }}>任务目标（每行一个）</div>
+        <textarea style={{ ...iS, resize: "vertical", minHeight: 52 }} value={f.tasks} onChange={e => setF(p => ({ ...p, tasks: e.target.value }))} placeholder={"目标1\n目标2"} />
+      </div>
+      <PreReqEditor groups={f.preReqs} onChange={pr => setF(p => ({ ...p, preReqs: pr }))} allData={allData} currentLineId={lineId} currentQuestId={quest.id} />
+    </div>
+    <div style={{ padding: "12px 22px 18px", display: "flex", gap: 10, justifyContent: "flex-end", borderTop: "1px solid #334155" }}>
+      {!isNew && <button onClick={() => { onDelete(quest.id); onClose(); }} style={{ marginRight: "auto", background: "rgba(233,69,96,.12)", border: "1px solid rgba(233,69,96,.3)", color: "#e94560", borderRadius: 7, padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>🗑 删除</button>}
+      <button onClick={onClose} style={btnBase}>取消</button>
+      <button onClick={doSave} style={{ ...btnBase, background: "#10b981", color: "#fff", fontWeight: 600 }}>💾 保存</button>
+    </div>
+  </Overlay>;
+}
+
+/* ═══════════════════════════════════════════
+   LINE EDITOR MODAL
+   ═══════════════════════════════════════════ */
+function LineEditor({ line, onSave, onDelete, onClose }) {
+  const isNew = !line._exists;
+  const [f, setF] = useState({ name: line.name || "", icon: line.icon || "📖", desc: line.desc || "", bg: line.bg || "" });
+  const doSave = () => { if (!f.name.trim()) return; onSave({ ...line, _exists: undefined, id: line.id || ("ql_" + Date.now().toString(36)), name: f.name.trim(), icon: f.icon, desc: f.desc, bg: f.bg, quests: line.quests || [] }); };
+  return <Overlay onClose={onClose}>
+    <div style={{ padding: "18px 22px 14px", borderBottom: "1px solid #334155", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ fontSize: 17, fontWeight: 700 }}>{isNew ? "📂 新建任务线" : "✏️ 编辑任务线"}</div>
+      <button onClick={onClose} style={{ background: "none", border: "none", color: "#64748b", fontSize: 20, cursor: "pointer" }}>✕</button>
+    </div>
+    <div style={{ padding: "18px 22px" }}>
+      <div style={{ marginBottom: 14 }}><div style={{ fontSize: 12, fontWeight: 600, color: "#94a3b8", marginBottom: 5 }}>名称</div><input style={iS} value={f.name} onChange={e => setF(p => ({ ...p, name: e.target.value }))} /></div>
+      <div style={{ marginBottom: 14 }}><IconPicker value={f.icon} onChange={ic => setF(p => ({ ...p, icon: ic }))} label="章节图标" /></div>
+      <div style={{ marginBottom: 14 }}><div style={{ fontSize: 12, fontWeight: 600, color: "#94a3b8", marginBottom: 5 }}>描述</div><input style={iS} value={f.desc} onChange={e => setF(p => ({ ...p, desc: e.target.value }))} /></div>
+      <BgPicker value={f.bg} onChange={bg => setF(p => ({ ...p, bg }))} />
+    </div>
+    <div style={{ padding: "12px 22px 18px", display: "flex", gap: 10, justifyContent: "flex-end", borderTop: "1px solid #334155" }}>
+      {!isNew && <button onClick={() => { onDelete(line.id); onClose(); }} style={{ marginRight: "auto", background: "rgba(233,69,96,.12)", border: "1px solid rgba(233,69,96,.3)", color: "#e94560", borderRadius: 7, padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>🗑 删除</button>}
+      <button onClick={onClose} style={btnBase}>取消</button>
+      <button onClick={doSave} style={{ ...btnBase, background: "#10b981", color: "#fff", fontWeight: 600 }}>💾 保存</button>
+    </div>
+  </Overlay>;
+}
+
+/* ═══════════════════════════════════════════
+   SVG: CONNECTIONS (same-chapter only)
+   ═══════════════════════════════════════════ */
+function Connections({ quests, lineId }) {
+  const qm = useMemo(() => { const o = {}; quests.forEach(q => o[q.id] = q); return o; }, [quests]);
+  // For each quest, draw lines to same-chapter prereqs
+  return <g>{quests.flatMap(q => {
+    const allIds = allPreReqIds(q.preReqs);
+    return allIds.map(pid => {
+      const p = qm[pid]; if (!p) return null; // skip cross-chapter
+      const main = q.isMain && p.isMain;
+      const mx = p.x + (q.x - p.x) * .5;
+      const d = `M${p.x} ${p.y} C${mx} ${p.y},${mx} ${q.y},${q.x} ${q.y}`;
+      // Is this an OR connection? find the group it belongs to
+      const orGroup = q.preReqs.find(g => g.includes(pid));
+      const isOr = orGroup && orGroup.length > 1;
+      return <g key={pid + "-" + q.id}>
+        {main && <path d={d} fill="none" stroke="rgba(233,69,96,.35)" strokeWidth={5} strokeLinecap="round" />}
+        <path d={d} fill="none" stroke={main ? "rgba(233,69,96,.6)" : isOr ? "rgba(99,102,241,.4)" : "rgba(100,116,139,.35)"} strokeWidth={main ? 2.5 : 1.5} strokeLinecap="round" strokeDasharray={main ? "" : "6 4"} />
+        {/* OR indicator */}
+        {isOr && <text x={p.x + (q.x - p.x) * .5} y={p.y + (q.y - p.y) * .5 - 8} textAnchor="middle" fontSize={9} fill="#818cf8" fontWeight="bold" style={{ pointerEvents: "none" }}>OR</text>}
+      </g>;
+    });
+  })}</g>;
+}
+
+/* ═══════════════════════════════════════════
+   SVG: NODE
+   ═══════════════════════════════════════════ */
+function Node({ q, selected, onClick, scale, editMode, quickMode, onDrag, hasCrossDep }) {
+  const s = SC[q.state]; const sz = q.isMain ? 54 : 46; const h = sz / 2;
+  const imgSz = q.isMain ? 26 : 22; const isI = isImg(q.icon);
+  return <g style={{ cursor: editMode ? "move" : "pointer" }}
+    onClick={e => { e.stopPropagation(); onClick(q); }}
+    onMouseDown={e => { if (editMode && e.button === 0) { e.stopPropagation(); onDrag(q.id, e); } }}>
+    <circle cx={q.x} cy={q.y} r={h + 12} fill={s.glow} />
+    {isI && <defs><clipPath id={`cl-${q.id}`}>{q.isMain ? <rect x={q.x - h + 6} y={q.y - h + 6} width={sz - 12} height={sz - 12} rx={4} transform={`rotate(45,${q.x},${q.y})`} /> : <rect x={q.x - h + 4} y={q.y - h + 4} width={sz - 8} height={sz - 8} rx={8} />}</clipPath></defs>}
+    {q.isMain
+      ? <rect x={q.x - h} y={q.y - h} width={sz} height={sz} rx={6} transform={`rotate(45,${q.x},${q.y})`} fill="#0f0f1e" stroke={selected ? "#e94560" : s.bdr} strokeWidth={selected ? 3 : 2} style={{ filter: selected ? `drop-shadow(0 0 10px ${s.fill})` : "" }} />
+      : <rect x={q.x - h} y={q.y - h} width={sz} height={sz} rx={11} fill="#0f0f1e" stroke={selected ? "#e94560" : s.bdr} strokeWidth={selected ? 3 : 2} style={{ filter: selected ? `drop-shadow(0 0 10px ${s.fill})` : "" }} />}
+    {isI ? <image href={q.icon} x={q.x - imgSz / 2} y={q.y - imgSz / 2} width={imgSz} height={imgSz} clipPath={`url(#cl-${q.id})`} preserveAspectRatio="xMidYMid slice" style={{ pointerEvents: "none" }} />
+      : <text x={q.x} y={q.y + 1} textAnchor="middle" dominantBaseline="central" fontSize={q.isMain ? 23 : 19} style={{ pointerEvents: "none", userSelect: "none" }}>{q.icon}</text>}
+    <circle cx={q.x + h - 3} cy={q.y - h + 3} r={6} fill={s.fill} stroke="#0f0f1e" strokeWidth={2} />
+    {q.state === "completed" && <text x={q.x + h - 3} y={q.y - h + 4} textAnchor="middle" dominantBaseline="central" fontSize={7.5} fill="#fff" fontWeight="bold" style={{ pointerEvents: "none" }}>✓</text>}
+    {q.state === "locked" && <text x={q.x + h - 3} y={q.y - h + 4.5} textAnchor="middle" dominantBaseline="central" fontSize={7} style={{ pointerEvents: "none" }}>🔒</text>}
+    {/* cross-chapter indicator */}
+    {hasCrossDep && <circle cx={q.x - h + 3} cy={q.y - h + 3} r={5} fill="#818cf8" stroke="#0f0f1e" strokeWidth={1.5} />}
+    {hasCrossDep && <text x={q.x - h + 3} y={q.y - h + 4} textAnchor="middle" dominantBaseline="central" fontSize={6} fill="#fff" fontWeight="bold" style={{ pointerEvents: "none" }}>⇗</text>}
+    {scale > .4 && <text x={q.x} y={q.y + h + 18} textAnchor="middle" fill={q.state === "locked" ? "#64748b" : "#e2e8f0"} fontSize={12} fontWeight={q.isMain ? 600 : 400} style={{ pointerEvents: "none", userSelect: "none" }}>{q.name}</text>}
+    {editMode && <circle cx={q.x} cy={q.y} r={h + 12} fill="none" stroke="#f59e0b" strokeWidth={1} strokeDasharray="4 3" opacity={.4} />}
+    {quickMode && q.state === "available" && <circle cx={q.x} cy={q.y} r={h + 12} fill="none" stroke="#10b981" strokeWidth={1.5} strokeDasharray="3 3" opacity={.6}><animate attributeName="stroke-dashoffset" from="0" to="12" dur="1s" repeatCount="indefinite" /></circle>}
+  </g>;
+}
+
+/* ═══════════════════════════════════════════
+   DETAIL PANEL
+   ═══════════════════════════════════════════ */
+function Panel({ q, editMode, onClose, onComplete, onUndo, onEdit, allData }) {
+  if (!q) return null;
+  const s = SC[q.state];
+  const labels = { completed: "已完成", available: "可进行", locked: "未解锁" };
+  const gm = buildGlobalMap(allData);
+
+  return <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 380, background: "#1e293b", borderLeft: "1px solid #334155", display: "flex", flexDirection: "column", zIndex: 100, boxShadow: "-4px 0 24px rgba(0,0,0,.4)", animation: "slideIn .2s ease-out" }}>
+    {/* header */}
+    <div style={{ padding: "16px 16px 12px", borderBottom: "1px solid #334155", display: "flex", gap: 12, alignItems: "flex-start" }}>
+      <div style={{ width: 48, height: 48, borderRadius: q.isMain ? 6 : 12, background: "#0f0f1e", border: `2px solid ${s.bdr}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transform: q.isMain ? "rotate(45deg)" : "none", overflow: "hidden" }}>
+        <span style={{ transform: q.isMain ? "rotate(-45deg)" : "none", display: "flex", alignItems: "center", justifyContent: "center" }}><IconHTML icon={q.icon} size={26} /></span>
+      </div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 4 }}>{q.name}</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <span style={{ width: 8, height: 8, borderRadius: "50%", background: s.fill, display: "inline-block" }} />
+          <span style={{ fontSize: 12, fontWeight: 600, color: s.fill }}>{labels[q.state]}</span>
+          {q.isMain && <span style={{ fontSize: 11, color: "#e94560", background: "rgba(233,69,96,.15)", padding: "2px 8px", borderRadius: 4, fontWeight: 600 }}>主线</span>}
+        </div>
+      </div>
+      <button onClick={onClose} style={{ background: "none", border: "none", color: "#64748b", fontSize: 20, cursor: "pointer", padding: 4 }}>✕</button>
+    </div>
+    {/* body */}
+    <div style={{ flex: 1, overflowY: "auto", padding: 16 }}>
+      <div style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>描述</div>
+      <div style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.7, whiteSpace: "pre-line", marginBottom: 18 }}>{q.desc || "暂无描述"}</div>
+      {q.tasks?.length > 0 && <>
+        <div style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>任务目标</div>
+        {q.tasks.map((t, i) => <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", marginBottom: 3, background: "rgba(255,255,255,.03)", borderRadius: 6, borderLeft: `3px solid ${q.state === "completed" ? "#10b981" : "#334155"}`, fontSize: 13, color: q.state === "completed" ? "#64748b" : "#e2e8f0", textDecoration: q.state === "completed" ? "line-through" : "none" }}>{q.state === "completed" ? "✅" : "⬜"} {t}</div>)}
+      </>}
+      {/* prereqs display */}
+      {q.preReqs?.length > 0 && <div style={{ marginTop: 16 }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>前置条件</div>
+        {q.preReqs.map((group, gi) => <div key={gi} style={{ marginBottom: 6 }}>
+          {gi > 0 && <div style={{ fontSize: 10, color: "#e94560", fontWeight: 700, textAlign: "center", margin: "2px 0" }}>AND</div>}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 4, alignItems: "center" }}>
+            {group.map((qid, qi) => {
+              const info = gm[qid];
+              const done = info?.state === "completed";
+              const cross = info && info._lineId !== q._lineId;
+              return <span key={qid}>
+                {qi > 0 && <span style={{ fontSize: 10, color: "#f59e0b", fontWeight: 700, margin: "0 3px" }}>OR</span>}
+                <span style={{
+                  padding: "3px 8px", display: "inline-flex", alignItems: "center", gap: 3,
+                  background: done ? "rgba(16,185,129,.1)" : "rgba(255,255,255,.04)",
+                  border: `1px solid ${done ? "rgba(16,185,129,.3)" : cross ? "rgba(99,102,241,.3)" : "#334155"}`,
+                  borderRadius: 10, fontSize: 11, color: done ? "#10b981" : cross ? "#818cf8" : "#94a3b8",
+                }}>
+                  {done && "✅"}{info && <IconHTML icon={info.icon} size={12} />}
+                  {cross && <span style={{ fontSize: 9, opacity: .7 }}>[{info._lineName}]</span>}
+                  {info?.name || qid}
+                </span>
+              </span>;
+            })}
+          </div>
+        </div>)}
+      </div>}
+    </div>
+    {/* actions */}
+    <div style={{ padding: "12px 16px", borderTop: "1px solid #334155", display: "flex", gap: 8, flexWrap: "wrap" }}>
+      {q.state === "available" && <button onClick={() => onComplete(q.id)} style={{ flex: 1, height: 36, borderRadius: 8, fontSize: 13, fontWeight: 600, border: "none", background: "#10b981", color: "#fff", cursor: "pointer", fontFamily: "inherit" }}>✅ 完成任务</button>}
+      {q.state === "completed" && <button onClick={() => onUndo(q.id)} style={{ flex: 1, height: 36, borderRadius: 8, fontSize: 13, fontWeight: 600, border: "1px solid rgba(245,158,11,.3)", background: "rgba(245,158,11,.12)", color: "#f59e0b", cursor: "pointer", fontFamily: "inherit" }}>↩️ 取消完成</button>}
+      {q.state === "locked" && <button disabled style={{ flex: 1, height: 36, borderRadius: 8, fontSize: 13, border: "none", background: "rgba(255,255,255,.04)", color: "#475569", fontFamily: "inherit" }}>🔒 需要完成前置任务</button>}
+      {editMode && <button onClick={() => onEdit(q)} style={{ height: 36, borderRadius: 8, fontSize: 13, fontWeight: 600, border: "1px solid rgba(233,69,96,.3)", background: "rgba(233,69,96,.12)", color: "#e94560", cursor: "pointer", fontFamily: "inherit", padding: "0 16px" }}>✏️ 编辑</button>}
+    </div>
+  </div>;
+}
+
+/* ═══════════════════════════════════════════
+   MAIN APP
+   ═══════════════════════════════════════════ */
+function QuestBook() {
+  const [data, setDataRaw] = useState(() => { const d = load(); return d ? migrateData(d) : DEFAULT_DATA; });
+  const [lineId, setLineId] = useState(null);
+  const [selQ, setSelQ] = useState(null);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [scale, setScale] = useState(1);
+  const [panning, setPanning] = useState(false);
+  const [panOrig, setPanOrig] = useState({ x: 0, y: 0 });
+  const [collapsed, setCollapsed] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [quickMode, setQuickMode] = useState(false);
+  const [modal, setModal] = useState(null);
+  const [toast, setToast] = useState("");
+  const [drag, setDrag] = useState(null);
+  const svgRef = useRef(null);
+
+  useEffect(() => { if (data.length && !lineId) setLineId(data[0].id); }, [data]);
+  const setData = useCallback(fn => { setDataRaw(p => { const n = typeof fn === "function" ? fn(p) : fn; save(n); return n; }); }, []);
+  const flash = useCallback(m => { setToast(m); setTimeout(() => setToast(""), 2200); }, []);
+
+  const line = data.find(l => l.id === lineId);
+  const stats = useMemo(() => { if (!line) return { t: 0, c: 0 }; return { t: line.quests.length, c: line.quests.filter(q => q.state === "completed").length }; }, [line]);
+  const globalMap = useMemo(() => buildGlobalMap(data), [data]);
+
+  // keep selQ in sync
+  useEffect(() => { if (selQ && line) { const f = line.quests.find(q => q.id === selQ.id); if (!f) setSelQ(null); else if (JSON.stringify(f) !== JSON.stringify(selQ)) setSelQ({ ...f, _lineId: lineId }); } }, [data, line]);
+  useEffect(() => { setPan({ x: 0, y: 0 }); setScale(1); setSelQ(null); }, [lineId]);
+
+  // --- operations (all recompute globally) ---
+  const applyAndRecompute = useCallback((updater) => { setData(d => recomputeAll(updater(d.map(l => ({ ...l, quests: l.quests.map(q => ({ ...q })) }))))); }, [setData]);
+
+  const completeQ = useCallback(id => { applyAndRecompute(d => { d.forEach(l => l.quests.forEach(q => { if (q.id === id) q.state = "completed"; })); return d; }); flash("✅ 任务已完成！"); }, [applyAndRecompute, flash]);
+  const undoQ = useCallback(id => { applyAndRecompute(d => { d.forEach(l => l.quests.forEach(q => { if (q.id === id) q.state = "available"; })); return d; }); flash("↩️ 已取消完成"); }, [applyAndRecompute, flash]);
+
+  const saveQ = useCallback(q => {
+    applyAndRecompute(d => d.map(l => {
+      if (l.id !== lineId) return l;
+      const ex = l.quests.find(x => x.id === q.id);
+      return { ...l, quests: ex ? l.quests.map(x => x.id === q.id ? q : x) : [...l.quests, q] };
+    }));
+    setModal(null); flash("💾 已保存");
+  }, [lineId, applyAndRecompute, flash]);
+
+  const deleteQ = useCallback(id => {
+    applyAndRecompute(d => d.map(l => ({
+      ...l,
+      quests: l.quests.filter(q => q.id !== id).map(q => ({
+        ...q, preReqs: q.preReqs.map(g => g.filter(x => x !== id)).filter(g => g.length > 0)
+      }))
+    })));
+    setSelQ(null); flash("🗑 已删除");
+  }, [applyAndRecompute, flash]);
+
+  const saveLine = useCallback(ln => {
+    setData(d => {
+      const ex = d.find(l => l.id === ln.id);
+      return ex ? d.map(l => l.id === ln.id ? { ...l, name: ln.name, icon: ln.icon, desc: ln.desc, bg: ln.bg } : l) : [...d, ln];
+    });
+    setLineId(ln.id); setModal(null); flash("💾 已保存");
+  }, [setData, flash]);
+
+  const deleteLine = useCallback(lid => {
+    // Also clean prereqs referencing quests in deleted line
+    const qids = new Set((data.find(l => l.id === lid)?.quests || []).map(q => q.id));
+    applyAndRecompute(d => d.filter(l => l.id !== lid).map(l => ({
+      ...l,
+      quests: l.quests.map(q => ({
+        ...q, preReqs: q.preReqs.map(g => g.filter(x => !qids.has(x))).filter(g => g.length > 0)
+      }))
+    })));
+    setLineId(p => { const n = data.filter(l => l.id !== lid); return n.length ? n[0].id : null; });
+    flash("🗑 已删除");
+  }, [data, applyAndRecompute, flash]);
+
+  const nodeClick = useCallback(q => { if (quickMode) { if (q.state === "available") completeQ(q.id); else if (q.state === "completed") undoQ(q.id); return; } setSelQ({ ...q, _lineId: lineId }); }, [quickMode, completeQ, undoQ, lineId]);
+
+  // pan/zoom/drag
+  const onDown = useCallback(e => { if (e.button !== 0) return; setPanning(true); setPanOrig({ x: e.clientX - pan.x, y: e.clientY - pan.y }); }, [pan]);
+  const onMove = useCallback(e => {
+    if (drag) { const dx = (e.clientX - drag.sx) / scale, dy = (e.clientY - drag.sy) / scale; const nx = Math.round((drag.ox + dx) / 10) * 10, ny = Math.round((drag.oy + dy) / 10) * 10; setData(d => d.map(l => l.id !== lineId ? l : { ...l, quests: l.quests.map(q => q.id === drag.id ? { ...q, x: nx, y: ny } : q) })); return; }
+    if (!panning) return; setPan({ x: e.clientX - panOrig.x, y: e.clientY - panOrig.y });
+  }, [panning, panOrig, drag, scale, lineId, setData]);
+  const onUp = useCallback(() => { setPanning(false); if (drag) { setDrag(null); flash("📍 已更新"); } }, [drag, flash]);
+  const onWheel = useCallback(e => { e.preventDefault(); setScale(s => Math.min(3, Math.max(.2, s + (e.deltaY > 0 ? -.08 : .08)))); }, []);
+  const startDrag = useCallback((id, e) => { const q = line?.quests.find(x => x.id === id); if (!q) return; setDrag({ id, sx: e.clientX, sy: e.clientY, ox: q.x, oy: q.y }); }, [line]);
+  const onDbl = useCallback(e => { if (!editMode || !line) return; const r = svgRef.current?.getBoundingClientRect(); if (!r) return; const x = Math.round(((e.clientX - r.left - pan.x) / scale) / 10) * 10; const y = Math.round(((e.clientY - r.top - pan.y) / scale) / 10) * 10; setModal({ t: "quest", d: { x, y, name: "", icon: "💡", isMain: true, desc: "", tasks: [], preReqs: [], state: "available" } }); }, [editMode, line, pan, scale]);
+
+  const doExport = () => { const b = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = "questbook.json"; a.click(); flash("📥 已导出"); };
+  const doImport = () => { const inp = document.createElement("input"); inp.type = "file"; inp.accept = ".json"; inp.onchange = e => { const f = e.target.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = ev => { try { const d = JSON.parse(ev.target.result); if (Array.isArray(d)) { setData(migrateData(d)); setLineId(d[0]?.id); flash("📤 导入成功"); } } catch { flash("❌ 无效 JSON"); } }; rd.readAsText(f); }; inp.click(); };
+  const doReset = () => setModal({ t: "confirm", d: { msg: "确认恢复默认？所有修改将丢失。", fn: () => { setData(DEFAULT_DATA); setLineId(DEFAULT_DATA[0].id); flash("🔄 已恢复"); } } });
+
+  // detect cross-chapter deps for each quest in current line
+  const crossDepSet = useMemo(() => {
+    const s = new Set();
+    if (!line) return s;
+    const localIds = new Set(line.quests.map(q => q.id));
+    line.quests.forEach(q => { if (allPreReqIds(q.preReqs).some(id => !localIds.has(id))) s.add(q.id); });
+    return s;
+  }, [line]);
+
+  const bS = { background: "rgba(255,255,255,.06)", border: "none", color: "#94a3b8", height: 30, borderRadius: 7, fontSize: 12, padding: "0 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: 4, fontFamily: "inherit", transition: "all .12s", whiteSpace: "nowrap" };
+
+  return <div style={{ width: "100%", height: "100vh", display: "flex", background: "#1a1a2e", fontFamily: "system-ui, sans-serif", color: "#e2e8f0", overflow: "hidden" }}>
+    <style>{`@keyframes slideIn{from{transform:translateX(20px);opacity:0}to{transform:translateX(0);opacity:1}}@keyframes fadeUp{from{opacity:0}to{opacity:1}}@keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}`}</style>
+
+    {/* SIDEBAR */}
+    <div style={{ width: collapsed ? 56 : 244, background: "#16213e", borderRight: "1px solid #334155", display: "flex", flexDirection: "column", flexShrink: 0, transition: "width .2s", zIndex: 50 }}>
+      <div style={{ padding: collapsed ? "14px 8px" : "16px 18px", borderBottom: "1px solid #334155", display: "flex", alignItems: "center", gap: 10, minHeight: 58, justifyContent: collapsed ? "center" : "flex-start" }}>
+        <button onClick={() => setCollapsed(!collapsed)} style={{ background: "none", border: "none", color: "#94a3b8", fontSize: 15, padding: "4px 6px", cursor: "pointer" }}>{collapsed ? "▶" : "◀"}</button>
+        {!collapsed && <div><div style={{ fontSize: 15, fontWeight: 700 }}>📜 任务书</div><div style={{ fontSize: 11, color: "#64748b", marginTop: 1 }}>Quest Book</div></div>}
+      </div>
+      <div style={{ flex: 1, overflowY: "auto", padding: "6px 0" }}>
+        {data.map(l => {
+          const act = l.id === lineId; const done = l.quests.filter(q => q.state === "completed").length;
+          return <div key={l.id} onClick={() => setLineId(l.id)} onDoubleClick={() => editMode && setModal({ t: "line", d: { ...l, _exists: true } })}
+            style={{ padding: collapsed ? "10px 0" : "10px 14px", margin: collapsed ? "2px 4px" : "2px 8px", borderRadius: 8, cursor: "pointer", display: "flex", alignItems: "center", gap: 10, borderLeft: `3px solid ${act ? "#e94560" : "transparent"}`, background: act ? "#0f3460" : "transparent", transition: "background .12s", justifyContent: collapsed ? "center" : "flex-start" }}>
+            <span style={{ flexShrink: 0, display: "flex", alignItems: "center" }}><IconHTML icon={l.icon} size={22} /></span>
+            {!collapsed && <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 13, fontWeight: act ? 600 : 400, color: act ? "#e2e8f0" : "#94a3b8", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{l.name}</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginTop: 2 }}>{done}/{l.quests.length}</div>
+            </div>}
+          </div>;
+        })}
+        {editMode && !collapsed && <button onClick={() => setModal({ t: "line", d: { name: "", icon: "📖", desc: "", bg: "", quests: [] } })} style={{ width: "calc(100% - 16px)", margin: "4px 8px", padding: "8px 0", borderRadius: 8, border: "1px dashed #334155", background: "none", color: "#64748b", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>＋ 新建任务线</button>}
+      </div>
+      {!collapsed && <div style={{ padding: "10px 16px", borderTop: "1px solid #334155", fontSize: 11, color: "#64748b" }}>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 4 }}>
+          {[["#10b981", "完成"], ["#f59e0b", "可用"], ["#475569", "锁定"]].map(([c, l]) => <span key={l} style={{ display: "flex", alignItems: "center", gap: 3 }}><span style={{ width: 6, height: 6, borderRadius: "50%", background: c, display: "inline-block" }} />{l}</span>)}
+          <span style={{ display: "flex", alignItems: "center", gap: 3 }}><span style={{ width: 6, height: 6, borderRadius: "50%", background: "#818cf8", display: "inline-block" }} />跨章</span>
+        </div>
+        <div style={{ display: "flex", gap: 5, marginTop: 6 }}>
+          <button onClick={doExport} style={{ ...bS, height: 22, fontSize: 10, padding: "0 7px" }}>📥 导出</button>
+          <button onClick={doImport} style={{ ...bS, height: 22, fontSize: 10, padding: "0 7px" }}>📤 导入</button>
+          <button onClick={doReset} style={{ ...bS, height: 22, fontSize: 10, padding: "0 7px" }}>🔄 重置</button>
+        </div>
+      </div>}
+    </div>
+
+    {/* MAIN */}
+    <div style={{ flex: 1, position: "relative", overflow: "hidden", background: "#111827" }}>
+      {line?.bg && <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${line.bg})`, backgroundSize: "cover", backgroundPosition: "center", opacity: .15, zIndex: 0, pointerEvents: "none" }} />}
+      {/* topbar */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: selQ && !quickMode ? 380 : 0, height: 48, background: "rgba(17,24,39,.9)", backdropFilter: "blur(10px)", borderBottom: "1px solid #334155", display: "flex", alignItems: "center", padding: "0 14px", zIndex: 20, justifyContent: "space-between", transition: "right .2s" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
+          <IconHTML icon={line?.icon || "📜"} size={18} />
+          <span style={{ fontSize: 14, fontWeight: 700, whiteSpace: "nowrap" }}>{line?.name || "—"}</span>
+          <span style={{ fontSize: 12, color: "#64748b", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{line?.desc}</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
+          {line && <><div style={{ width: 80, height: 5, borderRadius: 3, background: "rgba(255,255,255,.08)", overflow: "hidden" }}><div style={{ height: "100%", borderRadius: 3, background: "linear-gradient(90deg,#10b981,#e94560)", width: `${stats.t ? (stats.c / stats.t * 100) : 0}%`, transition: "width .3s" }} /></div><span style={{ fontSize: 11, color: "#94a3b8" }}>{stats.c}/{stats.t}</span></>}
+          <div style={{ width: 1, height: 18, background: "#334155", margin: "0 3px" }} />
+          <button onClick={() => { setQuickMode(!quickMode); if (!quickMode) setEditMode(false); }} style={{ ...bS, ...(quickMode ? { background: "rgba(16,185,129,.18)", color: "#10b981", border: "1px solid rgba(16,185,129,.35)" } : {}) }}>⚡ 快捷</button>
+          <button onClick={() => { setEditMode(!editMode); if (!editMode) { setQuickMode(false); setSelQ(null); } }} style={{ ...bS, ...(editMode ? { background: "rgba(245,158,11,.15)", color: "#f59e0b", border: "1px solid rgba(245,158,11,.3)" } : {}) }}>✏️ 编辑</button>
+          {(editMode || quickMode) && <span style={{ fontSize: 10, padding: "2px 8px", borderRadius: 10, fontWeight: 600, ...(editMode ? { background: "rgba(245,158,11,.18)", color: "#f59e0b" } : { background: "rgba(16,185,129,.18)", color: "#10b981" }) }}>{editMode ? "编辑中" : "快捷"}</span>}
+          <div style={{ width: 1, height: 18, background: "#334155", margin: "0 2px" }} />
+          <button style={{ ...bS, width: 26, padding: 0, justifyContent: "center" }} onClick={() => setScale(s => Math.max(.2, s - .2))}>−</button>
+          <span style={{ color: "#64748b", fontSize: 10, minWidth: 32, textAlign: "center" }}>{Math.round(scale * 100)}%</span>
+          <button style={{ ...bS, width: 26, padding: 0, justifyContent: "center" }} onClick={() => setScale(s => Math.min(3, s + .2))}>+</button>
+          <button style={{ ...bS, fontSize: 10, padding: "0 8px" }} onClick={() => { setScale(1); setPan({ x: 0, y: 0 }); }}>重置</button>
+        </div>
+      </div>
+      {/* SVG */}
+      <svg ref={svgRef} width="100%" height="100%" style={{ cursor: drag ? "grabbing" : panning ? "grabbing" : "grab", userSelect: "none", display: "block", position: "relative", zIndex: 1 }}
+        onMouseDown={onDown} onMouseMove={onMove} onMouseUp={onUp} onMouseLeave={onUp} onWheel={onWheel} onDoubleClick={onDbl} onClick={() => { if (!quickMode) setSelQ(null); }}>
+        <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,.03)" strokeWidth="1" /></pattern></defs>
+        <rect width="100%" height="100%" fill={line?.bg ? "transparent" : "url(#grid)"} />
+        <g transform={`translate(${pan.x},${pan.y}) scale(${scale})`}>
+          {line && <>
+            <Connections quests={line.quests} lineId={lineId} />
+            {line.quests.map(q => <Node key={q.id} q={q} selected={selQ?.id === q.id} onClick={nodeClick} scale={scale} editMode={editMode} quickMode={quickMode} onDrag={startDrag} hasCrossDep={crossDepSet.has(q.id)} />)}
+          </>}
+        </g>
+      </svg>
+      <div style={{ position: "absolute", bottom: 8, left: 10, fontSize: 11, color: "#64748b", opacity: .5, zIndex: 2 }}>
+        {editMode ? "双击空白→添加 · 拖拽→移动 · 双击侧栏→编辑任务线" : quickMode ? "点击→完成/取消" : "滚轮缩放 · 拖拽平移 · 点击→详情"}
+      </div>
+      {selQ && !quickMode && <Panel q={selQ} editMode={editMode} onClose={() => setSelQ(null)} onComplete={completeQ} onUndo={undoQ} onEdit={q => setModal({ t: "quest", d: { ...q, _exists: true } })} allData={data} />}
+    </div>
+
+    {/* MODALS */}
+    {modal?.t === "quest" && <QuestEditor quest={modal.d} lineId={lineId} allData={data} onSave={saveQ} onDelete={deleteQ} onClose={() => setModal(null)} />}
+    {modal?.t === "line" && <LineEditor line={modal.d} onSave={saveLine} onDelete={deleteLine} onClose={() => setModal(null)} />}
+    {modal?.t === "confirm" && <Confirm msg={modal.d.msg} onYes={modal.d.fn} onNo={() => setModal(null)} />}
+    <Toast msg={toast} />
+  </div>;
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(QuestBook));
+</script>
+</body>
+</html>
